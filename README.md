@@ -1,5 +1,13 @@
 # Final Project Binar Academy
 
+## Back-End Member
+
+- John Tri Putra Sihombing
+- Muhammad Umar Mansyur
+- Achmad Fadilla
+
+---
+
 ## Develop The Repository
 
 ## How to make a PR & merge
