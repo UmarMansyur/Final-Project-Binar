@@ -1,0 +1,37 @@
+{
+  "name": "final_project_binar",
+  "version": "1.0.0",
+  "description": "- John Tri Putra Sihombing\r - Muhammad Umar Mansyur\r - Achmad Fadilla",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UmarMansyur/Final-Project-Binar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UmarMansyur/Final-Project-Binar/issues"
+  },
+  "homepage": "https://github.com/UmarMansyur/Final-Project-Binar#readme",
+  "dependencies": {
+    "axios": "^1.1.3",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "googleapis": "^109.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-mailer": "^0.1.1",
+    "pg": "^8.8.0",
+    "sequelize": "^6.25.8",
+    "web-push": "^3.5.0"
+  }
+}
