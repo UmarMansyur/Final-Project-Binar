@@ -3,13 +3,22 @@ const express = require("express");
 const morgan = require("morgan");
 const router = require("./routes");
 const app = express();
+const methodOverride = require('method-override');
+const path = require('path')
+const cors = require('cors');
 const { HTTP_PORT = 3000 } = process.env;
 
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-// app.use(router);
+app.use(router);
+app.set('view engine', 'ejs');
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
 
 // 404 handler
 app.use((req, res, next) => {
