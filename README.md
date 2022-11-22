@@ -12,7 +12,7 @@
 
 ## How to make a PR & merge
 
-1. Pull the latest changes (main branch)
+1. Pull the latest changes (master branch)
    `git pull origin master`
 2. Make some change to file you want to change, add, or delete.
 3. Make your own branch, with format:
@@ -42,4 +42,4 @@
    `git push origin your_branch`
 6. Make PR to Github web.
 7. Back to main branch
-   `git checkout main`
+   `git checkout master`
