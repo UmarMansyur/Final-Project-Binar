@@ -12,7 +12,7 @@
 
 ## How to make a PR & merge
 
-1. Pull the latest changes (master branch)
+1. Pull the latest changes (main branch)
    `git pull origin master`
 2. Make some change to file you want to change, add, or delete.
 3. Make your own branch, with format:
