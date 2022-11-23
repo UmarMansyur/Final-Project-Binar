@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
 
 const { JWT_SECRET_KEY } = process.env;
@@ -8,7 +8,8 @@ const { JWT_SECRET_KEY } = process.env;
 module.exports = {
   register: async (req, res, next) => {
     try{
-        const { username, email, password, role = roles.user } = req.body;
+        const { username, email, password, thumbnail, role = roles.user, first_name, last_name, user_id, gender, country,
+        province, city, address, phone } = req.body;
 
         const exist = await User.findOne({ where: { email }});
         if (exist) return res.status(400).json({ status: false, message: 'e-mail already in use!!!'});
@@ -19,17 +20,29 @@ module.exports = {
             username,
             email,
             password: passHash,
+            thumbnail,
             role
+        })
+
+        const regis1 = await DetailUser.create({
+            user_id: regis.id,
+            fullname: [first_name, last_name].join(' '),
+            gender,
+            country,
+            province,
+            city,
+            address,
+            phone
+            
         })
 
         return res.status(200).json({
             status: true,
             message: 'account successfully registered',
             data: {
-                username: regis.username,
-                email: regis.email,
-                password: regis.password,
-                role: regis.role
+                regis,
+                regis1
+                
             }            
         })
     }catch (err){
