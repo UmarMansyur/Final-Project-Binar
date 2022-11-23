@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       date_flight: DataTypes.DATE,
       flight_name: DataTypes.STRING,
       flight_number: DataTypes.STRING,
-      class: DataTypes.ENUM,
+      class: DataTypes.ENUM("Economy", "Business"),
       gate: DataTypes.INTEGER,
       seat: DataTypes.STRING,
       boarding_time: DataTypes.TIME,
