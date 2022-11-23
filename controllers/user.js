@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
+const email1 = require('./email')
+const ejs = require('ejs')
 
 const { JWT_SECRET_KEY } = process.env;
 
@@ -10,6 +12,9 @@ module.exports = {
     try{
         const { username, email, password, thumbnail, role = roles.user, first_name, last_name, user_id, gender, country,
         province, city, address, phone } = req.body;
+
+        const exist1 = await User.findOne({ where: { username }});
+        if (exist1) return res.status(400).json({ status: false, message: `username ${username} already in use!!!`});
 
         const exist = await User.findOne({ where: { email }});
         if (exist) return res.status(400).json({ status: false, message: 'e-mail already in use!!!'});
@@ -36,12 +41,17 @@ module.exports = {
             
         })
 
+        const html = await email1.getHtml('helo.ejs', { user: { name: regis1.fullname }})
+
+        const response = await email1.sendEmail(`${regis.email}`, 'Welcome, new user', `${html}`)
+
         return res.status(200).json({
             status: true,
             message: 'account successfully registered',
             data: {
                 regis,
-                regis1
+                regis1,
+                response
                 
             }            
         })
