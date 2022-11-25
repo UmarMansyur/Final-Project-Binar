@@ -27,10 +27,6 @@ oauth2Client.setCredentials({
 module.exports = {
   sendEmail: async (to, subject, html) => {
     return new Promise(async (resolve, reject) => {
-      try {
-        const accessToken = await oauth2Client.getAccessToken();
-
-
             try{ 
             const accessToken = await oauth2Client.getAccessToken();
         
@@ -72,19 +68,6 @@ module.exports = {
                     resolve(data);
                 }
             });
-        });
-
-        const mailOptions = {
-          to,
-          subject,
-          html,
-        };
-
-        const response = transport.sendMail(mailOptions);
-        resolve(response);
-      } catch (err) {
-        reject(err);
-      }
     });
   },
 

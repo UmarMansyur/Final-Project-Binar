@@ -20,7 +20,7 @@ module.exports = {
   register: async (req, res, next) => {
 
     try{
-        const { username, email, password, thumbnail, role = roles.user, first_name, last_name, user_id, gender, country,
+        const { username, email, password, thumbnail, role = roles.user, user_type, is_verified = 0, first_name, last_name, user_id, gender, country,
         province, city, address, phone } = req.body;
 
         const exist1 = await User.findOne({ where: { username }});
@@ -39,12 +39,14 @@ module.exports = {
             email,
             password: passHash,
             thumbnail,
-            role
+            role,
+            user_type,
+            is_verified
         })
 
         const detail_user = await DetailUser.create({
-            user_id: regis.id,
-            fullname: [first_name, last_name].join(' '),
+            user_id: user.id,
+            fullName: [first_name, last_name].join(' '),
             gender,
             country,
             province,
@@ -54,14 +56,14 @@ module.exports = {
             
         })
 
-        const html = await email1.getHtml('helo.ejs', { user: { name: detail_user.fullname }})
+        const html = await email1.getHtml('helo.ejs', { user: { name: detail_user.fullName }})
 
         const response = await email1.sendEmail(`${user.email}`, 'Welcome, new user', `${html}`)
 
 
         const payload = JSON.stringify({
-            title: `${regis1.fullname}, selamat akun anda berhasil dibuat`,
-            body: 'silahkan cek email untuk pemberitahuan',
+            title: `${detail_user.fullName}, Congratulations, your account has been successfully created`,
+            body: 'Please check email for notification',
         });
     
     // user_id : user.id
@@ -155,7 +157,7 @@ module.exports = {
       if (!usercompare) {
           return res.status(400).json({
               status: false,
-              message: 'user tidak di temukan!'
+              message: 'user not found!'
           })
       }
 
@@ -163,14 +165,14 @@ module.exports = {
       if (!pass) {
           return res.status(400).json({
               status: false,
-              message: 'password salah!!'
+              message: 'incorrect password!!'
           })
       }
 
       if (passwordBaru !== passwordBaru2) 
       return res.status(422).json({
           status: false,
-          message: 'password 1 dan password 2 tidak sama!'
+          message: 'password 1 and password 2 doesn\'t match!'
       });
 
       const hashedPassword = await bcrypt.hash(passwordBaru, 10);
@@ -178,7 +180,7 @@ module.exports = {
 
       return res.status(200).json({
           success: true,
-          message: 'Password berhasil di ubah'
+          message: 'password changed successfully!'
       });
   } catch (err) {
       res.status(500).json({
