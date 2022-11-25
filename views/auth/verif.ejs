@@ -9,12 +9,17 @@
 </head>
 
 <body>
+    <% if(message){ %>
+        <p>
+            Message: <%= message %>
+        </p>
+        <% } %>
     <h3>
-        Halo <%= user.name %>, selamat datang di website resmi kami.
+        Selamat. Akun kamu berhasil di verifikasi.
     </h3>
 
 
-    <b>silahkan <a href="<%= user.link %>">klik</a> disini untuk memverifikasi email kamu</b>
+    <b>silahkan <a href="http://localhost:3002/auth/login">klik</a> disini untuk masuk</b>
 </body>
 
 </html>
