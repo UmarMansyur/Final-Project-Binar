@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cont = require("../controllers");
 const middle = require("../middlewares/authorize");
-const roles = require('../utils/roles')
+const roles = require('../utils/roles');
 
 // router.get('/register', cont.user.register);
 router.get('/register', cont.user.registerPage);
