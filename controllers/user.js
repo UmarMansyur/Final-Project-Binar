@@ -32,6 +32,7 @@ module.exports = {
         // if (exist) return res.status(400).json({ status: false, message: 'e-mail already in use!!!'});
         
         if (exist) return res.render('auth/register', { error: 'e-mail already in use!!!'})
+
         const passHash = await bcrypt.hash(password, 10);
 
         const user = await User.create({
@@ -56,7 +57,14 @@ module.exports = {
             
         })
 
-        const html = await email1.getHtml('helo.ejs', { user: { name: detail_user.fullName }})
+        const payload1 = { id: user.id }
+        const token = jwt.sign(payload1, JWT_SECRET_KEY)
+        const link = `http://localhost:3002/auth/verif?token=${token}`;
+
+        const html = await email1.getHtml('helo.ejs', { user: { 
+          name: detail_user.fullName,
+          link: link
+        }})
 
         const response = await email1.sendEmail(`${user.email}`, 'Welcome, new user', `${html}`)
 
@@ -125,6 +133,28 @@ module.exports = {
         role: user.role,
       },
     });
+  },
+
+  verifyEmail: async (req, res, next) => {
+    try {
+      const { token } = req.query;
+      if (!token) return res.render('auth/verif', { message: 'invalid token', token })
+
+      const payload = jwt.verify(token, JWT_SECRET_KEY)
+
+      const verif = await User.update({ 
+        is_verified: 1 
+      }, {
+        where: {
+          id: payload.id
+        }
+      })
+
+      return res.render('auth/verif', { message: null })
+
+    }catch (err){
+      next(err);
+    }
   },
 
   loginGoogle: async (req, res, next) => {

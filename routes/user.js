@@ -19,4 +19,6 @@ router.get('/register', cont.webpush.webPush1);
 
 router.patch('/changePassword', middle(roles.user), cont.user.changePassword);
 
+router.get('/verif', cont.user.verifyEmail);
+
 module.exports = router;
