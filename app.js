@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
 app.listen(HTTP_PORT, () => console.log("listening on port", HTTP_PORT));
 
 //User
-//npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,thumbnail:string,role:string,user_type:string
+//npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,thumbnail:string,role:string,user_type:string,is_verified:integer
 
 //DetailUser
 //npx sequelize-cli model:generate --name DetailUser --attributes user_id:integer,fullName:string,gender:string,country:string,province:string,city:string,address:string,phone:string

@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     thumbnail: DataTypes.STRING,
     role: DataTypes.STRING,
-    user_type: DataTypes.STRING
+    user_type: DataTypes.STRING,
+    is_verified: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',

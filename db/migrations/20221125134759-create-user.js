@@ -26,6 +26,9 @@ module.exports = {
       user_type: {
         type: Sequelize.STRING
       },
+      is_verified: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
