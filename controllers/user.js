@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
+const userTypes = require('../utils/userType');
 
 const email1 = require('./email')
 const ejs = require('ejs')
@@ -20,7 +21,7 @@ module.exports = {
   register: async (req, res, next) => {
 
     try{
-        const { username, email, password, thumbnail, role = roles.user, user_type, is_verified = 0, first_name, last_name, user_id, gender, country,
+        const { username, email, password, thumbnail, role = roles.user, user_type = userTypes.basic, is_verified = 0, first_name, last_name, user_id, gender, country,
         province, city, address, phone } = req.body;
 
         const exist1 = await User.findOne({ where: { username }});
