@@ -1,44 +1,48 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tickets', {
+    await queryInterface.createTable('Flights', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      departure_city: {
+      airlineName: {
         type: Sequelize.STRING
       },
-      arrival_city: {
+      departureCity: {
         type: Sequelize.STRING
       },
-      arrival_time: {
+      arrivalCity: {
         type: Sequelize.STRING
       },
-      date_flight: {
-        type: Sequelize.DATE
-      },
-      flight_number: {
+      departureCity: {
         type: Sequelize.STRING
       },
-      class: {
-        type: Sequelize.ENUM,
-        values: ['Economy', 'Business']
+      departureTime: {
+        type: Sequelize.TIME
       },
-      gate: {
+      arrivalTime: {
+        type: Sequelize.STRING
+      },
+      totalSeat: {
         type: Sequelize.INTEGER
       },
-      seat: {
+      class: {
         type: Sequelize.STRING
       },
-      boarding_time: {
+      gate: {
+        type: Sequelize.STRING
+      },
+      boardingTime: {
         type: Sequelize.TIME
       },
       price: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.INTEGER
+      },
+      stock: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -51,6 +55,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tickets');
+    await queryInterface.dropTable('Flights');
   }
 };

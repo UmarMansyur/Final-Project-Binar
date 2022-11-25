@@ -15,9 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   DetailTransaction.init({
     transaction_id: DataTypes.INTEGER,
-    ticket_id: DataTypes.INTEGER,
-    passenger_id: DataTypes.INTEGER,
-    price: DataTypes.DOUBLE
+    flight_id: DataTypes.INTEGER,
+    passenger_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'DetailTransaction',

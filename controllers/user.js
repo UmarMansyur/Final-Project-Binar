@@ -2,9 +2,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
+
 const email1 = require('./email')
 const ejs = require('ejs')
 const webpush = require('web-push');
+
 
 const { JWT_SECRET_KEY } = process.env;
 
@@ -16,6 +18,7 @@ module.exports = {
     },
 
   register: async (req, res, next) => {
+
     try{
         const { username, email, password, thumbnail, role = roles.user, first_name, last_name, user_id, gender, country,
         province, city, address, phone } = req.body;
@@ -107,40 +110,38 @@ module.exports = {
     }
   },
 
-  auth : (req, res, next) => {
+  auth: (req, res, next) => {
     const user = req.user;
 
     return res.status(200).json({
-        status: true,
-        message: 'successful authentication',
-        data: {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            role: user.role
-        }
-    })
-
+      status: true,
+      message: "successful authentication",
+      data: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+    });
   },
 
   loginGoogle: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 
   loginFacebook: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 
   changePassword: async (req, res, next) => {
     try {
+
       const { 
            passwordLama,
            passwordBaru,
@@ -188,34 +189,30 @@ module.exports = {
   },
 
   forgotPasswordPage: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 
   forgotPassword: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 
   resetPasswordPage: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 
   resetPassword: async (req, res, next) => {
-    try{
-
-    }catch (err){
-        next(err);
+    try {
+    } catch (err) {
+      next(err);
     }
   },
 };
