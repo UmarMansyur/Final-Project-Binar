@@ -6,7 +6,9 @@ const app = express();
 const methodOverride = require('method-override');
 const path = require('path')
 const cors = require('cors');
-const { HTTP_PORT = 3000 } = process.env;
+const webpush = require('web-push');
+const fs = require('fs');
+const { HTTP_PORT = 3002 } = process.env;
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -30,7 +32,6 @@ app.use((req, res, next) => {
 
 // 500 handler
 app.use((err, req, res, next) => {
-  console.log(err);
   return res.status(500).json({
     status: false,
     message: err.message,

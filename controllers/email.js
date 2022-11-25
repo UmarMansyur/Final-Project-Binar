@@ -8,8 +8,7 @@ const {
     GOOGLE_ACCESS_TOKEN1,
     GOOGLE_CLIENT_ID1,
     GOOGLE_CLIENT_SECRET1,
-    GOOGLE_REDIRECT_URI1,
-    JWT_TOKEN
+    GOOGLE_REDIRECT_URI1
 } = process.env
 
 const oauth2Client = new google.auth.OAuth2(
@@ -33,7 +32,7 @@ module.exports = {
                 service: 'gmail',
                 auth: {
                     type: 'OAuth2',
-                    user: 'your_mail@gmail.com',
+                    user: 'achmadfadilla112@gmail.com',
                     clientId: GOOGLE_CLIENT_ID1,
                     clientSecret: GOOGLE_CLIENT_SECRET1,
                     refreshToken: GOOGLE_REFRESH_TOKEN1,
