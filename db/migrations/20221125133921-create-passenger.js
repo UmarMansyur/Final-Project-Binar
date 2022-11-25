@@ -1,23 +1,30 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Stocks', {
+    await queryInterface.createTable('Passengers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ticket_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Tickets',
-          key: 'id'
-        }
+      email: {
+        type: Sequelize.STRING
       },
-      stock: {
-        type: Sequelize.INTEGER
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING
+      },
+      type: {
+        type: Sequelize.STRING
+      },
+      travelDocument: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Stocks');
+    await queryInterface.dropTable('Passengers');
   }
 };

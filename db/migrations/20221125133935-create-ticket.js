@@ -1,5 +1,4 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Tickets', {
@@ -9,36 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      departure_city: {
-        type: Sequelize.STRING
-      },
-      arrival_city: {
-        type: Sequelize.STRING
-      },
-      arrival_time: {
-        type: Sequelize.STRING
-      },
-      date_flight: {
-        type: Sequelize.DATE
-      },
-      flight_number: {
-        type: Sequelize.STRING
-      },
-      class: {
-        type: Sequelize.ENUM,
-        values: ['Economy', 'Business']
-      },
-      gate: {
+      detail_transaction_id: {
         type: Sequelize.INTEGER
       },
-      seat: {
+      ticket_code: {
         type: Sequelize.STRING
-      },
-      boarding_time: {
-        type: Sequelize.TIME
-      },
-      price: {
-        type: Sequelize.DOUBLE
       },
       createdAt: {
         allowNull: false,

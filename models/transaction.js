@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transaction.init({
     user_id: DataTypes.INTEGER,
-    is_paid: DataTypes.BOOLEAN,
-    one_way: DataTypes.DATE,
-    round_trip: DataTypes.DATE
+    isPaid: DataTypes.BOOLEAN,
+    roundTrip: DataTypes.DATE,
+    oneWay: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Transaction',

@@ -1,28 +1,23 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Transactions', {
       id: {
-        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
-      is_paid: {
+      isPaid: {
         type: Sequelize.BOOLEAN
       },
-      one_way: {
+      roundTrip: {
         type: Sequelize.DATE
       },
-      round_trip: {
+      oneWay: {
         type: Sequelize.DATE
       },
       createdAt: {
