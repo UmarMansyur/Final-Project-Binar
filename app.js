@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const router = require("./routes");
 const app = express();
-const { HTTP_PORT = 8080 } = process.env;
+const { HTTP_PORT = 3002 } = process.env;
 const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
