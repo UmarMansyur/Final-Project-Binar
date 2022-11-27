@@ -9,7 +9,7 @@ const path = require('path')
 const cors = require('cors');
 const webpush = require('web-push');
 const fs = require('fs');
-const { HTTP_PORT = 3002 } = process.env;
+const { HTTP_PORT = 3000 } = process.env;
 
 
 app.use(express.json());

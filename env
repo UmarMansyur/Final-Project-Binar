@@ -1,17 +1,17 @@
 DB_USERNAME = postgres
-DB_PASSWORD = root
+DB_PASSWORD = 19maret1995
 DB_NAME = db_pesawat
 DB_HOST = localhost
 DB_DIALECT = postgres
 
-JWT_SECRET_KEY = khana zulfana imam
+JWT_SECRET_KEY = hehehe
 
-GOOGLE_CLIENT_ID = 939049319401-rutts51kqfnhohpvb6nfarlbvb834fq6.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET = 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
-GOOGLE_REDIRECT_URI = http://localhost:3000/auth/login/google
+GOOGLE_CLIENT_ID = 473771590990-a3mn90jrlsnepqk5rjaq8njs0ssrom1o.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET = 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
+GOOGLE_REDIRECT_URI = http://localhost:3000/user/login/google
 
-FB_ID = 1158939494758581
-FB_SECRET_KEY = 80002ecc84b0ab63e1fd7e066cc7bbf8
+FB_ID = 536593288298466
+FB_SECRET_KEY = cb011f7e52c3e15b9de75d34a4406632
 FB_REDIRECT_URI = http://localhost:3000/user/login/facebook
 
 VAPID_PUBLIC_KEY = 'BO1HaUoJThYJsetJmFK2YLeN9P3scsLLm4Ol3Z2a7BZANdX3IIj4mb6RQsHlDJjkZ18HIxwHUtKoJPcRjl7wq4U'
