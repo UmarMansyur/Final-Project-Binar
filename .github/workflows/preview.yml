@@ -3,7 +3,6 @@ name: Deploy to Railway Dev Environment
 on:
   push:
     branches: [develop, 'featureLogin']
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
