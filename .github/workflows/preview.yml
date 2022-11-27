@@ -20,6 +20,9 @@ jobs:
       - name: Install packages
         run: npm install
 
+      - name: Run tests
+        run: npm run dev
+
       - name: Install Railway
         run: npm i -g @railway/cli
 
