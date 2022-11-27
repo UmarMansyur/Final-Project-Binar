@@ -4,13 +4,12 @@ const morgan = require("morgan");
 const router = require("./routes");
 const app = express();
 
-const methodOverride = require('method-override');
-const path = require('path')
-const cors = require('cors');
-const webpush = require('web-push');
-const fs = require('fs');
+const methodOverride = require("method-override");
+const path = require("path");
+const cors = require("cors");
+const webpush = require("web-push");
+const fs = require("fs");
 const { HTTP_PORT = 3002 } = process.env;
-
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -40,7 +39,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => console.log("listening on port", PORT));
+app.listen(HTTP_PORT, () => console.log("listening on port", HTTP_PORT));
 
 //User
 //npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,thumbnail:string,role:string,user_type:string,is_verified:integer
