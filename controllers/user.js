@@ -6,9 +6,7 @@ const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
 const userTypes = require("../utils/userType");
-
 const email1 = require("./email");
-const ejs = require("ejs");
 const webpush = require("web-push");
 
 const { JWT_SECRET_KEY } = process.env;
@@ -26,36 +24,41 @@ module.exports = {
         username,
         email,
         password,
+        password2,
         thumbnail,
         role = roles.user,
         user_type = userTypes.basic,
-        is_verified = 0,
-        first_name,
-        last_name,
-        user_id,
-        gender,
-        country,
-        province,
-        city,
-        address,
-        phone,
+        is_verified = 0
       } = req.body;
 
       const exist1 = await User.findOne({ where: { username } });
-      // if (exist1) return res.status(400).json({ status: false, message: `username ${username} already in use!!!`});
+      if (exist1) return res.status(400).json({ 
+        status: false, 
+        message: `username ${username} already in use!!!`
+      });
 
-      if (exist1)
-        return res.render("auth/register", {
-          error: `username ${username} already in use!!!`,
-        });
+      // if (exist1)
+      //   return res.render("auth/register", {
+      //     error: `username ${username} already in use!!!`,
+      //   });
 
       const exist = await User.findOne({ where: { email } });
-      // if (exist) return res.status(400).json({ status: false, message: 'e-mail already in use!!!'});
+      if (exist) 
+      return res.status(400).json({ 
+        status: false, 
+        message: 'e-mail already in use!!!'
+      });
 
-      if (exist)
-        return res.render("auth/register", {
-          error: "e-mail already in use!!!",
-        });
+      // if (exist)
+      //   return res.render("auth/register", {
+      //     error: "e-mail already in use!!!",
+      //   });
+
+      if (password != password2) 
+      return res.status(400).json({ 
+        status: false, 
+        message: 'password 1 dan password 2 doesn\t match!!!'
+      });
 
       const passHash = await bcrypt.hash(password, 10);
 
@@ -69,24 +72,14 @@ module.exports = {
         is_verified,
       });
 
-      const detail_user = await DetailUser.create({
-        user_id: user.id,
-        fullName: [first_name, last_name].join(" "),
-        gender,
-        country,
-        province,
-        city,
-        address,
-        phone,
-      });
-      const apiHost = process.env.API_HOST;
+      const apiHost = process.env.HTTP_PORT;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
-      const link = `${apiHost}/auth/verif?token=${token}`;
+      const link = `http://localhost:${apiHost}/auth/verif?token=${token}`;
 
       const html = await email1.getHtml("helo.ejs", {
         user: {
-          name: detail_user.fullName,
+          name: user.username,
           link: link,
         },
       });
@@ -98,32 +91,28 @@ module.exports = {
       );
 
       const payload = JSON.stringify({
-        title: `${detail_user.fullName}, Congratulations, your account has been successfully created`,
+        title: `${user.username}, Congratulations, your account has been successfully created`,
         body: "Please check email for notification",
       });
-
-      // user_id : user.id
-      // data: JSON.stringify(subscription);
 
       subscriptions.forEach((subscription) => {
         webpush
           .sendNotification(subscription, payload)
-          .then((result) => console.log('success'))
+          .then((result) => ('success'))
           .catch((e) => console.log(e.stack));
       });
 
-      // return res.status(200).json({
-      //     status: true,
-      //     message: 'account successfully registered',
-      //     data: {
-      //         regis,
-      //         regis1,
-      //         response
+      return res.status(200).json({
+          status: true,
+          message: 'account successfully registered',
+          data: {
+              user,
+              response
 
-      //     }
-      // })
+          }
+      })
 
-      return res.render("auth/login", { error: null });
+      // return res.render("auth/login", { error: null });
     } catch (err) {
       next(err);
     }
@@ -142,7 +131,7 @@ module.exports = {
           email: user.email,
           role: user.role,
           token: accesstoken,
-        },
+        }
       });
     } catch (err) {
       next(err);
@@ -168,7 +157,12 @@ module.exports = {
     try {
       const { token } = req.query;
       if (!token)
-        return res.render("auth/verif", { message: "invalid token", token });
+        // return res.render("auth/verif", { message: "invalid token", token });
+        return res.status(400).json({
+          status: false,
+          message: 'invalid token',
+          token
+        })
 
       const payload = jwt.verify(token, JWT_SECRET_KEY);
 
@@ -183,7 +177,12 @@ module.exports = {
         }
       );
 
-      return res.render("auth/verif", { message: null });
+      // return res.render("auth/verif", { message: null });
+      return res.status(200).json({
+        status: true,
+        message: 'account verified successfully',
+        verif
+      })
     } catch (err) {
       next(err);
     }
@@ -268,6 +267,43 @@ module.exports = {
         status: false,
         message: err.message,
       });
+    }
+  },
+
+  updateProfile: async (req, res, next) => {
+    try{
+      const {
+        user_id,
+        first_name,
+        last_name,
+        fullName,
+        gender,
+        country,
+        province,
+        city,
+        address,
+        phone
+      } = req.body;
+
+      const detail_user = await DetailUser.create({
+        user_id: req.user.id,
+        fullName: [first_name, last_name].join(' '),
+        gender,
+        country,
+        province,
+        city,
+        address,
+        phone
+      })
+
+      return res.status(200).json({
+        status: true,
+        message: 'Profile updated successfully',
+        data: detail_user
+      })
+
+    }catch (err){
+      next(err);
     }
   },
 

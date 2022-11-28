@@ -35,10 +35,12 @@ module.exports = (sequelize, DataTypes) => {
     static authenticate = async ({ email, password }) => {
       try {
         const user = await this.findOne({ where: { email: email } });
-        if (!user) return Promise.reject(new Error('user tidak ditemukan!'));
+        if (!user) return Promise.reject(new Error('E-mail not found!'));
 
         const valid = user.checkPassword(password);
-        if (!valid) return Promise.reject(new Error('password salah!'));
+        if (!valid) return Promise.reject(new Error('Wrong password!'));
+
+        if (user.is_verified == 0) return Promise.reject(new Error('Your account has not been verified. Please verify first!'));
 
         return Promise.resolve(user);
       } catch (err) {

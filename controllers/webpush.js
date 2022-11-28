@@ -27,8 +27,8 @@ module.exports = {
       );
 
       const payload = JSON.stringify({
-        title: "Selamat datang di website kami",
-        body: "Silahkan lihat-lihat website kami",
+        title: "Welcome to the Terbang Tinggi",
+        body: "Where do you want to go?",
       });
 
       const result = await webpush.sendNotification(subscription, payload);

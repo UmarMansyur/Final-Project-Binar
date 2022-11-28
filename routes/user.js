@@ -15,10 +15,13 @@ router.get('/auth', middle(roles.user), cont.user.auth);
 
 router.post('/subscribe', cont.webpush.webPush);
 
-router.get('/register', cont.webpush.webPush1);
+router.get('/reg', cont.webpush.webPush1);
 
 router.patch('/changePassword', middle(roles.user), cont.user.changePassword);
 
 router.get('/verif', cont.user.verifyEmail);
+
+router.post('/updateProfile', middle(roles.user), cont.user.updateProfile);
+
 
 module.exports = router;
