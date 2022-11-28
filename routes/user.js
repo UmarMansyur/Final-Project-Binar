@@ -5,7 +5,6 @@ const middle = require("../middlewares/authorize");
 const roles = require('../utils/roles');
 
 // router.get('/register', cont.user.register);
-router.get('/register', cont.user.registerPage);
 router.post('/register', cont.user.register);
 
 // router.get('/login', cont.auth.signIn);
