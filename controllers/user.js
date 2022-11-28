@@ -1,3 +1,6 @@
+const googleOauth2 = require("../utils/oauth2/google");
+const facebookOauth2 = require("../utils/oauth2/facebook");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
@@ -188,6 +191,18 @@ module.exports = {
 
   loginGoogle: async (req, res, next) => {
     try {
+      const code = req.query.code;
+      if (!code) {
+        const url = googleOauth2.generateAuthURL();
+        return res.redirect(url);
+      }
+
+      await googleOauth2.setCredentials(code);
+      const { data } = await googleOauth2.getUserData();
+
+      let userExist = await User.findOne({ where: { email: data.email } });
+
+      return res.json(data);
     } catch (err) {
       next(err);
     }
@@ -195,6 +210,17 @@ module.exports = {
 
   loginFacebook: async (req, res, next) => {
     try {
+      const code = req.query.code;
+      if (!code) {
+        const url = facebookOauth2.generateAuthURL();
+        return res.redirect(url);
+      }
+      const access_token = await facebookOauth2.getAccessToken(code);
+      const userInfo = await facebookOauth2.getUserInfo(access_token);
+      console.log(userInfo.picture.data.url)
+      res.send(userInfo)
+
+     
     } catch (err) {
       next(err);
     }
