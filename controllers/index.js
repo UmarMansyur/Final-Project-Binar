@@ -1,3 +1,4 @@
-const user = require('./user')
+const user = require("./user");
+const webpush = require("./webpush");
 
-module.exports = { user };
+module.exports = { user, webpush };

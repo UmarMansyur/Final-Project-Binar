@@ -13,17 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Ticket.init(
     {
-      departure_city: DataTypes.STRING,
-      arrival_city: DataTypes.STRING,
-      arrival_time: DataTypes.STRING,
-      date_flight: DataTypes.DATE,
-      flight_name: DataTypes.STRING,
-      flight_number: DataTypes.STRING,
-      class: DataTypes.ENUM("Economy", "Business"),
-      gate: DataTypes.INTEGER,
-      seat: DataTypes.STRING,
-      boarding_time: DataTypes.TIME,
-      price: DataTypes.DOUBLE,
+      detail_transaction_id: DataTypes.INTEGER,
+      ticket_code: DataTypes.STRING,
+      qr_code: DataTypes.STRING,
     },
     {
       sequelize,

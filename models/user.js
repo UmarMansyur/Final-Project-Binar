@@ -1,7 +1,8 @@
-"use strict";
-const { Model } = require("sequelize");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+'use strict';
+const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -20,8 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     generateToken() {
       const payload = {
         id: this.id,
+        username: this.username,
         email: this.email,
         role: this.role,
+        usertype: this.usertype,
+        is_verified: this.is_verified
+
       };
 
       return jwt.sign(payload, process.env.JWT_SECRET_KEY);
@@ -30,10 +35,12 @@ module.exports = (sequelize, DataTypes) => {
     static authenticate = async ({ email, password }) => {
       try {
         const user = await this.findOne({ where: { email: email } });
-        if (!user) return Promise.reject(new Error("user not found!"));
+        if (!user) return Promise.reject(new Error('E-mail not found!'));
 
         const valid = user.checkPassword(password);
-        if (!valid) return Promise.reject(new Error("wrong password!"));
+        if (!valid) return Promise.reject(new Error('Wrong password!'));
+
+        if (user.is_verified == 0) return Promise.reject(new Error('Your account has not been verified. Please verify first!'));
 
         return Promise.resolve(user);
       } catch (err) {
@@ -41,18 +48,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     };
   }
-  User.init(
-    {
-      username: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      thumbnail: DataTypes.STRING,
-      role: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: "User",
-    }
-  );
+  User.init({
+    username: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    thumbnail: DataTypes.STRING,
+    role: DataTypes.STRING,
+    user_type: DataTypes.STRING,
+    is_verified: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
   return User;
 };
