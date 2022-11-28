@@ -3,11 +3,11 @@ const express = require("express");
 const morgan = require("morgan");
 const router = require("./routes");
 const app = express();
-const HTTP_PORT = 8181;
 const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
 const webpush = require("web-push");
+const { HTTP_PORT } = process.env;
 const fs = require("fs");
 
 app.use(express.json());
