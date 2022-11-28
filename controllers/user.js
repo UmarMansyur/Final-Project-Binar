@@ -7,7 +7,6 @@ const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
 const userTypes = require("../utils/userType");
 const email1 = require("./email");
-const ejs = require("ejs");
 const webpush = require("web-push");
 
 const { JWT_SECRET_KEY } = process.env;
