@@ -14,7 +14,6 @@ const { JWT_SECRET_KEY } = process.env;
 const subscriptions = require("./subscriptions.json");
 
 module.exports = {
-
   register: async (req, res, next) => {
     try {
       const {
@@ -25,14 +24,15 @@ module.exports = {
         thumbnail,
         role = roles.user,
         user_type = userTypes.basic,
-        is_verified = 0
+        is_verified = 0,
       } = req.body;
 
       const exist1 = await User.findOne({ where: { username } });
-      if (exist1) return res.status(400).json({ 
-        status: false, 
-        message: `username ${username} already in use!!!`
-      });
+      if (exist1)
+        return res.status(400).json({
+          status: false,
+          message: `username ${username} already in use!!!`,
+        });
 
       // if (exist1)
       //   return res.render("auth/register", {
@@ -40,22 +40,22 @@ module.exports = {
       //   });
 
       const exist = await User.findOne({ where: { email } });
-      if (exist) 
-      return res.status(400).json({ 
-        status: false, 
-        message: 'e-mail already in use!!!'
-      });
+      if (exist)
+        return res.status(400).json({
+          status: false,
+          message: "e-mail already in use!!!",
+        });
 
       // if (exist)
       //   return res.render("auth/register", {
       //     error: "e-mail already in use!!!",
       //   });
 
-      if (password != password2) 
-      return res.status(400).json({ 
-        status: false, 
-        message: 'password 1 dan password 2 doesn\t match!!!'
-      });
+      if (password != password2)
+        return res.status(400).json({
+          status: false,
+          message: "password 1 dan password 2 doesn\t match!!!",
+        });
 
       const passHash = await bcrypt.hash(password, 10);
 
@@ -95,19 +95,17 @@ module.exports = {
       subscriptions.forEach((subscription) => {
         webpush
           .sendNotification(subscription, payload)
-          .then((result) => ('success'))
           .catch((e) => console.log(e.stack));
       });
 
       return res.status(200).json({
-          status: true,
-          message: 'account successfully registered',
-          data: {
-              user,
-              response
-
-          }
-      })
+        status: true,
+        message: "account successfully registered",
+        data: {
+          user,
+          response,
+        },
+      });
 
       // return res.render("auth/login", { error: null });
     } catch (err) {
@@ -128,7 +126,7 @@ module.exports = {
           email: user.email,
           role: user.role,
           token: accesstoken,
-        }
+        },
       });
     } catch (err) {
       next(err);
@@ -157,9 +155,9 @@ module.exports = {
         // return res.render("auth/verif", { message: "invalid token", token });
         return res.status(400).json({
           status: false,
-          message: 'invalid token',
-          token
-        })
+          message: "invalid token",
+          token,
+        });
 
       const payload = jwt.verify(token, JWT_SECRET_KEY);
 
@@ -177,9 +175,9 @@ module.exports = {
       // return res.render("auth/verif", { message: null });
       return res.status(200).json({
         status: true,
-        message: 'account verified successfully',
-        verif
-      })
+        message: "account verified successfully",
+        verif,
+      });
     } catch (err) {
       next(err);
     }
@@ -213,10 +211,8 @@ module.exports = {
       }
       const access_token = await facebookOauth2.getAccessToken(code);
       const userInfo = await facebookOauth2.getUserInfo(access_token);
-      console.log(userInfo.picture.data.url)
-      res.send(userInfo)
-
-     
+      console.log(userInfo.picture.data.url);
+      res.send(userInfo);
     } catch (err) {
       next(err);
     }
@@ -268,7 +264,7 @@ module.exports = {
   },
 
   updateProfile: async (req, res, next) => {
-    try{
+    try {
       const {
         user_id,
         first_name,
@@ -279,49 +275,50 @@ module.exports = {
         province,
         city,
         address,
-        phone
+        phone,
       } = req.body;
 
       const detail_user = await DetailUser.create({
         user_id: req.user.id,
-        fullName: [first_name, last_name].join(' '),
+        fullName: [first_name, last_name].join(" "),
         gender,
         country,
         province,
         city,
         address,
-        phone
-      })
+        phone,
+      });
 
       return res.status(200).json({
         status: true,
-        message: 'Profile updated successfully',
-        data: detail_user
-      })
-
-    }catch (err){
+        message: "Profile updated successfully",
+        data: detail_user,
+      });
+    } catch (err) {
       next(err);
     }
   },
 
   myProfile: async (req, res, next) => {
-    try{
-      const id = req.user.id
-      const user = await User.findOne({ where : { id }});
-      const detail = await DetailUser.findOne({ where: { user_id: id } })
+    try {
+      const id = req.user.id;
+      const user = await User.findOne({ where: { id } });
+      const detail = await DetailUser.findOne({ where: { user_id: id } });
 
-      if (!user || !detail) return res.status(400).json({ status: false, message: 'user not found!' })
+      if (!user || !detail)
+        return res
+          .status(400)
+          .json({ status: false, message: "user not found!" });
 
       return res.status(200).json({
         status: true,
-        message: 'berhasil dapat data!',
+        message: "berhasil dapat data!",
         data: {
           user,
-          detail
-        }
-      })
-
-    }catch (err){
+          detail,
+        },
+      });
+    } catch (err) {
       next(err);
     }
   },
