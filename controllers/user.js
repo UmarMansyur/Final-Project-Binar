@@ -20,7 +20,7 @@ module.exports = {
         username,
         email,
         password,
-        password2,
+        confirmPassword,
         thumbnail,
         role = roles.user,
         user_type = userTypes.basic,
@@ -51,10 +51,10 @@ module.exports = {
       //     error: "e-mail already in use!!!",
       //   });
 
-      if (password != password2)
+      if (password != confirmPassword)
         return res.status(400).json({
           status: false,
-          message: "password 1 dan password 2 doesn\t match!!!",
+          message: "password and confirm password doesn\t match!!!",
         });
 
       const passHash = await bcrypt.hash(password, 10);
