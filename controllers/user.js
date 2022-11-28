@@ -102,8 +102,11 @@ module.exports = {
         status: true,
         message: "account successfully registered",
         data: {
-          user,
-          response,
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+          username: user.user_type,
         },
       });
 
