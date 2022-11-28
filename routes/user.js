@@ -23,4 +23,5 @@ router.get('/verif', cont.user.verifyEmail);
 
 router.post('/updateProfile', middle(roles.user), cont.user.updateProfile);
 
+
 module.exports = router;
