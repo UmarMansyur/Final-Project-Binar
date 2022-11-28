@@ -14,9 +14,6 @@ const { JWT_SECRET_KEY } = process.env;
 const subscriptions = require("./subscriptions.json");
 
 module.exports = {
-  registerPage: (req, res) => {
-    res.render("auth/register", { error: null });
-  },
 
   register: async (req, res, next) => {
     try {
@@ -72,10 +69,10 @@ module.exports = {
         is_verified,
       });
 
-      const apiHost = process.env.HTTP_PORT;
+      const apiHost = process.env.API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
-      const link = `http://localhost:${apiHost}/auth/verif?token=${token}`;
+      const link = `${apiHost}/auth/verif?token=${token}`;
 
       const html = await email1.getHtml("helo.ejs", {
         user: {
