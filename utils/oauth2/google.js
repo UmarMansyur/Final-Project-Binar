@@ -8,7 +8,6 @@ const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_SECRET,
   GOOGLE_REDIRECT_URI
 );
-console.log(GOOGLE_REDIRECT_URI);
 module.exports = {
   generateAuthURL: () => {
     const scopes = [
