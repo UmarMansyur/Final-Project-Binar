@@ -108,7 +108,7 @@ module.exports = {
       subscriptions.forEach((subscription) => {
         webpush
           .sendNotification(subscription, payload)
-          .then((result) => ('success'))
+          .then((result) => console.log('success'))
           .catch((e) => console.log(e.stack));
       });
 
