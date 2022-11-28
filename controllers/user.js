@@ -304,6 +304,28 @@ module.exports = {
     }
   },
 
+  myProfile: async (req, res, next) => {
+    try{
+      const id = req.user.id
+      const user = await User.findOne({ where : { id }});
+      const detail = await DetailUser.findOne({ where: { user_id: id } })
+
+      if (!user || !detail) return res.status(400).json({ status: false, message: 'user not found!' })
+
+      return res.status(200).json({
+        status: true,
+        message: 'berhasil dapat data!',
+        data: {
+          user,
+          detail
+        }
+      })
+
+    }catch (err){
+      next(err);
+    }
+  },
+
   forgotPasswordPage: async (req, res, next) => {
     try {
     } catch (err) {
