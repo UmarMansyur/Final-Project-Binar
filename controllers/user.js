@@ -1,6 +1,5 @@
 const googleOauth2 = require("../utils/oauth2/google");
 const facebookOauth2 = require("../utils/oauth2/facebook");
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
@@ -9,11 +8,10 @@ const userTypes = require("../utils/userType");
 const email1 = require("./email");
 const webpush = require("web-push");
 
+const apiHost = process.env.API_HOST;
 const { JWT_SECRET_KEY } = process.env;
 
 const subscriptions = require("./subscriptions.json");
-const { where } = require("sequelize");
-const apiHost = process.env.API_HOST;
 
 module.exports = {
   register: async (req, res, next) => {
@@ -61,6 +59,10 @@ module.exports = {
         is_verified,
       });
 
+      const detail = await DetailUser.create({
+        user_id: user.id,
+      });
+
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
@@ -74,7 +76,7 @@ module.exports = {
 
       const response = await email1.sendEmail(
         `${user.email}`,
-        "Welcome, new user",
+        "Terbang Tinggi",
         `${html}`
       );
 
@@ -97,7 +99,7 @@ module.exports = {
           username: user.username,
           email: user.email,
           role: user.role,
-          username: user.user_type,
+          user_type: user.user_type,
         },
       });
     } catch (err) {
@@ -194,7 +196,7 @@ module.exports = {
           email: data.email,
           thumbnail: data.picture,
           role: roles.user,
-          user_type: "Google",
+          user_type: userTypes.google,
           is_verified: 1,
         });
       } else {
@@ -205,7 +207,7 @@ module.exports = {
             email: data.email,
             thumbnail: data.picture,
             role: roles.user,
-            user_type: "Google",
+            user_type: userTypes.google,
             is_verified: 1,
           },
           { where: { email: data.email }, returning: true }
@@ -230,6 +232,123 @@ module.exports = {
       const userInfo = await facebookOauth2.getUserInfo(access_token);
       console.log(userInfo.picture.data.url);
       res.send(userInfo);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  changePassword: async (req, res, next) => {
+    try {
+      const { passwordLama, passwordBaru, passwordBaru2 } = req.body;
+
+      const usercompare = await User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      });
+      if (!usercompare) {
+        return res.status(400).json({
+          status: false,
+          message: "user not found!",
+        });
+      }
+
+      const pass = await bcrypt.compare(passwordLama, usercompare.password);
+      if (!pass) {
+        return res.status(400).json({
+          status: false,
+          message: "incorrect password!!",
+        });
+      }
+
+      if (passwordBaru !== passwordBaru2)
+        return res.status(422).json({
+          status: false,
+          message: "password 1 and password 2 doesn't match!",
+        });
+
+      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
+      await usercompare.update({ password: hashedPassword });
+
+      return res.status(200).json({
+        success: true,
+        message: "password changed successfully!",
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: false,
+        message: err.message,
+      });
+    }
+  },
+
+  updateProfile: async (req, res, next) => {
+    try {
+      const {
+        user_id,
+        first_name,
+        last_name,
+        fullName,
+        gender,
+        country,
+        province,
+        city,
+        address,
+        phone,
+      } = req.body;
+
+      const id = req.user.id;
+      const exist = await DetailUser.findOne({ where: { user_id: id } });
+      if (!exist)
+        return res
+          .status(400)
+          .json({ status: false, message: "user not found!" });
+
+      const detail_user = await DetailUser.update(
+        {
+          fullName: [first_name, last_name].join(" "),
+          gender,
+          country,
+          province,
+          city,
+          address,
+          phone,
+        },
+        {
+          where: {
+            user_id: id,
+          },
+        }
+      );
+
+      return res.status(200).json({
+        status: true,
+        message: "Profile updated successfully",
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  myProfile: async (req, res, next) => {
+    try {
+      const id = req.user.id;
+      const user = await User.findOne({ where: { id } });
+      const detail = await DetailUser.findOne({ where: { user_id: id } });
+
+      if (!user || !detail)
+        return res
+          .status(400)
+          .json({ status: false, message: "user not found!" });
+
+      return res.status(200).json({
+        status: true,
+        message: "berhasil dapat data!",
+        data: {
+          user,
+          detail,
+        },
+      });
     } catch (err) {
       next(err);
     }
@@ -292,66 +411,6 @@ module.exports = {
           message: "password updated successfully",
         });
       }
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  updateProfile: async (req, res, next) => {
-    try {
-      const {
-        user_id,
-        first_name,
-        last_name,
-        fullName,
-        gender,
-        country,
-        province,
-        city,
-        address,
-        phone,
-      } = req.body;
-
-      const detail_user = await DetailUser.create({
-        user_id: req.user.id,
-        fullName: [first_name, last_name].join(" "),
-        gender,
-        country,
-        province,
-        city,
-        address,
-        phone,
-      });
-
-      return res.status(200).json({
-        status: true,
-        message: "Profile updated successfully",
-        data: detail_user,
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  myProfile: async (req, res, next) => {
-    try {
-      const id = req.user.id;
-      const user = await User.findOne({ where: { id } });
-      const detail = await DetailUser.findOne({ where: { user_id: id } });
-
-      if (!user || !detail)
-        return res
-          .status(400)
-          .json({ status: false, message: "user not found!" });
-
-      return res.status(200).json({
-        status: true,
-        message: "berhasil dapat data!",
-        data: {
-          user,
-          detail,
-        },
-      });
     } catch (err) {
       next(err);
     }
