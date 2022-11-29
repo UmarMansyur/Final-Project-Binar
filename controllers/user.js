@@ -8,7 +8,6 @@ const userTypes = require("../utils/userType");
 const email1 = require("./email");
 const webpush = require("web-push");
 
-const apiHost = process.env.API_HOST;
 const { JWT_SECRET_KEY } = process.env;
 
 const subscriptions = require("./subscriptions.json");
@@ -63,6 +62,7 @@ module.exports = {
         user_id: user.id,
       });
 
+      const apiHost = process.env.API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
@@ -237,48 +237,65 @@ module.exports = {
     }
   },
 
-  changePassword: async (req, res, next) => {
+  forgotPassword: async (req, res, next) => {
     try {
-      const { passwordLama, passwordBaru, passwordBaru2 } = req.body;
+      const { email } = req.body;
 
-      const usercompare = await User.findOne({
-        where: {
-          id: req.user.id,
-        },
-      });
-      if (!usercompare) {
-        return res.status(400).json({
-          status: false,
-          message: "user not found!",
+      const user = await User.findOne({ where: { email } });
+      if (user) {
+        const payload = { user_id: user.id };
+        const token = jwt.sign(payload, JWT_SECRET_KEY);
+        const link = `${apiHost}/auth/reset-password?token=${token}`;
+        htmlEmail = await email1.getHtml("email/reset-password.ejs", {
+          name: user.name,
+          link: link,
         });
+        await email1.sendEmail(user.email, "Reset your password", htmlEmail);
       }
-
-      const pass = await bcrypt.compare(passwordLama, usercompare.password);
-      if (!pass) {
-        return res.status(400).json({
-          status: false,
-          message: "incorrect password!!",
-        });
-      }
-
-      if (passwordBaru !== passwordBaru2)
-        return res.status(422).json({
-          status: false,
-          message: "password 1 and password 2 doesn't match!",
-        });
-
-      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
-      await usercompare.update({ password: hashedPassword });
-
       return res.status(200).json({
         success: true,
-        message: "password changed successfully!",
+        message: "Success send email forgot password to user",
       });
     } catch (err) {
-      res.status(500).json({
-        status: false,
-        message: err.message,
-      });
+      next(err);
+    }
+  },
+
+  resetPassword: async (req, res, next) => {
+    try {
+      const { newPassword, confirmPassword } = req.body;
+      const { token } = req.query;
+
+      if (!token) {
+        return res.status(400).json({
+          status: false,
+          message: "invalid token!",
+        });
+      }
+      if (newPassword != confirmPassword) {
+        return res.status(400).json({
+          status: false,
+          message: "password and confirm password doesn't match",
+        });
+      }
+
+      const payload = jwt.verify(token, JWT_SECRET_KEY);
+
+      const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+      const user = await User.update(
+        { password: encryptedPassword },
+        { where: { id: payload.user_id } }
+      );
+
+      if (user) {
+        return res.status(200).json({
+          status: true,
+          message: "password updated successfully",
+        });
+      }
+    } catch (err) {
+      next(err);
     }
   },
 
@@ -349,68 +366,6 @@ module.exports = {
           detail,
         },
       });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  forgotPassword: async (req, res, next) => {
-    try {
-      const { email } = req.body;
-
-      const user = await User.findOne({ where: { email } });
-      if (user) {
-        const payload = { user_id: user.id };
-        const token = jwt.sign(payload, JWT_SECRET_KEY);
-        const link = `${apiHost}/auth/reset-password?token=${token}`;
-        htmlEmail = await email1.getHtml("email/reset-password.ejs", {
-          name: user.name,
-          link: link,
-        });
-        await email1.sendEmail(user.email, "Reset your password", htmlEmail);
-      }
-      return res.status(200).json({
-        success: true,
-        message: "Success send email forgot password to user",
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  resetPassword: async (req, res, next) => {
-    try {
-      const { newPassword, confirmPassword } = req.body;
-      const { token } = req.query;
-
-      if (!token) {
-        return res.status(400).json({
-          status: false,
-          message: "invalid token!",
-        });
-      }
-      if (newPassword != confirmPassword) {
-        return res.status(400).json({
-          status: false,
-          message: "password and confirm password doesn't match",
-        });
-      }
-
-      const payload = jwt.verify(token, JWT_SECRET_KEY);
-
-      const encryptedPassword = await bcrypt.hash(newPassword, 10);
-
-      const user = await User.update(
-        { password: encryptedPassword },
-        { where: { id: payload.user_id } }
-      );
-
-      if (user) {
-        return res.status(200).json({
-          status: true,
-          message: "password updated successfully",
-        });
-      }
     } catch (err) {
       next(err);
     }
