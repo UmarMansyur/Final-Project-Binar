@@ -217,7 +217,7 @@ module.exports = {
         const payload = { user_id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
         const link = `http://localhost:3000/auth/reset-password?token=${token}`;
-        htmlEmail = await email1.getHtmlForgotPassword("reset-password.ejs", {
+        htmlEmail = await email1.getHtml("email/reset-password.ejs", {
           name: user.name,
           link: link,
         });
