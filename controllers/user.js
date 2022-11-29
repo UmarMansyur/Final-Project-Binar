@@ -61,10 +61,14 @@ module.exports = {
         is_verified,
       });
 
+      const detail = await DetailUser.create({
+        user_id: user.id
+      })
+
       const apiHost = process.env.API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
-      const link = `${apiHost}/auth/verif?token=${token}`;
+      const link = `http://localhost:3002/auth/verif?token=${token}`;
 
       const html = await email1.getHtml("helo.ejs", {
         user: {
@@ -196,7 +200,7 @@ module.exports = {
           email: data.email,
           thumbnail: data.picture,
           role: roles.user,
-          user_type: "Google",
+          user_type: userTypes.google,
           is_verified: 1,
         });
       } else {
@@ -207,7 +211,7 @@ module.exports = {
             email: data.email,
             thumbnail: data.picture,
             role: roles.user,
-            user_type: "Google",
+            user_type: userTypes.google,
             is_verified: 1,
           },
           { where: { email: data.email }, returning: true }
@@ -297,8 +301,11 @@ module.exports = {
         phone,
       } = req.body;
 
-      const detail_user = await DetailUser.create({
-        user_id: req.user.id,
+      const id = req.user.id;
+      const exist = await DetailUser.findOne({ where: { user_id: id }})
+      if (!exist) return res.status(400).json({ status: false, message: 'user not found!'})
+
+      const detail_user = await DetailUser.update({
         fullName: [first_name, last_name].join(" "),
         gender,
         country,
@@ -306,12 +313,16 @@ module.exports = {
         city,
         address,
         phone,
+      }, {
+        where: {
+          user_id: id,
+        }
+      
       });
 
       return res.status(200).json({
         status: true,
-        message: "Profile updated successfully",
-        data: detail_user,
+        message: "Profile updated successfully"
       });
     } catch (err) {
       next(err);
