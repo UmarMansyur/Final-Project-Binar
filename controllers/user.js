@@ -7,7 +7,7 @@ const roles = require("../utils/roles");
 const userTypes = require("../utils/userType");
 const email1 = require("./email");
 const webpush = require("web-push");
-
+const apiHost = process.env.API_HOST;
 const { JWT_SECRET_KEY } = process.env;
 
 const subscriptions = require("./subscriptions.json");
@@ -62,7 +62,6 @@ module.exports = {
         user_id: user.id,
       });
 
-      const apiHost = process.env.API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
