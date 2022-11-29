@@ -68,7 +68,7 @@ module.exports = {
       const apiHost = process.env.API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
-      const link = `http://localhost:3002/auth/verif?token=${token}`;
+      const link = `${apiHost}/auth/verif?token=${token}`;
 
       const html = await email1.getHtml("helo.ejs", {
         user: {
