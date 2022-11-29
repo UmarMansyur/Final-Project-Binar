@@ -212,8 +212,18 @@ module.exports = {
           { where: { email: data.email }, returning: true }
         );
       }
+      // generate token
+      const payload = {
+        id: userExist.id,
+        username: userExist.username,
+        email: userExist.email,
+        user_type: userExist.user_type,
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+
       return res.status(200).json({
         data: exist == true ? userExist[1][0] : userExist,
+        access_token: token,
       });
     } catch (err) {
       next(err);
