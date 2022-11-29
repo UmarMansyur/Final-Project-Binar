@@ -14,11 +14,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-
+app.use(cors());
 app.use(router);
 app.set("view engine", "ejs");
 
-app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "client")));
 
