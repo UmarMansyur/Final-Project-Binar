@@ -58,10 +58,7 @@ module.exports = {
     // data: JSON.stringify(subscription);
 
     subscriptions.forEach((subscription) => {
-      webpush
-        .sendNotification(subscription, payload)
-        .then((result) => console.log(result))
-        .catch((e) => console.log(e.stack));
+      webpush.sendNotification(subscription, payload).then(result).catch(e);
     });
 
     res.status(200).json({ success: true });
