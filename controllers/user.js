@@ -199,7 +199,16 @@ module.exports = {
       const { data } = await googleOauth2.getUserData();
 
       let userExist = await User.findOne({ where: { email: data.email } });
-      if (userExist) {
+      if (!userExist) {
+        userExist = await User.create({
+          username: data.name,
+          email: data.email,
+          thumbnail: data.picture,
+          role: roles.user,
+          user_type: "Google",
+          is_verified: 1,
+        });
+      } else {
         userExist = await User.update(
           {
             username: data.name,
@@ -211,19 +220,7 @@ module.exports = {
           },
           { where: { email: data.email }, returning: true }
         );
-        return res.status(200).json({
-          message: "Data updated successfully",
-          data: userExist[1][0]
-        });
       }
-      userExist = await User.create({
-        username: data.name,
-        email: data.email,
-        thumbnail: data.picture,
-        role: roles.user,
-        user_type: "Google",
-        is_verified: 1,
-      });
       return res.status(200).json({
         data: userExist,
       });
