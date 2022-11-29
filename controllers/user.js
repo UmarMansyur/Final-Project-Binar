@@ -1,6 +1,5 @@
 const googleOauth2 = require("../utils/oauth2/google");
 const facebookOauth2 = require("../utils/oauth2/facebook");
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
@@ -12,7 +11,6 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY } = process.env;
 
 const subscriptions = require("./subscriptions.json");
-const { where } = require("sequelize");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -79,7 +77,7 @@ module.exports = {
 
       const response = await email1.sendEmail(
         `${user.email}`,
-        "Welcome, new user",
+        "Terbang Tinggi",
         `${html}`
       );
 
@@ -102,7 +100,7 @@ module.exports = {
           username: user.username,
           email: user.email,
           role: user.role,
-          username: user.user_type,
+          user_type: user.user_type,
         },
       });
 
