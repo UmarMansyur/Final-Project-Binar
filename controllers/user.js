@@ -12,6 +12,7 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY } = process.env;
 
 const subscriptions = require("./subscriptions.json");
+const { where } = require("sequelize");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -198,8 +199,34 @@ module.exports = {
       const { data } = await googleOauth2.getUserData();
 
       let userExist = await User.findOne({ where: { email: data.email } });
-
-      return res.json(data);
+      if (userExist) {
+        userExist = await User.update(
+          {
+            username: data.name,
+            email: data.email,
+            thumbnail: data.picture,
+            role: roles.user,
+            user_type: "Google",
+            is_verified: 1,
+          },
+          { where: { email: data.email }, returning: true }
+        );
+        return res.status(200).json({
+          message: "Data updated successfully",
+          data: userExist[1][0]
+        });
+      }
+      userExist = await User.create({
+        username: data.name,
+        email: data.email,
+        thumbnail: data.picture,
+        role: roles.user,
+        user_type: "Google",
+        is_verified: 1,
+      });
+      return res.status(200).json({
+        data: userExist,
+      });
     } catch (err) {
       next(err);
     }
