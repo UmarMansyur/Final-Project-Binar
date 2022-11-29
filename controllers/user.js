@@ -73,7 +73,7 @@ module.exports = {
 
       const response = await email1.sendEmail(
         `${user.email}`,
-        "Welcome, new user",
+        "Welcome to Terbang Tinggi App",
         `${html}`
       );
 
