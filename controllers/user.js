@@ -35,10 +35,6 @@ module.exports = {
           message: `username ${username} already in use!!!`,
         });
 
-      // if (exist1)
-      //   return res.render("auth/register", {
-      //     error: `username ${username} already in use!!!`,
-      //   });
 
       const exist = await User.findOne({ where: { email } });
       if (exist)
@@ -46,11 +42,6 @@ module.exports = {
           status: false,
           message: "e-mail already in use!!!",
         });
-
-      // if (exist)
-      //   return res.render("auth/register", {
-      //     error: "e-mail already in use!!!",
-      //   });
 
       if (password != confirmPassword)
         return res.status(400).json({
@@ -111,7 +102,6 @@ module.exports = {
         },
       });
 
-      // return res.render("auth/login", { error: null });
     } catch (err) {
       next(err);
     }
@@ -199,6 +189,7 @@ module.exports = {
       const { data } = await googleOauth2.getUserData();
 
       let userExist = await User.findOne({ where: { email: data.email } });
+      let exist = false;
       if (!userExist) {
         userExist = await User.create({
           username: data.name,
@@ -209,6 +200,7 @@ module.exports = {
           is_verified: 1,
         });
       } else {
+        exist = true;
         userExist = await User.update(
           {
             username: data.name,
@@ -222,7 +214,7 @@ module.exports = {
         );
       }
       return res.status(200).json({
-        data: userExist,
+        data: exist == true ? userExist[1][0] : userExist,
       });
     } catch (err) {
       next(err);
