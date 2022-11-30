@@ -17,9 +17,6 @@ module.exports = {
       arrivalCity: {
         type: Sequelize.STRING
       },
-      departureCity: {
-        type: Sequelize.STRING
-      },
       departureTime: {
         type: Sequelize.TIME
       },
