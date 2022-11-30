@@ -7,7 +7,7 @@ const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = process.env;
 
 webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY);
 
-let sub = require("./subscriptions.json");
+let sub = require("../subscriptions.json");
 sub.splice(1, sub.length);
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
 
       subs.push(subscription);
       fs.writeFile(
-        "d:/Binar/npm/Final-Project-Binar/controllers/subscriptions.json",
+        "d:/Binar/npm/Final-Project-Binar/subscriptions.json",
         JSON.stringify(subs),
         (err) => {
           console.log = err;
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   webPush1: (req, res) => {
-    const subscriptions = require("./subscriptions.json");
+    const subscriptions = require("../subscriptions.json");
 
     const payload = JSON.stringify({
       title: "",
