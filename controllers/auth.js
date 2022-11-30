@@ -251,7 +251,13 @@ module.exports = {
       const { email } = req.body;
 
       const user = await User.findOne({ where: { email } });
-      if (user) {
+
+      if (!user) {
+        return res.status(404).json({
+          status: false,
+          message: "email not found",
+        });
+      } else {
         const payload = { user_id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
         const link = `${apiHost}/auth/reset-password?token=${token}`;
