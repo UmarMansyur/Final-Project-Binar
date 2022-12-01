@@ -58,10 +58,6 @@ module.exports = {
         is_verified,
       });
 
-      const detail = await DetailUser.create({
-        user_id: user.id,
-      });
-
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
@@ -102,7 +98,7 @@ module.exports = {
         },
       });
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   },
   login: async (req, res, next) => {
