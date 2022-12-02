@@ -7,7 +7,6 @@ const roles = require("../utils/roles");
 const userTypes = require("../utils/userType");
 const email1 = require("../utils/sendEmail");
 const webpush = require("web-push");
-const apiHost = process.env.API_HOST;
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../subscriptions.json");
