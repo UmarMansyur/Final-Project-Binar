@@ -16,6 +16,7 @@ module.exports = {
   register: async (req, res, next) => {
     try {
       const {
+        user_id,
         username,
         email,
         password,
@@ -179,13 +180,17 @@ module.exports = {
 
   loginGoogle: async (req, res, next) => {
     try {
+      const { user_id, fullName } = req.body;
       const code = req.query.code;
       if (!code) {
         const url = googleOauth2.generateAuthURL();
+        console.log(url);
         return res.redirect(url);
       }
 
-      await googleOauth2.setCredentials(code);
+      const code1 = await googleOauth2.setCredentials(code);
+      console.log(code)
+
       const { data } = await googleOauth2.getUserData();
 
       let userExist = await User.findOne({ where: { email: data.email } });
@@ -213,6 +218,12 @@ module.exports = {
           { where: { email: data.email }, returning: true }
         );
       }
+
+      await DetailUser.create({
+        user_id: userExist.id,
+        fullName: data.name
+      })
+
       // generate token
       const payload = {
         id: userExist.id,
@@ -259,7 +270,8 @@ module.exports = {
           message: "email not found",
         });
       } else {
-        const payload = { user_id: user.id };
+        const apiHost = API_HOST;
+        const payload = { id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
         const link = `${apiHost}/auth/reset-password?token=${token}`;
         htmlEmail = await email1.getHtml("email/reset-password.ejs", {
@@ -301,7 +313,7 @@ module.exports = {
 
       const user = await User.update(
         { password: encryptedPassword },
-        { where: { id: payload.user_id } }
+        { where: { id: payload.id } }
       );
 
       if (user) {
