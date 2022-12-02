@@ -8,7 +8,7 @@ const userTypes = require("../utils/userType");
 const email1 = require("../utils/sendEmail");
 const webpush = require("web-push");
 const apiHost = process.env.API_HOST;
-const { JWT_SECRET_KEY } = process.env;
+const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../subscriptions.json");
 
@@ -58,6 +58,11 @@ module.exports = {
         is_verified,
       });
 
+      await DetailUser.create({
+        user_id: user.id
+      })
+
+      const apiHost = API_HOST;
       const payload1 = { id: user.id };
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
