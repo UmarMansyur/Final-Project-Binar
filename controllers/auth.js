@@ -92,7 +92,7 @@ module.exports = {
           .catch((e) => console.log(e.stack));
       });
 
-      return res.status(200).json({
+      return res.status(201).json({
         status: true,
         message: "account successfully registered",
         data: {
