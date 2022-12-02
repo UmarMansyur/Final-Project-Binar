@@ -60,8 +60,8 @@ module.exports = {
       });
 
       await DetailUser.create({
-        user_id: user.id
-      })
+        user_id: user.id,
+      });
 
       const apiHost = API_HOST;
       const payload1 = { id: user.id };
@@ -273,7 +273,7 @@ module.exports = {
         const apiHost = API_HOST;
         const payload = { id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
-        const link = `${apiHost}/auth/reset-password?token=${token}`;
+        const link = `https://terbangtinggi-staging.km3ggwp.com/reset-password?token=${token}`;
         htmlEmail = await email1.getHtml("email/reset-password.ejs", {
           name: user.name,
           link: link,
