@@ -257,6 +257,55 @@ module.exports = {
     }
   },
 
+  changePassword: async (req, res, next) => {
+    try {
+
+      const { 
+           passwordLama,
+           passwordBaru,
+           passwordBaru2
+      } = req.body;
+
+      const usercompare = await User.findOne({ 
+          where: { 
+              id: req.user.id
+          }});
+      if (!usercompare) {
+          return res.status(400).json({
+              status: false,
+              message: 'user tidak di temukan!'
+          })
+      }
+
+      const pass = await bcrypt.compare(passwordLama, usercompare.password);
+      if (!pass) {
+          return res.status(400).json({
+              status: false,
+              message: 'password salah!!'
+          })
+      }
+
+      if (passwordBaru !== passwordBaru2) 
+      return res.status(422).json({
+          status: false,
+          message: 'password 1 dan password 2 tidak sama!'
+      });
+
+      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
+       await usercompare.update({password: hashedPassword});
+
+      return res.status(200).json({
+          success: true,
+          message: 'Password berhasil di ubah'
+      });
+  } catch (err) {
+      res.status(500).json({
+          status: false, 
+          message: err.message
+      });
+  }
+  },
+
   forgotPassword: async (req, res, next) => {
     try {
       const { email } = req.body;
