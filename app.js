@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const router = require("./routes");
 const app = express();
+const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
@@ -12,6 +13,7 @@ const fs = require("fs");
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(cors());

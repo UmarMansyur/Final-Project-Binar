@@ -1,6 +1,7 @@
 const googleOauth2 = require("../utils/oauth2/google");
 const facebookOauth2 = require("../utils/oauth2/facebook");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { User, DetailUser } = require("../models");
 const roles = require("../utils/roles");
@@ -10,6 +11,7 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../subscriptions.json");
+const { token } = require("morgan");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -179,7 +181,48 @@ module.exports = {
 
   loginGoogle: async (req, res, next) => {
     try {
-      const { user_id, fullName } = req.body;
+      const { access_token } = req.body;
+      const response = await axios.get(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
+      );
+
+      const { name, email, picture } = response.data;
+
+      let user = await User.findOne({ where: { email: email } });
+      if (!user)
+        user = await User.create({
+          username: name,
+          email,
+          thumbnail: picture,
+          role: "User",
+          user_type: "Google",
+          is_verified: 1,
+        });
+
+      delete user.encryptedPassword;
+
+      // generate token
+      const payload = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        user_type: user.user_type,
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+
+      res.status(201).json({
+        status: true,
+        message: "Success get token",
+        token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  //get credential token
+  loginGoogleGetData: async (req, res, next) => {
+    try {
       const code = req.query.code;
       if (!code) {
         const url = googleOauth2.generateAuthURL();
@@ -187,54 +230,12 @@ module.exports = {
         return res.redirect(url);
       }
 
-      const code1 = await googleOauth2.setCredentials(code);
-      console.log(code)
+      await googleOauth2.setCredentials(code);
 
       const { data } = await googleOauth2.getUserData();
 
-      let userExist = await User.findOne({ where: { email: data.email } });
-      let exist = false;
-      if (!userExist) {
-        userExist = await User.create({
-          username: data.name,
-          email: data.email,
-          thumbnail: data.picture,
-          role: roles.user,
-          user_type: userTypes.google,
-          is_verified: 1,
-        });
-      } else {
-        exist = true;
-        userExist = await User.update(
-          {
-            username: data.name,
-            email: data.email,
-            thumbnail: data.picture,
-            role: roles.user,
-            user_type: userTypes.google,
-            is_verified: 1,
-          },
-          { where: { email: data.email }, returning: true }
-        );
-      }
-
-      await DetailUser.create({
-        user_id: userExist.id,
-        fullName: data.name
-      })
-
-      // generate token
-      const payload = {
-        id: userExist.id,
-        username: userExist.username,
-        email: userExist.email,
-        user_type: userExist.user_type,
-      };
-      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-
       return res.status(200).json({
-        data: exist == true ? userExist[1][0] : userExist,
-        access_token: token,
+        data,
       });
     } catch (err) {
       next(err);
@@ -259,51 +260,47 @@ module.exports = {
 
   changePassword: async (req, res, next) => {
     try {
+      const { passwordLama, passwordBaru, passwordBaru2 } = req.body;
 
-      const { 
-           passwordLama,
-           passwordBaru,
-           passwordBaru2
-      } = req.body;
-
-      const usercompare = await User.findOne({ 
-          where: { 
-              id: req.user.id
-          }});
+      const usercompare = await User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      });
       if (!usercompare) {
-          return res.status(400).json({
-              status: false,
-              message: 'user tidak di temukan!'
-          })
+        return res.status(400).json({
+          status: false,
+          message: "user tidak di temukan!",
+        });
       }
 
       const pass = await bcrypt.compare(passwordLama, usercompare.password);
       if (!pass) {
-          return res.status(400).json({
-              status: false,
-              message: 'password salah!!'
-          })
+        return res.status(400).json({
+          status: false,
+          message: "password salah!!",
+        });
       }
 
-      if (passwordBaru !== passwordBaru2) 
-      return res.status(422).json({
+      if (passwordBaru !== passwordBaru2)
+        return res.status(422).json({
           status: false,
-          message: 'password 1 dan password 2 tidak sama!'
-      });
+          message: "password 1 dan password 2 tidak sama!",
+        });
 
       const hashedPassword = await bcrypt.hash(passwordBaru, 10);
-       await usercompare.update({password: hashedPassword});
+      await usercompare.update({ password: hashedPassword });
 
       return res.status(200).json({
-          success: true,
-          message: 'Password berhasil di ubah'
+        success: true,
+        message: "Password berhasil di ubah",
       });
-  } catch (err) {
+    } catch (err) {
       res.status(500).json({
-          status: false, 
-          message: err.message
+        status: false,
+        message: err.message,
       });
-  }
+    }
   },
 
   forgotPassword: async (req, res, next) => {
