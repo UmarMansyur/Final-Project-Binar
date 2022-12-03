@@ -230,12 +230,13 @@ module.exports = {
         return res.redirect(url);
       }
 
-      await googleOauth2.setCredentials(code);
+      const token = await googleOauth2.setCredentials(code);
 
       const { data } = await googleOauth2.getUserData();
 
       return res.status(200).json({
         data,
+        token,
       });
     } catch (err) {
       next(err);
