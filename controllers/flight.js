@@ -4,16 +4,16 @@ module.exports = {
   create: async (req, res, next) => {
     try {
       const {
+        airlineName,
         code,
-        airline_name,
-        departure_city,
-        arrival_city,
-        departure_time,
-        arrival_time,
-        total_seat,
-        class_passenger,
+        departureCity,
+        arrivalCity,
+        departureTime,
+        arrivalTime,
+        totalSeat,
+        classPassenger,
         gate,
-        boarding_time,
+        boardingTime,
         price,
         stock,
       } = req.body;
@@ -33,22 +33,22 @@ module.exports = {
 
       const flight = await Flight.create({
         code,
-        airline_name,
-        departure_city,
-        arrival_city,
-        departure_time,
-        arrival_time,
-        total_seat,
-        class_passenger,
+        airlineName,
+        departureCity,
+        arrivalCity,
+        departureTime,
+        arrivalTime,
+        totalSeat,
+        classPassenger,
         gate,
-        boarding_time,
+        boardingTime,
         price,
         stock,
       });
 
       return res.status(201).json({
         status: true,
-        message: "flight created",
+        message: "Success create flight",
         data: flight,
       });
     } catch (err) {
@@ -58,25 +58,11 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const { flightId } = req.params;
-
-      const flight = await Flight.findOne({
-        where: {
-          id: flightId,
-        },
-      });
-
-      if (!flight) {
-        return res.status(400).json({
-          status: false,
-          message: "flight not found",
-          data: null,
-        });
-      }
+      const flight = await Flight.findAll();
 
       return res.status(200).json({
         status: true,
-        message: "Success get detail flight",
+        message: "Success get data",
         data: flight,
       });
     } catch (err) {
@@ -89,15 +75,15 @@ module.exports = {
 
       let {
         code,
-        airline_name,
-        departure_city,
-        arrival_city,
-        departure_time,
-        arrival_time,
-        total_seat,
-        class_passenger,
+        airlineName,
+        departureCity,
+        arrivalCity,
+        departureTime,
+        arrivalTime,
+        totalSeat,
+        classPassenger,
         gate,
-        boarding_time,
+        boardingTime,
         price,
         stock,
       } = req.body;
@@ -119,15 +105,15 @@ module.exports = {
       const updatedFlight = await flight.update(
         {
           code,
-          airline_name,
-          departure_city,
-          arrival_city,
-          departure_time,
-          arrival_time,
-          total_seat,
-          class_passenger,
+          airlineName,
+          departureCity,
+          arrivalCity,
+          departureTime,
+          arrivalTime,
+          totalSeat,
+          classPassenger,
           gate,
-          boarding_time,
+          boardingTime,
           price,
           stock,
         },
