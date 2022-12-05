@@ -71,4 +71,23 @@ module.exports = {
       next(err);
     }
   },
+
+  //only admin
+  getAllUser: async (req, res, next) => {
+    try {
+      const user = await User.findAll({
+        attributes: { exclude: ["password", "thumbnail"] },
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "Sucess get data!",
+        data: {
+          user,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
 };
