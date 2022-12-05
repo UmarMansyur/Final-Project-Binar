@@ -15,7 +15,7 @@ module.exports = {
       };
       const result = await fetch(url, options);
       const json = await result.json();
-      let data = json.features[0].properties;
+      let data = json.features;
 
       return res.status(200).json({
         status: true,
@@ -23,7 +23,7 @@ module.exports = {
         data: data,
       });
     } catch (error) {
-      console.log(error);
+      next(err);
     }
   },
 };
