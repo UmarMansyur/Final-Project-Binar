@@ -3,6 +3,7 @@ const router = express.Router();
 const user = require("./user");
 const auth = require("./auth");
 const port = require("./port");
+const passenger = require("./passenger");
 
 router.get("/", (req, res) => {
   return res.status(200).json({
@@ -14,4 +15,5 @@ router.get("/", (req, res) => {
 router.use("/auth", auth);
 router.use("/user", user);
 router.use("/port", port);
+router.use("/passenger", passenger);
 module.exports = router;
