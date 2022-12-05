@@ -11,7 +11,6 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../subscriptions.json");
-const { token } = require("morgan");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -193,8 +192,8 @@ module.exports = {
           username: name,
           email,
           thumbnail: picture,
-          role: "User",
-          user_type: "Google",
+          role: roles.basic,
+          user_type: userTypes.google,
           is_verified: 1,
         });
 
@@ -270,7 +269,7 @@ module.exports = {
       if (!usercompare) {
         return res.status(400).json({
           status: false,
-          message: "user tidak di temukan!",
+          message: "user not found!",
         });
       }
 
@@ -278,14 +277,14 @@ module.exports = {
       if (!pass) {
         return res.status(400).json({
           status: false,
-          message: "password salah!!",
+          message: "incorrect password!!",
         });
       }
 
       if (passwordBaru !== passwordBaru2)
         return res.status(422).json({
           status: false,
-          message: "password 1 dan password 2 tidak sama!",
+          message: "password 1 dan password 2 doesn'\t match!",
         });
 
       const hashedPassword = await bcrypt.hash(passwordBaru, 10);
@@ -293,7 +292,7 @@ module.exports = {
 
       return res.status(200).json({
         success: true,
-        message: "Password berhasil di ubah",
+        message: "Password change succesfully",
       });
     } catch (err) {
       res.status(500).json({
