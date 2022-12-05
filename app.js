@@ -7,9 +7,9 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
-const webpush = require("web-push");
+const swaggerUi = require("swagger-ui-express");
+
 const { HTTP_PORT } = process.env;
-const fs = require("fs");
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -22,6 +22,9 @@ app.set("view engine", "ejs");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "client")));
+
+//documentation
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 404 handler
 app.use((req, res, next) => {

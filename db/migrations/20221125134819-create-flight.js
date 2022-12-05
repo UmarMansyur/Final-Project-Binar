@@ -1,57 +1,57 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Flights', {
+    await queryInterface.createTable("Flights", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       airlineName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       departureCity: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       arrivalCity: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       departureTime: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME,
       },
       arrivalTime: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       totalSeat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      class: {
-        type: Sequelize.STRING
+      classPassenger: {
+        type: Sequelize.STRING,
       },
       gate: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       boardingTime: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME,
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       stock: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Flights');
-  }
+    await queryInterface.dropTable("Flights");
+  },
 };

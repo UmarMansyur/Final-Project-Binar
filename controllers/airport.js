@@ -24,9 +24,9 @@ module.exports = {
           iata: v.properties.iata,
           name: v.properties.name,
           region: v.properties.region.name,
-          country : v.properties.country.name,
-        }
-        return field;      
+          country: v.properties.country.name,
+        };
+        return field;
       });
       return res.status(200).json({
         status: true,
