@@ -77,7 +77,7 @@ module.exports = {
 
       const response = await email1.sendEmail(
         `${user.email}`,
-        "Terbang Tinggi",
+        "Verify Your Email Address",
         `${html}`
       );
 
@@ -110,14 +110,15 @@ module.exports = {
   login: async (req, res, next) => {
     try {
       const user = await User.authenticate(req.body);
+
       const accesstoken = user.generateToken();
+
       return res.status(200).json({
         status: true,
         message: "success",
         data: {
           id: user.id,
           email: user.email,
-          username: user.username,
           role: user.role,
           token: accesstoken,
         },
@@ -192,10 +193,16 @@ module.exports = {
           username: name,
           email,
           thumbnail: picture,
-          role: roles.basic,
-          user_type: userTypes.google,
+          role: "User",
+          user_type: "Google",
           is_verified: 1,
         });
+      else {
+        res.status(201).json({
+          status: true,
+          message: "",
+        });
+      }
 
       delete user.encryptedPassword;
 
@@ -269,7 +276,7 @@ module.exports = {
       if (!usercompare) {
         return res.status(400).json({
           status: false,
-          message: "user not found!",
+          message: "user tidak di temukan!",
         });
       }
 
@@ -277,14 +284,14 @@ module.exports = {
       if (!pass) {
         return res.status(400).json({
           status: false,
-          message: "incorrect password!!",
+          message: "password salah!!",
         });
       }
 
       if (passwordBaru !== passwordBaru2)
         return res.status(422).json({
           status: false,
-          message: "password 1 dan password 2 doesn'\t match!",
+          message: "password 1 dan password 2 tidak sama!",
         });
 
       const hashedPassword = await bcrypt.hash(passwordBaru, 10);
@@ -292,7 +299,7 @@ module.exports = {
 
       return res.status(200).json({
         success: true,
-        message: "Password change succesfully",
+        message: "Password berhasil di ubah",
       });
     } catch (err) {
       res.status(500).json({
