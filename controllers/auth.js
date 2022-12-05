@@ -111,15 +111,14 @@ module.exports = {
   login: async (req, res, next) => {
     try {
       const user = await User.authenticate(req.body);
-
       const accesstoken = user.generateToken();
-
       return res.status(200).json({
         status: true,
         message: "success",
         data: {
           id: user.id,
           email: user.email,
+          username: user.username,
           role: user.role,
           token: accesstoken,
         },
