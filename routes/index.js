@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const user = require("./user");
 const auth = require("./auth");
-const port = require("./port");
+const airport = require("./airport");
 const passenger = require("./passenger");
 
 router.get("/", (req, res) => {
@@ -14,6 +14,6 @@ router.get("/", (req, res) => {
 
 router.use("/auth", auth);
 router.use("/user", user);
-router.use("/airport", port);
+router.use("/airport", airport);
 router.use("/passenger", passenger);
 module.exports = router;
