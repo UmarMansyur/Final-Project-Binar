@@ -62,7 +62,7 @@ module.exports = {
 
     return res.status(200).json({
         status: true,
-        message: 'image berhasil di upload',
+        message: 'success upload document',
         data: uploadedFile1
     });
 
