@@ -33,10 +33,17 @@ app.use((req, res, next) => {
 
 // 500 handler
 app.use((err, req, res, next) => {
-  return res.status(500).json({
+  if(err.code == 'LIMIT_FILE_SIZE' || err.message == 'file too large'){
+    return res.status(500).json({
+        status: false,
+        message: "the file size is too large, a maximum of 1 MB for images!"
+    })
+} else {
+return res.status(500).json({
     status: false,
-    message: err.message,
-  });
+    message: err.message
+})
+}
 });
 
 app.listen(HTTP_PORT, () => console.log("listening on port", HTTP_PORT));
