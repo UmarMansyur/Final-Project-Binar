@@ -8,7 +8,7 @@ const middle = require("../middlewares/authorize");
 const roles = require("../utils/roles");
 const storage = require('../utils/storage')
 
-router.get("/show/:id", middle(roles.user), cont.passenger.show);
+router.get("/myTicket", middle(roles.user), cont.passenger.show);
 router.post('/upload-document', storage.image.single('image'), middle(roles.user), cont.passenger.passenger)
 
 module.exports = router;

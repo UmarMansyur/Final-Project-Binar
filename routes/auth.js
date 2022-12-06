@@ -16,7 +16,7 @@ router.patch(
 );
 router.post("/forgot-password", cont.auth.forgotPassword);
 router.patch("/reset-password", cont.auth.resetPassword);
-router.get("/auth", middle([roles.user, roles.admin]), cont.auth.auth);
+router.get("/me", middle([roles.user, roles.admin]), cont.auth.auth);
 router.post("/subscribe", cont.webpush.webPush);
 router.get("/verif", cont.auth.verifyEmail);
 
