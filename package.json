@@ -38,7 +38,8 @@
     "query-string": "^7.1.1",
     "sequelize": "^6.25.8",
     "swagger-ui-express": "^4.6.0",
-    "web-push": "^3.5.0"
+    "web-push": "^3.5.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

@@ -1,0 +1,277 @@
+openapi: 3.0.0
+x-stoplight:
+  id: afhuwuwcragg4
+info:
+  title: Terbang Tinggi App
+  version: "1.0"
+  description: |
+    Terbang Tinggi Api
+servers:
+  - url: "https://terbangtinggi-api-staging.km3ggwp.com/"
+    description: ""
+  - url: "http://localhost:3000"
+    description: ""
+paths:
+  /auth/register:
+    post:
+      summary: Register User
+      tags:
+        - Auth
+      operationId: post-auth-register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                confirmPassword:
+                  type: string
+              x-examples:
+                Example 1:
+                  username: john_123
+                  email: johnsihombing80@gmail.com
+                  password: tes1234
+                  confirmPassword: tes1234
+            examples:
+              Example 1:
+                value:
+                  username: john_123
+                  email: johnsihombing80@gmail.com
+                  password: tes1234
+                  confirmPassword: tes1234
+        description: ""
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: account successfully registered
+                    data:
+                      id: 6
+                      username: Basic
+                      email: johnsihombing80@gmail.com
+                      role: User
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: false
+                    message: e-mail already in use!!!
+        "404":
+          description: Not Found
+        "500":
+          description: |
+            Internal Server Error
+  /auth/login:
+    post:
+      summary: Login User
+      tags:
+        - Auth
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: success
+                    data:
+                      id: 73
+                      email: johnsihombing80@gmail.com
+                      role: User
+                      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzMsInVzZXJuYW1lIjoiam9obl8xMjMiLCJlbWFpbCI6ImpvaG5zaWhvbWJpbmc4MEBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsInVzZXJfdHlwZSI6IkJhc2ljIiwiaXNfdmVyaWZpZWQiOjEsImlhdCI6MTY3MDA1Njc3N30.wSw7sI3l24RQP6XOeVne93Wu2xb-AfYOm2yhyn-i-Gc
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: post-auth-login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  email: johnsihombing80@gmail.com
+                  password: tes1234
+  /auth/forgot-password:
+    post:
+      summary: Forgot Password
+      tags:
+        - Auth
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    success: true
+                    message: Success send email forgot password to user
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: post-auth-forgot-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  email: johnsihombing80@gmail.com
+  /auth/reset-password:
+    patch:
+      summary: Reset Password
+      tags:
+        - Auth
+      responses:
+        "201":
+          description: |
+            OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    access_token: ya29.a0AeTM1ie-SkXBb65317yime-6KcRflZmerzaYjm3zNYLS9Y5wjk2u-EVluXQj8yr8Xpp5rtQTjcCKYkomi1qzewcJHJsmPWgPN3fLRBzIYcqXlY2nARlIpFHLMz8VRN2fK3UZyRSQhFy8FmZI9HNFACE1tVg3aCgYKAcoSARISFQHWtWOmfJ8BdPCdMrNouJcD0JcWWg0163
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: patch-auth-reset-password-?token=
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: token
+          description: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  newPassword: tes123
+                  confirmPassword: tes123
+        description: |
+          Reset Password
+    parameters: []
+  /auth/google:
+    post:
+      summary: Login Google Oauth
+      tags:
+        - Auth
+      responses:
+        "201":
+          description: |
+            OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success get token
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzQsInVzZXJuYW1lIjoiS29tIEJfSm9obiBUcmkgUHV0cmFfIDA1MCIsImVtYWlsIjoiam9obnRyaXNpaG9tYmluZ0BnbWFpbC5jb20iLCJ1c2VyX3R5cGUiOiJHb29nbGUiLCJpYXQiOjE2NzAwNTY0ODV9.89ueO3ZEKGZL-ihkIVYFkN4rCH1b5Dh_R3k42QHBwZk
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: post-auth-google
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  access_token: ya29.a0AeTM1ie-SkXBb65317yime-6KcRflZmerzaYjm3zNYLS9Y5wjk2u-EVluXQj8yr8Xpp5rtQTjcCKYkomi1qzewcJHJsmPWgPN3fLRBzIYcqXlY2nARlIpFHLMz8VRN2fK3UZyRSQhFy8FmZI9HNFACE1tVg3aCgYKAcoSARISFQHWtWOmfJ8BdPCdMrNouJcD0JcWWg0163
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      x-examples:
+        Alice Smith:
+          id: 142
+          username: Alice
+          email: alice.smith@gmail.com
+          password: alice123
+          thumbnail: http.drive.com
+          role: User
+          user_type: Basic
+          is_verified: 0
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        thumbnail:
+          type: string
+        role:
+          type: string
+        user_type:
+          type: string
+        is_verified:
+          type: integer
+      required:
+        - id
+        - username
+        - email

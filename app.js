@@ -8,6 +8,8 @@ const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./documentation.yaml");
 
 const { HTTP_PORT } = process.env;
 
@@ -24,7 +26,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "client")));
 
 //documentation
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 404 handler
 app.use((req, res, next) => {
@@ -36,17 +38,17 @@ app.use((req, res, next) => {
 
 // 500 handler
 app.use((err, req, res, next) => {
-  if(err.code == 'LIMIT_FILE_SIZE' || err.message == 'file too large'){
+  if (err.code == "LIMIT_FILE_SIZE" || err.message == "file too large") {
     return res.status(500).json({
-        status: false,
-        message: "the file size is too large, a maximum of 1 MB for images!"
-    })
-} else {
-return res.status(500).json({
-    status: false,
-    message: err.message
-})
-}
+      status: false,
+      message: "the file size is too large, a maximum of 1 MB for images!",
+    });
+  } else {
+    return res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
 });
 
 app.listen(HTTP_PORT, () => console.log("listening on port", HTTP_PORT));
