@@ -119,6 +119,7 @@ module.exports = {
         data: {
           id: user.id,
           email: user.email,
+          username: user.username,
           role: user.role,
           token: accesstoken,
         },
@@ -193,8 +194,8 @@ module.exports = {
           username: name,
           email,
           thumbnail: picture,
-          role: "User",
-          user_type: "Google",
+          role: roles.basic,
+          user_type: userTypes.google,
           is_verified: 1,
         });
       else {
@@ -276,7 +277,7 @@ module.exports = {
       if (!usercompare) {
         return res.status(400).json({
           status: false,
-          message: "user tidak di temukan!",
+          message: "user not found!",
         });
       }
 
@@ -284,14 +285,14 @@ module.exports = {
       if (!pass) {
         return res.status(400).json({
           status: false,
-          message: "password salah!!",
+          message: "incorrect password!!",
         });
       }
 
       if (passwordBaru !== passwordBaru2)
         return res.status(422).json({
           status: false,
-          message: "password 1 dan password 2 tidak sama!",
+          message: "password 1 dan password 2 doesn'\t match!",
         });
 
       const hashedPassword = await bcrypt.hash(passwordBaru, 10);
@@ -299,7 +300,7 @@ module.exports = {
 
       return res.status(200).json({
         success: true,
-        message: "Password berhasil di ubah",
+        message: "The password has been successfully changed",
       });
     } catch (err) {
       res.status(500).json({

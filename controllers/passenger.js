@@ -6,8 +6,7 @@ const imagekit = require('../utils/imagekit');
 module.exports = {
   show: async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const ticket = await Passenger.findOne({ where: { id: id } });
+      const ticket = await Passenger.findAll({ where: { id: req.user.id } });
       if (!ticket) {
         return res.status(400).json({
           status: false,
@@ -18,7 +17,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "get ticket success",
-        data: ticket.get(),
+        data: ticket
       });
     } catch (err) {
       next(err);
@@ -40,6 +39,18 @@ module.exports = {
             message: 'user not found!'
         })
     }
+
+    const emailcompare = await User.findOne({ 
+      where: { 
+          email: usercompare.email
+      }});
+  if (!emailcompare) {
+      return res.status(400).json({
+          status: false,
+          message: 'e-mail must use the e-mail registered to this account!'
+      })
+  }
+  
     const file = req.file.buffer.toString("base64");
 
     const uploadedFile = await imagekit.upload({
@@ -51,7 +62,7 @@ module.exports = {
 
     const uploadedFile1 = await Passenger.create({
         id: user.id,
-        email: user.email,
+        email,
         firstName,
         lastName,
         phone,
