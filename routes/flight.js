@@ -12,5 +12,12 @@ router.put("/data/:flightId", middle([roles.admin]), cont.flight.update);
 
 router.delete("/data/:flightId", middle([roles.admin]), cont.flight.delete);
 
-router.get("/myFlight/:id", middle([roles.user, roles.admin]), cont.flight.detailFlight);
+router.get(
+  "/myFlight/:id",
+  middle([roles.user, roles.admin]),
+  cont.flight.detailFlight
+);
+
+router.get("/show", cont.airport.showFlight);
+
 module.exports = router;

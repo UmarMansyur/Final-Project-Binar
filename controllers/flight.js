@@ -18,11 +18,26 @@ module.exports = {
         stock,
       } = req.body;
 
+      if (
+        !airlineName ||
+        !code ||
+        !departureCity ||
+        !arrivalCity ||
+        !departureTime ||
+        !arrivalTime
+      ) {
+        return res.status(400).json({
+          status: false,
+          message: "you have to fill the form",
+        });
+      }
+
       const exist = await Flight.findOne({
         where: {
           code: code,
         },
       });
+
       if (exist) {
         return res.status(409).json({
           status: false,
@@ -69,6 +84,7 @@ module.exports = {
       next(err);
     }
   },
+
   update: async (req, res, next) => {
     try {
       const { flightId } = req.params;
@@ -168,28 +184,28 @@ module.exports = {
   },
 
   detailFlight: async (req, res, next) => {
-    try{
+    try {
       const { id } = req.params;
 
       const flight = await Flight.findOne({
         where: {
-          id: id
-        }
-      })
+          id: id,
+        },
+      });
 
       if (!flight)
-      return res.status(400).json({
-        status: false,
-        message: 'your flight not found!'
-      })
+        return res.status(400).json({
+          status: false,
+          message: "your flight not found!",
+        });
 
       return res.status(200).json({
         status: true,
-        message: 'successfully get your flight',
-        data: flight
-      })
-    }catch (err){
-      next(err)
+        message: "successfully get your flight",
+        data: flight,
+      });
+    } catch (err) {
+      next(err);
     }
-  }
+  },
 };

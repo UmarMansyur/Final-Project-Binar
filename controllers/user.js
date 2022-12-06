@@ -1,4 +1,5 @@
 const { User, DetailUser } = require("../models");
+
 module.exports = {
   updateProfile: async (req, res, next) => {
     try {
@@ -115,6 +116,7 @@ module.exports = {
     }
   },
 
+  //only admin
   delete: async (req, res, next) => {
     try {
       const { userId } = req.params;
