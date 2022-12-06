@@ -3,7 +3,7 @@ const fetch = (...args) =>
 const { GOFLIGHTLABS_ACCESS_KEY } = process.env;
 
 module.exports = {
-  getPort: async (req, res) => {
+  getPort: async (req, res, next) => {
     try {
       const { search } = req.params;
 
@@ -39,7 +39,7 @@ module.exports = {
     }
   },
 
-  showFlight: async (req, res) => {
+  showFlight: async (req, res, next) => {
     try {
       const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=active`;
       const options = {
