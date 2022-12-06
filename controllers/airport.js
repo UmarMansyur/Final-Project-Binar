@@ -67,11 +67,11 @@ module.exports = {
       }
       return res.status(200).json({
         status: true,
-        message: "Success Get Flight Data",
+        message: "Success Get Data",
         data: flightSchedule,
       });
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   },
 };
