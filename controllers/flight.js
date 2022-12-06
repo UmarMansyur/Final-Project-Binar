@@ -32,8 +32,8 @@ module.exports = {
       }
 
       const flight = await Flight.create({
-        code,
         airlineName,
+        code,
         departureCity,
         arrivalCity,
         departureTime,
