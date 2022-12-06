@@ -166,4 +166,30 @@ module.exports = {
       next(err);
     }
   },
+
+  detailFlight: async (req, res, next) => {
+    try{
+      const { id } = req.params;
+
+      const flight = await Flight.findOne({
+        where: {
+          id: id
+        }
+      })
+
+      if (!flight)
+      return res.status(400).json({
+        status: false,
+        message: 'your flight not found!'
+      })
+
+      return res.status(200).json({
+        status: true,
+        message: 'successfully get your flight',
+        data: flight
+      })
+    }catch (err){
+      next(err)
+    }
+  }
 };
