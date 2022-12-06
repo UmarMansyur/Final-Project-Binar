@@ -70,8 +70,8 @@ module.exports = {
         message: "Success Get Flight Data",
         data: flightSchedule,
       });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   },
 };
