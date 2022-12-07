@@ -16,7 +16,6 @@ module.exports = {
   register: async (req, res, next) => {
     try {
       const {
-        user_id,
         username,
         email,
         password,

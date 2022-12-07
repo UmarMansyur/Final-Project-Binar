@@ -6,9 +6,10 @@ const imagekit = require('../utils/imagekit');
 module.exports = {
   show: async (req, res, next) => {
     try {
-      const ticket = await Passenger.findAll({ where: { passenger_id: req.user.id }, attributes: { exclude: ["id", "passenger_id", "createdAt", "updatedAt"] } });
+      // passenger_id doesn't colomn exist
+      const ticket = await Passenger.findAll({ where: { id: req.user.id }, attributes: { exclude: ["id", "passenger_id", "createdAt", "updatedAt"] } });
       if (!ticket) {
-        return res.status(400).json({
+        return res.status(404).json({
           status: false,
           message: "ticket not found",
           data: null,

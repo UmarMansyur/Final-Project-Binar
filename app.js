@@ -10,6 +10,12 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./documentation.yaml");
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const graphql = require("./routes/graphql");
+
+app.use('/graphql', graphql);
+
 
 const { HTTP_PORT } = process.env;
 
