@@ -68,7 +68,7 @@ module.exports = {
       const token = jwt.sign(payload1, JWT_SECRET_KEY);
       const link = `${apiHost}/auth/verif?token=${token}`;
 
-      const html = await email1.getHtml("helo.ejs", {
+      const html = await email1.getHtml("email/helo.ejs", {
         user: {
           name: user.username,
           link: link,
