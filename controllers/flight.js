@@ -1,4 +1,7 @@
 const { Flight } = require("../models");
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const { GOFLIGHTLABS_ACCESS_KEY } = process.env;
 
 module.exports = {
   create: async (req, res, next) => {
@@ -206,6 +209,43 @@ module.exports = {
       });
     } catch (err) {
       next(err);
+    }
+  },
+
+  //show flight from goflightlabs API
+  showFlight: async (req, res, next) => {
+    try {
+      const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=active`;
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Host": "app.goflightlabs.com",
+        },
+      };
+      const result = await fetch(url, options);
+      const json = await result.json();
+      let flights = json.data;
+
+      flights = flights.map((v) => {
+        let field = {
+          code: v.flight.iataNumber,
+          airline: v.airline.name,
+          departure: v.departure.iataCode,
+          arrival: v.arrival.iataCode,
+          // arrivalGate: v.arrival.gate,
+          departureTime: v.departure.scheduledTime,
+          arrivalTime: v.arrival.scheduledTime,
+        };
+        return field;
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "Success Get Data",
+        data: flights,
+      });
+    } catch (error) {
+      next(error);
     }
   },
 };

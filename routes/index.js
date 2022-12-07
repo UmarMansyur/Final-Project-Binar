@@ -18,4 +18,5 @@ router.use("/user", user);
 router.use("/airport", airport);
 router.use("/passenger", passenger);
 router.use("/flight", flight);
+
 module.exports = router;

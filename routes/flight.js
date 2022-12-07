@@ -18,6 +18,6 @@ router.get(
   cont.flight.detailFlight
 );
 
-router.get("/show", cont.airport.showFlight);
+router.get("/show", cont.flight.showFlight);
 
 module.exports = router;
