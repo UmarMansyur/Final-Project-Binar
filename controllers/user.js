@@ -64,8 +64,16 @@ module.exports = {
         status: true,
         message: "berhasil dapat data!",
         data: {
-          user,
-          detail,
+          username: user.username,
+          email: user.email,
+          thumbnail: user.thumbnail,
+          fullName: detail.fullName,
+          gender: detail.gender,
+          country: detail.country,
+          province: detail.province,
+          city: detail.city,
+          address: detail.address,
+          phone: detail.phone
         },
       });
     } catch (err) {
