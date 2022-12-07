@@ -17,7 +17,5 @@ router.get(
   middle([roles.user, roles.admin]),
   cont.flight.detailFlight
 );
-
 router.get("/show", cont.flight.showFlight);
-
 module.exports = router;
