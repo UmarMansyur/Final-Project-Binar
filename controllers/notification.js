@@ -125,4 +125,18 @@ module.exports = {
       next(err);
     }
   },
+
+  index: async (req, res, next) => {
+    try {
+      const notification = await Notification.findAll();
+
+      return res.status(200).json({
+        status: true,
+        message: "Success get all notification",
+        data: notification,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
 };

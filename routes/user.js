@@ -8,7 +8,7 @@ router.patch("/updateProfile", middle(roles.user), cont.user.updateProfile);
 router.get("/myProfile", middle(roles.user), cont.user.myProfile);
 
 //authorized by admin
-router.get("/data", cont.user.getAllUser);
+router.get("/data", middle(roles.admin), cont.user.getAllUser);
 router.get("/data/:userId", middle(roles.admin), cont.user.getDetailUser);
 router.delete("/data/:userId", middle(roles.admin), cont.user.delete);
 
