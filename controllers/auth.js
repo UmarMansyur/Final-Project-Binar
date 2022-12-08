@@ -320,7 +320,7 @@ module.exports = {
         const apiHost = API_HOST;
         const payload = { id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
-        const link = `https://terbangtinggi-staging.km3ggwp.com/forgot-password?token=${token}`;
+        const link = `https://terbangtinggi-staging.km3ggwp.com/reset-password?token=${token}`;
         htmlEmail = await email1.getHtml("email/reset-password.ejs", {
           name: user.name,
           link: link,
