@@ -216,17 +216,19 @@ module.exports = {
   showFlight: async (req, res, next) => {
     try {
       const { departure, arrival, date } = req.query;
-      const uri = [`https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&flight_status=scheduled`];
+      const uri = [
+        `https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&flight_status=scheduled`,
+      ];
       if (departure) {
         uri.push(`&dep_iata=${departure}`);
       }
       if (arrival) {
         uri.push(`&arr_iata=${arrival}`);
       }
-      if(date) {
+      if (date) {
         uri.push(`&arr_scheduled_time_dep=${date}`);
       }
-      const url = uri.join('');
+      const url = uri.join("");
       console.log(url);
       const options = {
         method: "GET",
@@ -237,7 +239,7 @@ module.exports = {
       const result = await fetch(url, options);
       const json = await result.json();
       let flights = json;
-      if(flights.success == false) {
+      if (flights.success == false) {
         return res.status(400).json({
           status: false,
           message: flights.message,
@@ -245,13 +247,13 @@ module.exports = {
       }
       flights = flights.map((v) => {
         return {
-          code : v.flight.number,
+          code: v.flight.number,
           name: v.airline.name,
           departure: v.departure.iata,
           arrival: v.arrival.iata,
           departureTime: v.departure.scheduled,
           arrivalTime: v.arrival.scheduled,
-        }
+        };
       });
 
       return res.status(200).json({
