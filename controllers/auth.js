@@ -200,7 +200,8 @@ module.exports = {
       else {
         res.status(201).json({
           status: true,
-          message: "",
+          message: "Login successfully",
+          data: user,
         });
       }
 
