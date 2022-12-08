@@ -197,13 +197,6 @@ module.exports = {
           user_type: userTypes.google,
           is_verified: 1,
         });
-      else {
-        res.status(201).json({
-          status: true,
-          message: "Login successfully",
-          data: user,
-        });
-      }
 
       delete user.encryptedPassword;
 
