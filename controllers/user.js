@@ -73,7 +73,7 @@ module.exports = {
           province: detail.province,
           city: detail.city,
           address: detail.address,
-          phone: detail.phone
+          phone: detail.phone,
         },
       });
     } catch (err) {
