@@ -1,5 +1,8 @@
 const { Op } = require("sequelize");
 const { Flight } = require("../models");
+const fs = require("fs");
+const fn = require('sequelize')
+const sequelize = require('sequelize')
 var moment = require("moment");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -249,8 +252,9 @@ module.exports = {
   //show flight from goflightlabs API
   showFlight: async (req, res, next) => {
     try {
-      const { departure, arrival, date } = req.query;
-      const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=scheduled`;
+      let subs = require('./airport.json');
+      // const { code, airlineName, departureAirport, departure, arrivalAirport, arrival, date, departureTime, arrivalTime, price } = req.body;
+      // const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=scheduled`;
       // const uri = [
       //   `https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&limit=2000`,
       // ];
@@ -264,18 +268,60 @@ module.exports = {
       //   uri.push(`&arr_scheduled_time_dep=${date}`);
       // }
 
-      console.log(url);
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Host": "app.goflightlabs.com",
-        },
-      };
-      const result = await fetch(url, options);
-      const json = await result.json();
-      let flights = json.data;
+      //  for (const flight of subs) {
+      //    await Flight.create({
+      //      code: flight.code,
+      //      airlineName: flight.name,
+      //      departureAirport: flight.departure_airport,
+      //      departure: flight.departure,
+      //      arrivalAirport: flight.arrival_airport,
+      //      arrival: flight.arrival,
+      //      date: flight.date,
+      //      departureTime: flight.departureTime,
+      //      arrivalTime: flight.arrivalTime,
+      //      price: flight.price
+      //    });
+      //  }
+    
+      
+      const exist = await Flight.findAll({
+        attributes: [
+          'code',
+          'airlineName',
+          'departureAirport',
+          'departure',
+          'arrivalAirport',
+          'arrival',
+          [sequelize.literal('date("date")'), 'date'],
+          'departureTime',
+          'arrivalTime',
+          'price'
+        ]})
 
-      console.log(flights);
+
+      // if (exist) return res.json({ message: 'data sudah ada'})
+
+      // console.log(url);
+      // const options = {
+      //   method: "GET",
+      //   headers: {
+      //     "X-RapidAPI-Host": "app.goflightlabs.com",
+      //   },
+      // };
+      // const result = await fetch(url, options);
+      // const json = await result.json();
+      // let flights = json.data;
+
+      // console.log(flights);
+
+      // sub.push(flights);
+      // fs.writeFile(
+      //   "d:/Binar/npm/Final-Project-Binar/subscriptions.json",
+      //   JSON.stringify(sub),
+      //   (err) => {
+      //     console.log = err;
+      //   }
+      // );
 
       // if (flights.success == false) {
       //   return res.status(400).json({
@@ -294,21 +340,34 @@ module.exports = {
       //   };
       // });
 
-      for (const flight of flights) {
-        await Flight.create({
-          airlineName: flight.airline.name,
-          code: flight.flight.iataNumber,
-          departureCity: flight.departure.iataCode,
-          arrivalCity: flight.arrival.iataCode,
-          departureTime: flight.departure.scheduledTime,
-          arrivalTime: flight.arrival.scheduledTime,
-        });
+
+      const filters = req.query;
+    const filteredUsers = exist.filter(user => {
+    let isValid = true;
+    for (key in filters) {
+      console.log(key, user[key], filters[key]);
+      isValid = isValid && user[key] == filters[key];
       }
+      return isValid;
+    });
+
+    if (filteredUsers < 1) return res.status(400).json({ status: false, message: "data not found!"})
+
+      // for (const flight of flights) {
+      //   await Flight.create({
+      //     airlineName: flight.airline.name,
+      //     code: flight.flight.iataNumber,
+      //     departureCity: flight.departure.iataCode,
+      //     arrivalCity: flight.arrival.iataCode,
+      //     departureTime: flight.departure.scheduledTime,
+      //     arrivalTime: flight.arrival.scheduledTime,
+      //   });
+      // }
 
       return res.status(200).json({
         status: true,
         message: "Success Get Data",
-        data: flights,
+        data: filteredUsers
       });
     } catch (error) {
       next(error);

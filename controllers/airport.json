@@ -1,0 +1,37 @@
+
+ [
+    {
+        "code": "SQ4330",
+        "name": "Singapore Airlines",
+        "departure_airport": "Wellington International",
+        "departure": "WLG",
+        "arrival_airport": "Soekarno - Hatta Airport",
+        "arrival": "CGK",
+        "date": "2022-12-10",
+        "departureTime": "06:05:00",
+        "arrivalTime": "08:20:00",
+        "price": "1000000"
+    }, {
+        "code": "O37350",
+        "name": "SF Airlines",
+        "departure_airport": "Wellington International",
+        "departure": "WLG",
+        "arrival_airport": "Halim Perdana Kusuma Airport",
+        "arrival": "HLP",
+        "date": "2022-12-11",
+        "departureTime": "01:30:00",
+        "arrivalTime": "05:30:00",
+        "price": "1000000"
+    }, {
+        "code": "KE253",
+        "name": "Korean Air",
+        "departure_airport": "Soekarno - Hatta Airport",
+        "departure": "CGK",
+        "arrival_airport": "Ted Stevens Anchorage International Airport",
+        "arrival": "ANC",
+        "date": "2022-12-12",
+        "departureTime": "02:55:00",
+        "arrivalTime": "17:55:00",
+        "price": "1000000"
+    }
+] 
