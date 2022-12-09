@@ -21,10 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       departureTime: {
-        type: Sequelize.TIME,
+        type: Sequelize.DATE,
       },
       arrivalTime: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       totalSeat: {
         type: Sequelize.INTEGER,

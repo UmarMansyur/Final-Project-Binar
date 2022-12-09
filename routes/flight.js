@@ -6,7 +6,7 @@ const roles = require("../utils/roles");
 
 router.post("/data", middle([roles.admin, roles.user]), cont.flight.create);
 
-router.get("/data", middle([roles.admin]), cont.flight.read);
+router.get("/data", cont.flight.read);
 
 router.put("/data/:flightId", middle([roles.admin]), cont.flight.update);
 
@@ -17,5 +17,9 @@ router.get(
   middle([roles.user, roles.admin]),
   cont.flight.detailFlight
 );
+
 router.get("/show", cont.flight.showFlight);
+
+router.post("/schedule", cont.flight.filterFlight);
+
 module.exports = router;

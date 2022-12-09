@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Flight } = require("../models");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -76,12 +77,44 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const flight = await Flight.findAll();
+      const allFlight = await Flight.findAll({
+        attributes: {
+          exclude: [
+            "totalSeat",
+            "classPassenger",
+            "gate",
+            "boardingTime",
+            "price",
+            "stock",
+          ],
+        },
+      });
 
+      if (allFlight <= 0) {
+        return res.status(400).json({
+          status: false,
+          message: "No Flight",
+        });
+      }
+
+      // const result = [];
+      // for (const flight of allFlight) {
+      //   const showFlight = {
+      //     id: flight.id,
+      //     code: flight.code,
+      //     airlineName: flight.airlineName,
+      //     departureCity: flight.departureCity,
+      //     arrivalCity: flight.arrivalCity,
+      //     departure: flight.departureTime,
+      //     arrival: flight.arrivalTime,
+      //   };
+
+      //   result.push(showFlight);
+      // }
       return res.status(200).json({
         status: true,
-        message: "Success get data",
-        data: flight,
+        message: "Success Get All Data",
+        data: allFlight,
       });
     } catch (err) {
       next(err);
@@ -216,19 +249,20 @@ module.exports = {
   showFlight: async (req, res, next) => {
     try {
       const { departure, arrival, date } = req.query;
-      const uri = [
-        `https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&flight_status=scheduled`,
-      ];
-      if (departure) {
-        uri.push(`&dep_iata=${departure}`);
-      }
-      if (arrival) {
-        uri.push(`&arr_iata=${arrival}`);
-      }
-      if (date) {
-        uri.push(`&arr_scheduled_time_dep=${date}`);
-      }
-      const url = uri.join("");
+      const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=scheduled`;
+      // const uri = [
+      //   `https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&limit=2000`,
+      // ];
+      // if (departure) {
+      //   uri.push(`&dep_iata=${departure}`);
+      // }
+      // if (arrival) {
+      //   uri.push(`&arr_iata=${arrival}`);
+      // }
+      // if (date) {
+      //   uri.push(`&arr_scheduled_time_dep=${date}`);
+      // }
+
       console.log(url);
       const options = {
         method: "GET",
@@ -238,28 +272,80 @@ module.exports = {
       };
       const result = await fetch(url, options);
       const json = await result.json();
-      let flights = json;
-      if (flights.success == false) {
-        return res.status(400).json({
-          status: false,
-          message: flights.message,
+      let flights = json.data;
+
+      console.log(flights);
+
+      // if (flights.success == false) {
+      //   return res.status(400).json({
+      //     status: false,
+      //     message: flights.message,
+      //   });
+      // }
+      // flights = flights.map((v) => {
+      //   return {
+      //     code: v.flight.number,
+      //     name: v.airline.name,
+      //     departure: v.departure.iata,
+      //     arrival: v.arrival.iata,
+      //     departureTime: v.departure.scheduled,
+      //     arrivalTime: v.arrival.scheduled,
+      //   };
+      // });
+
+      for (const flight of flights) {
+        await Flight.create({
+          airlineName: flight.airline.name,
+          code: flight.flight.iataNumber,
+          departureCity: flight.departure.iataCode,
+          arrivalCity: flight.arrival.iataCode,
+          departureTime: flight.departure.scheduledTime,
+          arrivalTime: flight.arrival.scheduledTime,
         });
       }
-      flights = flights.map((v) => {
-        return {
-          code: v.flight.number,
-          name: v.airline.name,
-          departure: v.departure.iata,
-          arrival: v.arrival.iata,
-          departureTime: v.departure.scheduled,
-          arrivalTime: v.arrival.scheduled,
-        };
-      });
 
       return res.status(200).json({
         status: true,
         message: "Success Get Data",
         data: flights,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  filterFlight: async (req, res, next) => {
+    try {
+      const { departure, arrival } = req.body;
+
+      const filterSearch = await Flight.findAll({
+        where: {
+          [Op.and]: [{ departureCity: departure }, { arrivalCity: arrival }],
+        },
+        attributes: {
+          exclude: [
+            "totalSeat",
+            "classPassenger",
+            "gate",
+            "boardingTime",
+            "price",
+            "stock",
+          ],
+        },
+      });
+
+      if (filterSearch <= 0) {
+        return res.status(400).json({
+          status: false,
+          message: "Empty Flight",
+          data: null,
+        });
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: "Success Get Data",
+        data: filterSearch,
       });
     } catch (error) {
       next(error);
