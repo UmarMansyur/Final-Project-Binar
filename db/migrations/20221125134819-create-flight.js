@@ -35,6 +35,9 @@ module.exports = {
       arrivalTime: {
         type: Sequelize.TIME,
       },
+      price: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
