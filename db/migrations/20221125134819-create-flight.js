@@ -14,35 +14,26 @@ module.exports = {
       airlineName: {
         type: Sequelize.STRING,
       },
-      departureCity: {
+      departureAirport: {
         type: Sequelize.STRING,
       },
-      arrivalCity: {
+      departure: {
         type: Sequelize.STRING,
+      },
+      arrivalAirport: {
+        type: Sequelize.STRING,
+      },
+      arrival: {
+        type: Sequelize.STRING,
+      },
+      date: {
+        type: Sequelize.DATE,
       },
       departureTime: {
-        type: Sequelize.DATE,
-      },
-      arrivalTime: {
-        type: Sequelize.DATE,
-      },
-      totalSeat: {
-        type: Sequelize.INTEGER,
-      },
-      classPassenger: {
-        type: Sequelize.STRING,
-      },
-      gate: {
-        type: Sequelize.STRING,
-      },
-      boardingTime: {
         type: Sequelize.TIME,
       },
-      price: {
-        type: Sequelize.INTEGER,
-      },
-      stock: {
-        type: Sequelize.INTEGER,
+      arrivalTime: {
+        type: Sequelize.TIME,
       },
       createdAt: {
         allowNull: false,
