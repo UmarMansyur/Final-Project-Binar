@@ -9,27 +9,26 @@ module.exports = {
   create: async (req, res, next) => {
     try {
       const {
-        airlineName,
         code,
-        departureCity,
-        arrivalCity,
+        airlineName,
+        departureAirport,
+        departure,
+        arrivalAirport,
+        arrival,
+        date,
         departureTime,
         arrivalTime,
-        totalSeat,
-        classPassenger,
-        gate,
-        boardingTime,
         price,
-        stock,
       } = req.body;
 
       if (
         !airlineName ||
         !code ||
-        !departureCity ||
-        !arrivalCity ||
-        !departureTime ||
-        !arrivalTime
+        !departureAirport ||
+        !departure ||
+        !arrivalAirport ||
+        !arrival ||
+        !date
       ) {
         return res.status(400).json({
           status: false,
@@ -52,18 +51,16 @@ module.exports = {
       }
 
       const flight = await Flight.create({
-        airlineName,
         code,
-        departureCity,
-        arrivalCity,
+        airlineName,
+        departureAirport,
+        departure,
+        arrivalAirport,
+        arrival,
+        date,
         departureTime,
         arrivalTime,
-        totalSeat,
-        classPassenger,
-        gate,
-        boardingTime,
         price,
-        stock,
       });
 
       return res.status(201).json({
@@ -78,18 +75,7 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const allFlight = await Flight.findAll({
-        attributes: {
-          exclude: [
-            "totalSeat",
-            "classPassenger",
-            "gate",
-            "boardingTime",
-            "price",
-            "stock",
-          ],
-        },
-      });
+      const allFlight = await Flight.findAll();
 
       if (allFlight <= 0) {
         return res.status(400).json({
@@ -98,20 +84,6 @@ module.exports = {
         });
       }
 
-      // const result = [];
-      // for (const flight of allFlight) {
-      //   const showFlight = {
-      //     id: flight.id,
-      //     code: flight.code,
-      //     airlineName: flight.airlineName,
-      //     departureCity: flight.departureCity,
-      //     arrivalCity: flight.arrivalCity,
-      //     departure: flight.departureTime,
-      //     arrival: flight.arrivalTime,
-      //   };
-
-      //   result.push(showFlight);
-      // }
       return res.status(200).json({
         status: true,
         message: "Success Get All Data",
@@ -129,16 +101,14 @@ module.exports = {
       let {
         code,
         airlineName,
-        departureCity,
-        arrivalCity,
+        departureAirport,
+        departure,
+        arrivalAirport,
+        arrival,
+        date,
         departureTime,
         arrivalTime,
-        totalSeat,
-        classPassenger,
-        gate,
-        boardingTime,
         price,
-        stock,
       } = req.body;
 
       let flight = await Flight.findOne({
@@ -159,16 +129,14 @@ module.exports = {
         {
           code,
           airlineName,
-          departureCity,
-          arrivalCity,
+          departureAirport,
+          departure,
+          arrivalAirport,
+          arrival,
+          date,
           departureTime,
           arrivalTime,
-          totalSeat,
-          classPassenger,
-          gate,
-          boardingTime,
           price,
-          stock,
         },
         {
           where: {
@@ -217,139 +185,6 @@ module.exports = {
       });
     } catch (err) {
       next(err);
-    }
-  },
-
-  detailFlight: async (req, res, next) => {
-    try {
-      const { id } = req.params;
-
-      const flight = await Flight.findOne({
-        where: {
-          id: id,
-        },
-      });
-
-      if (!flight)
-        return res.status(400).json({
-          status: false,
-          message: "your flight not found!",
-        });
-
-      return res.status(200).json({
-        status: true,
-        message: "successfully get your flight",
-        data: flight,
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  //show flight from goflightlabs API
-  showFlight: async (req, res, next) => {
-    try {
-      const { departure, arrival, date } = req.query;
-      const url = `https://app.goflightlabs.com/advanced-flights-schedules?access_key=${GOFLIGHTLABS_ACCESS_KEY}&status=scheduled`;
-      // const uri = [
-      //   `https://app.goflightlabs.com/flights?access_key=${GOFLIGHTLABS_ACCESS_KEY}&limit=2000`,
-      // ];
-      // if (departure) {
-      //   uri.push(`&dep_iata=${departure}`);
-      // }
-      // if (arrival) {
-      //   uri.push(`&arr_iata=${arrival}`);
-      // }
-      // if (date) {
-      //   uri.push(`&arr_scheduled_time_dep=${date}`);
-      // }
-
-      console.log(url);
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Host": "app.goflightlabs.com",
-        },
-      };
-      const result = await fetch(url, options);
-      const json = await result.json();
-      let flights = json.data;
-
-      console.log(flights);
-
-      // if (flights.success == false) {
-      //   return res.status(400).json({
-      //     status: false,
-      //     message: flights.message,
-      //   });
-      // }
-      // flights = flights.map((v) => {
-      //   return {
-      //     code: v.flight.number,
-      //     name: v.airline.name,
-      //     departure: v.departure.iata,
-      //     arrival: v.arrival.iata,
-      //     departureTime: v.departure.scheduled,
-      //     arrivalTime: v.arrival.scheduled,
-      //   };
-      // });
-
-      for (const flight of flights) {
-        await Flight.create({
-          airlineName: flight.airline.name,
-          code: flight.flight.iataNumber,
-          departureCity: flight.departure.iataCode,
-          arrivalCity: flight.arrival.iataCode,
-          departureTime: flight.departure.scheduledTime,
-          arrivalTime: flight.arrival.scheduledTime,
-        });
-      }
-
-      return res.status(200).json({
-        status: true,
-        message: "Success Get Data",
-        data: flights,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  filterFlight: async (req, res, next) => {
-    try {
-      const { departure, arrival } = req.body;
-
-      const filterSearch = await Flight.findAll({
-        where: {
-          [Op.and]: [{ departureCity: departure }, { arrivalCity: arrival }],
-        },
-        attributes: {
-          exclude: [
-            "totalSeat",
-            "classPassenger",
-            "gate",
-            "boardingTime",
-            "price",
-            "stock",
-          ],
-        },
-      });
-
-      if (filterSearch <= 0) {
-        return res.status(400).json({
-          status: false,
-          message: "Empty Flight",
-          data: null,
-        });
-      }
-
-      return res.status(200).json({
-        status: true,
-        message: "Success Get Data",
-        data: filterSearch,
-      });
-    } catch (error) {
-      next(error);
     }
   },
 };
