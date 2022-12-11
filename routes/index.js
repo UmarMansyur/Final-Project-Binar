@@ -6,6 +6,7 @@ const airport = require("./airport");
 const passenger = require("./passenger");
 const flight = require("./flight");
 const notification = require("./notification");
+const transaction = require("./transaction");
 
 router.get("/", (req, res) => {
   return res.status(200).json({
@@ -20,5 +21,6 @@ router.use("/airport", airport);
 router.use("/passenger", passenger);
 router.use("/flight", flight);
 router.use("/notification", notification);
+router.use("/transaction", transaction);
 
 module.exports = router;
