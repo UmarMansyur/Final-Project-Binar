@@ -237,6 +237,66 @@ paths:
               Example 1:
                 value:
                   access_token: ya29.a0AeTM1ie-SkXBb65317yime-6KcRflZmerzaYjm3zNYLS9Y5wjk2u-EVluXQj8yr8Xpp5rtQTjcCKYkomi1qzewcJHJsmPWgPN3fLRBzIYcqXlY2nARlIpFHLMz8VRN2fK3UZyRSQhFy8FmZI9HNFACE1tVg3aCgYKAcoSARISFQHWtWOmfJ8BdPCdMrNouJcD0JcWWg0163
+  /flight/data:
+    post:
+      summary: Create Flight
+      tags:
+        - "Admin : Flight"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success create flight
+                    data:
+                      id: 2
+                      code: JT999
+                      airlineName: Lion Air
+                      departureAirport: Kuala Namu
+                      departure: KNO
+                      arrivalAirport: Ngurah Rai
+                      arrival: DPS
+                      date: "2022-12-11T00:00:00.000Z"
+                      departureTime: "13:00:00"
+                      arrivalTime: "16:35:00"
+                      price: 2500000
+                      updatedAt: "2022-12-10T05:19:11.997Z"
+                      createdAt: "2022-12-10T05:19:11.997Z"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: post-flight-data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  code: JT777
+                  airlineName: Lion Air
+                  departureAirport: Kuala Namu
+                  departure: KNO
+                  arrivalAirport: Ngurah Rai
+                  arrival: DPS
+                  date: "2022-12-11"
+                  departureTime: "13:00:00"
+                  arrivalTime: "16:35:00"
+                  price: 2500000
+      parameters: []
+      description: Create Flight
+      security:
+        - Authorization: []
 components:
   schemas:
     User:
@@ -275,3 +335,9 @@ components:
         - id
         - username
         - email
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: basic
+security:
+  - Authorization: []

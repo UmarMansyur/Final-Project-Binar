@@ -14,8 +14,6 @@ const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const graphql = require("./routes/graphql");
 
-
-
 const { HTTP_PORT } = process.env;
 
 app.use(express.json());
@@ -29,7 +27,7 @@ app.set("view engine", "ejs");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "client")));
-app.use('/graphql', graphql);
+app.use("/graphql", graphql);
 
 //documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

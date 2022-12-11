@@ -106,6 +106,7 @@ module.exports = {
       console.log(err);
     }
   },
+
   login: async (req, res, next) => {
     try {
       const user = await User.authenticate(req.body);
