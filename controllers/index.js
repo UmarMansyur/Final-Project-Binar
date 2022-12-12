@@ -5,6 +5,7 @@ const airport = require("./airport");
 const passenger = require("./passenger");
 const flight = require("./flight");
 const notification = require("./notification");
+const scheduleFlight = require("./scheduleFlight");
 module.exports = {
   user,
   auth,
@@ -13,4 +14,5 @@ module.exports = {
   passenger,
   flight,
   notification,
+  scheduleFlight,
 };
