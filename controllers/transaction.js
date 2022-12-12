@@ -1,3 +1,4 @@
+const { exclude } = require("query-string");
 const {
   Transaction,
   DetailTransaction,
@@ -47,18 +48,37 @@ module.exports = {
         const data = await Transaction.findAll({
           include: [
             {
-              model: DetailTransaction,
-              as: "detail_transaction",
-              include: [
-                { model: Flight, as: "flight" },
-                { model: Passenger, as: "passenger" },
-              ],
-            },
-            {
               model: User,
               as: "user_transaction",
+              attributes: ['username', 'email']
+
             },
+            {
+              model: DetailTransaction,
+              attributes: ['transaction_id'],
+              as: "detail_transaction",
+              include: [
+                { 
+                  model: Flight, 
+                  attributes: {
+                    exclude: ["id", "createdAt", "updatedAt"]
+                  },
+                  as: "flight" 
+                },
+                { 
+                  model: Passenger, 
+                  attributes: {
+                    exclude: ["id", "createdAt", "updatedAt"]
+                  },
+                  as: "passenger" 
+                },
+              ],
+            },
+            
           ],
+          attributes: {
+            exclude : ["id", "user_id", "createdAt", "updatedAt", "detail_transaction"]
+          }
         });
         const result = {
           success: true,
@@ -166,7 +186,8 @@ module.exports = {
           }));
         }
 
-        const data = await Transaction.destroy({where: {id}})
+        const data = await Transaction.destroy({ where: { id } });
+        await DetailTransaction.destroy({ where: { transaction_id: id } })
 
         resolve(res.status(200).json({
           status: true,

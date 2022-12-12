@@ -297,6 +297,111 @@ paths:
       description: Create Flight
       security:
         - Authorization: []
+  /transaction/:
+    get:
+      summary: Get All Transaction
+      tags:
+        - "Admin : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Transaction data retrived successfully
+                    data:
+                    isPaid: false
+                    roundTrip: "2022-12-20T00:00:00.000Z"
+                    oneWay: "2022-12-23T00:00:00.000Z"
+                    user_transaction:
+                      username: Admin
+                      email: terbangtinggiapp@gmail.com
+                    detail_transaction:
+                      transaction_id: 8
+                      flight:
+                        code: JT999
+                        airlineName: Lion Air
+                        departureAirport: Kuala Namu
+                        departure: KNO
+                        arrivalAirport: Soekarno Hatta
+                        arrival: CGK
+                        date: "2022-12-21T00:00:00.000Z"
+                        departureTime: "11:00:00"
+                        arrivalTime: "22:35:00"
+                        price: 2500000
+                      passenger:
+                        email: -
+                        firstName: -
+                        lastName: -
+                        phone: -
+      operationId: get-transaction
+      parameters: []
+      description: Get All Transaction
+      security:
+        - Authorization: []              
+  /transaction/:id:
+    get:
+      summary: Get Transaction By Id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Transaction data retrived successfully
+                    data:
+                    isPaid: false
+                    roundTrip: "2022-12-20T00:00:00.000Z"
+                    oneWay: "2022-12-23T00:00:00.000Z"
+                    user_transaction:
+                      username: Admin
+                      email: admin@gmail.com
+                    detail_transaction:
+                      transaction_id: 8
+                      flight:
+                        code: JT999
+                        airlineName: Lion Air
+                        departureAirport: Kuala Namu
+                        departure: KNO
+                        arrivalAirport: Soekarno Hatta
+                        arrival: CGK
+                        date: "2022-12-21T00:00:00.000Z"
+                        departureTime: "11:00:00"
+                        arrivalTime: "22:35:00"
+                        price: 2500000
+                      passenger:
+                        email: -
+                        firstName: -
+                        lastName: -
+                        phone: -
+        "404":
+         description: Not Found
+        operationId: get-transaction-id
+        parameters:
+          - name: id
+            in: path
+            description: id
+            required: true
+            schema:
+              type: integer
+              format: int64
+        description: Get Transaction By Id
+        security:
+          - Authorization: []
+
+
 components:
   schemas:
     User:
