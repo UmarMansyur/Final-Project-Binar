@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "transaction_id",
         as: "transaction",
       });
-      DetailTransaction.belongsTo(models.Flight, { foreignKey: "flight_id" });
+      DetailTransaction.belongsTo(models.Flight, { foreignKey: "flight_id", as: "flight" });
       DetailTransaction.belongsTo(models.Passenger, {
-        foreignKey: "passenger_id",
+        foreignKey: "passenger_id", as: "passenger"
       });
     }
   }
