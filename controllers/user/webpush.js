@@ -47,7 +47,7 @@ module.exports = {
   },
 
   webPush1: (req, res) => {
-    const subscriptions = require("../../../subscriptions.json");
+    const subscriptions = require("../../subscriptions.json");
 
     const payload = JSON.stringify({
       title: "",
