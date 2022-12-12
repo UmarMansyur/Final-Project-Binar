@@ -7,23 +7,21 @@ module.exports = {
     try {
       const { departure, arrival, date } = req.query;
 
-      const filterSearch = await Flight.findAll(
-        {
+      const filterSearch = await Flight.findAll({
         attributes: [
-          'code',
-          'airlineName',
-          'departureAirport',
-          'departure',
-          'arrivalAirport',
-          'arrival',
-          [sequelize.literal('date("date")'), 'date'],
+          "code",
+          "airlineName",
+          "departureAirport",
+          "departure",
+          "arrivalAirport",
+          "arrival",
+          [sequelize.literal('date("date")'), "date"],
           // 'date',
-          'departureTime',
-          'arrivalTime',
-          'price'
-        ]
-      }
-      );
+          "departureTime",
+          "arrivalTime",
+          "price",
+        ],
+      });
 
       // flights = filterSearch.map((v) => {
       //   return {
@@ -41,33 +39,39 @@ module.exports = {
       // console.log(flights)
 
       const filters = req.query;
-      const filteredUsers = filterSearch.filter(user => {
-      let isValid = true;
-      for (key in filters) {
-        console.log(key, user[key], filters[key]);
-        isValid = isValid && user[key] == filters[key];
+      const filteredUsers = filterSearch.filter((user) => {
+        let isValid = true;
+        for (key in filters) {
+          console.log(key, user[key], filters[key]);
+          isValid = isValid && user[key] == filters[key];
         }
         return isValid;
       });
-  
-      if (filteredUsers < 1) return res.status(400).json({ status: false, message: `flight schedule on ${filters.date} not found`})
-  
-        // for (const flight of flights) {
-        //   await Flight.create({
-        //     airlineName: flight.airline.name,
-        //     code: flight.flight.iataNumber,
-        //     departureCity: flight.departure.iataCode,
-        //     arrivalCity: flight.arrival.iataCode,
-        //     departureTime: flight.departure.scheduledTime,
-        //     arrivalTime: flight.arrival.scheduledTime,
-        //   });
-        // }
-  
-        return res.status(200).json({
-          status: true,
-          message: "Success Get Data",
-          data: filteredUsers
-        });
+
+      if (filteredUsers < 1)
+        return res
+          .status(400)
+          .json({
+            status: false,
+            message: `flight schedule on ${filters.date} not found`,
+          });
+
+      // for (const flight of flights) {
+      //   await Flight.create({
+      //     airlineName: flight.airline.name,
+      //     code: flight.flight.iataNumber,
+      //     departureCity: flight.departure.iataCode,
+      //     arrivalCity: flight.arrival.iataCode,
+      //     departureTime: flight.departure.scheduledTime,
+      //     arrivalTime: flight.arrival.scheduledTime,
+      //   });
+      // }
+
+      return res.status(200).json({
+        status: true,
+        message: "Success Get Data",
+        data: filteredUsers,
+      });
 
       // if (filterSearch <= 0) {
       //   return res.status(400).json({
