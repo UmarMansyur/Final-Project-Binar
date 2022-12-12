@@ -49,12 +49,10 @@ module.exports = {
       });
 
       if (filteredUsers < 1)
-        return res
-          .status(400)
-          .json({
-            status: false,
-            message: `flight schedule on ${filters.date} not found`,
-          });
+        return res.status(400).json({
+          status: false,
+          message: `flight schedule on ${filters.date} not found`,
+        });
 
       // for (const flight of flights) {
       //   await Flight.create({
