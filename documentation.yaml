@@ -478,7 +478,6 @@ paths:
                         updatedAt: "2022-12-11T23:51:37.876Z"
                         createdAt: "2022-12-11T23:51:37.876Z"
  
-
 components:
   schemas:
     User:
