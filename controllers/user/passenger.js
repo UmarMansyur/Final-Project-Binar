@@ -1,7 +1,7 @@
-const { User, Passenger } = require("../models");
+const { User, Passenger } = require("../../models");
 const multer = require('multer');
 const upload = multer();
-const imagekit = require('../utils/imagekit');
+const imagekit = require('../../utils/imagekit');
 
 module.exports = {
   show: async (req, res, next) => {

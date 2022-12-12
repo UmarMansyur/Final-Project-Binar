@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const cont = require('../controllers');
+const cont = require('../controllers/user');
 
 router.post('/', cont.transaction.createTransaction);
 router.get('/', cont.transaction.show);

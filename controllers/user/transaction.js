@@ -4,7 +4,7 @@ const {
   User,
   Flight,
   Passenger,
-} = require("../models");
+} = require("../../models");
 module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {

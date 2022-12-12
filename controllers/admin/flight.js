@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Flight } = require("../models");
+const { Flight } = require("../../models");
 var moment = require("moment");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));

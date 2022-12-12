@@ -1,16 +1,16 @@
-const googleOauth2 = require("../utils/oauth2/google");
-const facebookOauth2 = require("../utils/oauth2/facebook");
+const googleOauth2 = require("../../utils/oauth2/google");
+const facebookOauth2 = require("../../utils/oauth2/facebook");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { User, DetailUser } = require("../models");
-const roles = require("../utils/roles");
-const userTypes = require("../utils/userType");
-const email1 = require("../utils/sendEmail");
+const { User, DetailUser } = require("../../models");
+const roles = require("../../utils/roles");
+const userTypes = require("../../utils/userType");
+const email1 = require("../../utils/sendEmail");
 const webpush = require("web-push");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
-const subscriptions = require("../subscriptions.json");
+const subscriptions = require("../../subscriptions.json");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -171,11 +171,6 @@ module.exports = {
       return res.redirect(
         "https://terbangtinggi-staging.km3ggwp.com/verified-email/"
       );
-      return res.status(200).json({
-        status: true,
-        message: "account verified successfully",
-        verif,
-      });
     } catch (err) {
       next(err);
     }

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const user = require("./user");
+const admin = require("./admin")
 const auth = require("./auth");
 const airport = require("./airport");
 const passenger = require("./passenger");
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
 
 router.use("/auth", auth);
 router.use("/user", user);
+router.use("/admin", admin);
 router.use("/airport", airport);
 router.use("/passenger", passenger);
 router.use("/flight", flight);
