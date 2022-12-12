@@ -186,6 +186,7 @@ module.exports = {
       const { name, email, picture } = response.data;
 
       let user = await User.findOne({ where: { email: email } });
+      console.log(user);
       if (!user)
         user = await User.create({
           username: name,
@@ -226,7 +227,7 @@ module.exports = {
         console.log(url);
         return res.redirect(url);
       }
-
+f
       const token = await googleOauth2.setCredentials(code);
 
       const { data } = await googleOauth2.getUserData();
