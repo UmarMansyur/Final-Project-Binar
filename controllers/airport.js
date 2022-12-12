@@ -5,13 +5,14 @@ module.exports = {
   getPort: async (req, res, next) => {
     try {
       const { search } = req.params;
-
       const url = `https://port-api.com/airport/search/${search}`;
       const options = {
         method: "GET",
+        
         headers: {
           "X-RapidAPI-Host": "port-api.com",
         },
+        
       };
       const result = await fetch(url, options);
       const json = await result.json();
