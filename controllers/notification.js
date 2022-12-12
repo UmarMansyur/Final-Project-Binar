@@ -23,11 +23,11 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const { notificationId } = req.params;
+      const { id } = req.params;
 
       const notification = await Notification.findOne({
         where: {
-          id: notificationId,
+          id
         },
       });
 

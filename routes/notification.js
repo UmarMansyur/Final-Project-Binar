@@ -8,7 +8,7 @@ const roles = require("../utils/roles");
 router.get("/", middle([roles.admin]), cont.notification.index);
 
 // get detail notif
-router.get("/:notificationId", middle([roles.admin]), cont.notification.read);
+router.get("/:id", middle([roles.admin]), cont.notification.read);
 
 // create notif by admin
 router.post("/", middle([roles.admin]), cont.notification.create);
