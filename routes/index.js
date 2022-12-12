@@ -22,7 +22,7 @@ router.use("/airport", airport);
 router.use("/passenger", passenger);
 router.use("/flight", flight);
 router.use("/notification", notification);
-router.use("/transaction", transaction);
 router.use("/schedule", schedule);
+router.use("/transaction", transaction);
 
 module.exports = router;
