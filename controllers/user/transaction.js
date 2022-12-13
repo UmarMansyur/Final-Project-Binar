@@ -12,7 +12,7 @@ module.exports = {
       try {
         const { user_id = req.user_id, isPaid = 0, roundTrip, oneWay, flight_id, passenger_id } =
           req.body;
-
+          
         const transaction = await Transaction.create({
           user_id,
           isPaid,

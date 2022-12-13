@@ -1,11 +1,21 @@
-const { User } = require("../../models");
+const { User, DetailUser } = require("../../models");
 
 module.exports = {
       //only admin
   getAllUser: async (req, res, next) => {
     try {
+      const { limit = 5, page = 1 } = req.query;
+      const offset = (page - 1) * limit;
       const user = await User.findAll({
-        attributes: { exclude: ["password", "thumbnail"] },
+        limit: limit,
+        offset: offset,
+        include: [
+          {
+            model: DetailUser,
+            as: "detail_user",
+            attributes: { exclude: ["password", "thumbnail"] },
+          }
+        ]
       });
 
       return res.status(200).json({
@@ -25,6 +35,12 @@ module.exports = {
       const { userId } = req.params;
       const user = await User.findOne({
         where: { id: userId },
+        include: [
+          {
+            model: DetailUser,
+            as: "detail_user",
+          },
+        ],
         attributes: { exclude: ["password", "thumbnail"] },
       });
       if (!user) {

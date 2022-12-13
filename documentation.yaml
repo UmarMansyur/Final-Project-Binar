@@ -449,6 +449,43 @@ paths:
         "500":
           description: Internal Server Error
       operationId: delete-user-userid
+  /auth/me:
+    get:
+      summary: Get data user login
+      parameters:
+      - name: authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+        - Auth
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success get data user login
+                    data:
+                      id: 1
+                      username: Umar Mansyur Tinggi Apps
+                      email: "umar.ovie@gmail.com"
+                      role: "User"
+
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-auth-me
   /flight/data:
     post:
       summary: Create Flight
