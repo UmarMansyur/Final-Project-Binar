@@ -1,1 +1,1209 @@
-[[{"iata":"BPN","airport":"Sultan Aji Muhammad Sulaiman Sepinggan International Airport","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"DJJ","airport":"Dortheys Hiyo Eluay International Airport","city":"Papua, Indonesia"},{"iata":"UPG","airport":"Hasanuddin International Airport","city":"Sulawesi Selatan (South Sulawesi), Indonesia"},{"iata":null,"airport":"(Duplicate)bandar udara internasional sultan aji muhammad sulaiman sepinggan","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"SUB","airport":"Juanda International Airport","city":"Jawa Timur (East Java), Indonesia"},{"iata":"DPS","airport":"Ngurah Rai (Bali) International Airport","city":"Bali, Indonesia"},{"iata":"CGK","airport":"Soekarno-Hatta International Airport","city":"Banten, Indonesia"},{"iata":"PLW","airport":"Mutiara - SIS Al-Jufrie Airport","city":"Sulawesi Tengah (Central Sulawesi), Indonesia"},{"iata":"TKG","airport":"Radin Inten II International Airport","city":"Lampung, Indonesia"},{"iata":"LUV","airport":"Karel Sadsuitubun Airport","city":"Maluku, Indonesia"},{"iata":"GNS","airport":"Binaka Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":"AEG","airport":"Aek Godang Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":null,"airport":"Tabing Airport","city":"Sumatra Barat (West Sumatra), Indonesia"},{"iata":"OKL","airport":"Oksibil Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"KNO","airport":"Kualanamu International Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":"UGU","airport":"Bilogai-Sugapa Airport","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":"FLZ","airport":"Dr. Ferdinand Lumban Tobing Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":"NAH","airport":"Naha Airport","city":"Sulawesi Utara (North Sulawesi), Indonesia"},{"iata":"NPO","airport":"Nanga Pinoh Airport","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":"WMX","airport":"Wamena Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"KTG","airport":"Rahadi Osman Airport","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":"NTX","airport":"Ranai-Natuna Airport","city":"Riau, Indonesia"},{"iata":"PNK","airport":"Supadio Airport","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":"PSU","airport":"Pangsuma Airport","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":"SQG","airport":"Sintang Airport","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":"LOP","airport":"Lombok International Airport","city":"Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"},{"iata":"WNI","airport":"Matahora Airport","city":"Sulawesi Tenggara (Southeast Sulawesi), Indonesia"},{"iata":"AMQ","airport":"Pattimura International Airport","city":"Maluku, Indonesia"},{"iata":"MDC","airport":"Sam Ratulangi Airport","city":"Sulawesi Utara (North Sulawesi), Indonesia"},{"iata":"MKQ","airport":"Mopah International Airport","city":"Papua Selatan (South Papua), Indonesia"},{"iata":"BKS","airport":"Fatmawati Soekarno Airport","city":"Bengkulu, Indonesia"},{"iata":"TIM","airport":"Mozes Kilangin Airport","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":"PLM","airport":"Sultan Mahmud Badaruddin II Airport","city":"Sumatra Selatan (South Sumatra), Indonesia"},{"iata":"PDO","airport":"Pendopo Airport","city":"Sumatra Selatan (South Sumatra), Indonesia"},{"iata":"PDG","airport":"Minangkabau International Airport","city":"Sumatra Barat (West Sumatra), Indonesia"},{"iata":"SOQ","airport":"Domine Eduard Osok Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":"TTE","airport":"Sultan Babullah Airport","city":"Maluku Utara (North Maluku), Indonesia"},{"iata":"YIA","airport":"Yogyakarta International Airport","city":"Yogyakarta, Indonesia"},{"iata":"MEQ","airport":"Cut Nyak Dhien Airport","city":"Aceh, Indonesia"},{"iata":"TMH","airport":"Tanah Merah Airport","city":"Papua Selatan (South Papua), Indonesia"},{"iata":"TXE","airport":"Rembele Airport","city":"Aceh, Indonesia"},{"iata":"CXP","airport":"Tunggul Wulung Airport","city":"Jawa Tengah (Central Java), Indonesia"},{"iata":"JOG","airport":"Adisutjipto International Airport","city":"Yogyakarta, Indonesia"},{"iata":"BTJ","airport":"Sultan Iskandar Muda International Airport","city":"Aceh, Indonesia"},{"iata":"SRG","airport":"Achmad Yani Airport","city":"Jawa Tengah (Central Java), Indonesia"},{"iata":"PKU","airport":"Sultan Syarif Kasim II International Airport / Roesmin Nurjadin AFB","city":"Riau, Indonesia"},{"iata":"DUM","airport":"Pinang Kampai Airport","city":"Riau, Indonesia"},{"iata":"BIK","airport":"Frans Kaisiepo Airport","city":"Papua, Indonesia"},{"iata":"BEJ","airport":"Kalimarau Airport","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"TJG","airport":"Warukin Airport","city":"Kalimantan Selatan (South Kalimantan), Indonesia"},{"iata":"BDO","airport":"Husein Sastranegara International Airport","city":"Jawa Barat (West Java), Indonesia"},{"iata":"FKQ","airport":"Fakfak Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":"BTH","airport":"Hang Nadim International Airport","city":"Riau, Indonesia"},{"iata":"KNG","airport":"Kaimana Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":"TRK","airport":"Juwata International Airport / Suharnoko Harbani AFB","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":"AAP","airport":"Aji Pangeran Tumenggung Pranoto International Airport","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"MKW","airport":"Rendani Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":"TRT","airport":"Toraja Airport","city":"Sumatra Selatan (South Sumatra), Indonesia"},{"iata":"HLP","airport":"Halim Perdanakusuma International Airport","city":"Jakarta Raya, Indonesia"},{"iata":"NBX","airport":"Nabire Airport","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":"MES","airport":"Soewondo Air Force Base","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":"PSJ","airport":"Kasiguncu Airport","city":"Sulawesi Tengah (Central Sulawesi), Indonesia"},{"iata":"LUW","airport":"Syukuran Aminuddin Amir Airport","city":"Sulawesi Tengah (Central Sulawesi), Indonesia"},{"iata":"LSX","airport":"Lhok Sukon Airport","city":"Aceh, Indonesia"},{"iata":"RGT","airport":"Japura Airport","city":"Riau, Indonesia"},{"iata":"KJT","airport":"Kertajati International Airport","city":"Jawa Barat (West Java), Indonesia"},{"iata":"OTI","airport":"Pitu Airport","city":"Maluku Utara (North Maluku), Indonesia"},{"iata":"ZRI","airport":"Stevanus Rumbewas Airport","city":"Papua, Indonesia"},{"iata":"BXB","airport":"Babo Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":null,"airport":"Long Rungan","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":null,"airport":"Oklip Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Okyap Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Sape Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Syekh Hamzah Fansyuri Airport","city":"Aceh, Indonesia"},{"iata":null,"airport":"Sumtamon Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Yapil Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"BXW","airport":"Bawean - Harun Thohir Airport","city":"Jawa Timur (East Java), Indonesia"},{"iata":null,"airport":"Awimbon Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kubibkop Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Molding Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Tarup Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Tinibil Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Okbab Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Alemson Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kotyobakon Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Mipol Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Binban Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kaklup Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Maksum Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Pedam Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Dumpasik Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Bordamban Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kirimu Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Hangmata Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"KRC","airport":"Departi Parbo Airport","city":"Jambi, Indonesia"},{"iata":"TBM","airport":"Tumbang Samba Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"JIO","airport":"Jos Orno Imsula Airport","city":"Maluku, Indonesia"},{"iata":"MOH","airport":"Maleo Airport","city":"Sulawesi Tengah (Central Sulawesi), Indonesia"},{"iata":"FOO","airport":"Kornasoren Airfield","city":"Papua, Indonesia"},{"iata":"BMU","airport":"Sultan Muhammad Salahuddin Airport","city":"Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"},{"iata":"SWQ","airport":"Sumbawa Besar Airport","city":"Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"},{"iata":"TMC","airport":"Tambolaka Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"WGP","airport":"Umbu Mehang Kunda Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"LLO","airport":"Bua - Palopo Lagaligo Airport","city":"Sulawesi Selatan (South Sulawesi), Indonesia"},{"iata":"MXB","airport":"Andi Jemma Airport","city":"Sulawesi Selatan (South Sulawesi), Indonesia"},{"iata":"HMS","airport":"Haji Muhammad Sidik Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"KLP","airport":"Seruyan Kuala Pembuang Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"PKY","airport":"Tjilik Riwut Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"KWB","airport":"Dewadaru - Kemujan Island","city":"Jawa Tengah (Central Java), Indonesia"},{"iata":"BUI","airport":"Bokondini Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kiwirok Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"TJS","airport":"Tanjung Harapan Airport","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":"DTD","airport":"Datadawai Airport","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"PGQ","airport":"Buli Airport","city":"Maluku, Indonesia"},{"iata":"GTO","airport":"Jalaluddin Airport","city":"Gorontalo, Indonesia"},{"iata":"UOL","airport":"Buol Airport","city":"Sulawesi Tengah (Central Sulawesi), Indonesia"},{"iata":"PKN","airport":"Iskandar Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"KBU","airport":"Gusti Syamsir Alam Airport","city":"Kalimantan Selatan (South Kalimantan), Indonesia"},{"iata":"BDJ","airport":"Syamsudin Noor International Airport","city":"Kalimantan Selatan (South Kalimantan), Indonesia"},{"iata":"SMQ","airport":"Sampit (Hasan) Airport","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":"NDA","airport":"Bandanaira Airport","city":"Maluku, Indonesia"},{"iata":"MLG","airport":"Abdul Rachman Saleh Airport","city":"Jawa Timur (East Java), Indonesia"},{"iata":"SOC","airport":"Adisumarmo International Airport","city":"Jawa Tengah (Central Java), Indonesia"},{"iata":"RJM","airport":"Marinda Airport","city":"Papua Barat (West Papua), Indonesia"},{"iata":"MOF","airport":"Frans Xavier Seda Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"ENE","airport":"H. Hasan Aroeboesman (Ende) Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"RTG","airport":"Frans Sales Lega Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"ARD","airport":"Alor Island - Mali Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"LBJ","airport":"Komodo Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"KOE","airport":"El Tari Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"KSR","airport":"Selayar - Haji Aroeppala Airport","city":"Sulawesi Selatan (South Sulawesi), Indonesia"},{"iata":"KDI","airport":"Haluoleo Airport","city":"Sulawesi Tenggara (Southeast Sulawesi), Indonesia"},{"iata":"CJN","airport":"Nusawiru Airport","city":"Jawa Barat (West Java), Indonesia"},{"iata":"TNJ","airport":"Raja Haji Fisabilillah International Airport","city":"Riau, Indonesia"},{"iata":"MPC","airport":"Muko Muko Airport","city":"Jambi, Indonesia"},{"iata":"PGK","airport":"Depati Amir Airport","city":"Bangka Belitung, Indonesia"},{"iata":"DTB","airport":"Silangit Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":"TJQ","airport":"H A S Hanandjoeddin International Airport","city":"Bangka Belitung, Indonesia"},{"iata":"DJB","airport":"Sultan Thaha Airport","city":"Jambi, Indonesia"},{"iata":"BUU","airport":"Muara Bungo Airport","city":"Jambi, Indonesia"},{"iata":"LSW","airport":"Malikus Saleh Airport","city":"Aceh, Indonesia"},{"iata":"SXK","airport":"Mathilda Batlayeri Airport","city":"Maluku, Indonesia"},{"iata":"ABU","airport":"AA Bere Tallo (Haliwen) Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"LKA","airport":"Larantuka Gewayentana Airport","city":"Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"},{"iata":"LBW","airport":"Long Bawan Airport","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":"BXT","airport":"Bontang Airport","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":"NNX","airport":"Nunukan Airport","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":"LPU","airport":"Long Apung Airport","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":"SEH","airport":"Senggeh Airport","city":"Papua, Indonesia"},{"iata":"DEX","airport":"Nop Goliat Dekai Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Okpahik Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"JBB","airport":"Notohadinegoro Airport","city":"Jawa Timur (East Java), Indonesia"},{"iata":"BWX","airport":"Banyuwangi International Airport","city":"Jawa Timur (East Java), Indonesia"},{"iata":null,"airport":"Lasondre Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":null,"airport":"Letkol Wisnu Airstrip","city":"Bali, Indonesia"},{"iata":null,"airport":"Diphikin Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Iwur Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kiwi Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Koropun Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Kuala Kurun","city":"Kalimantan Tengah (Central Kalimantan), Indonesia"},{"iata":null,"airport":"Kuala Randau Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Kustera Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Kwerba Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Kwijawagi","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Lake Holmes Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Landikma Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Langda Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Lokok Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Long Alango Airstrip","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":null,"airport":"Long Segar Airstrip","city":"Kalimantan Timur (East Kalimantan), Indonesia"},{"iata":null,"airport":"Luban Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Lumbis Airstrip","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":null,"airport":"Madya Raya Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Magoda Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Nalca Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Nanga Labang Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Nanga Mawong Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Nanga Merakai Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Nanga Nyabu Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Nanga Ruan Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Nenei Airstrip","city":"Papua Barat (West Papua), Indonesia"},{"iata":null,"airport":"Nain Baru Airstrip","city":"Kalimantan Utara (North Kalimantan), Indonesia"},{"iata":null,"airport":"Nania Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Nipsan Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Omban Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Onondowa/Rampi Airport","city":"Sulawesi Selatan (South Sulawesi), Indonesia"},{"iata":null,"airport":"Padang Pagai Airstrip","city":"Sumatra Barat (West Sumatra), Indonesia"},{"iata":null,"airport":"Pagai Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Panggema/Hasan Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Papasena Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Pass Valley Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Piramid Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Pit River Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Pogapa Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Polimo Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Poga Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Prongkoli Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Puldamat Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Rantau Prapat/Padang Halaban Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":null,"airport":"Riam Sejawak Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Ros Bori Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Samboka Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Sela Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Seradala Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Serimbu Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Serukam","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Sikari Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Silimo Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Siriwo Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Soba Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Sumo Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Sungai Tontang Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Taige Airstrip","city":"Papua Barat (West Papua), Indonesia"},{"iata":null,"airport":"Taiyeve Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Takar Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Tangma Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Tanjung Maju Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Tayayi Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Testega Airstrip","city":"Papua Barat (West Papua), Indonesia"},{"iata":null,"airport":"Timepa Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Turmo Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Waff Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Walerek Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Walma Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Wandama Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Wanggemalu Airstrip","city":"Papua Selatan (South Papua), Indonesia"},{"iata":null,"airport":"Wolo Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Wunin Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Yaniruma Airstrip","city":"Papua Selatan (South Papua), Indonesia"},{"iata":null,"airport":"Yigi Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Yogosem Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Alama Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Aideralma Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Enggano Airport","city":"Bengkulu, Indonesia"},{"iata":null,"airport":"Apowo Airstrip","city":"Papua Tengah (Central Papua), Indonesia"},{"iata":null,"airport":"Aurimi Wzil Airstrip","city":"Papua, Indonesia"},{"iata":null,"airport":"Bareri Airport","city":"Papua, Indonesia"},{"iata":null,"airport":"Bari Airport","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Basiem Airport","city":"Papua Selatan (South Papua), Indonesia"},{"iata":null,"airport":"Anik Airstrip","city":"Kalimantan Barat (West Kalimantan), Indonesia"},{"iata":null,"airport":"Yaosakor Airstrip","city":"Papua Selatan (South Papua), Indonesia"},{"iata":null,"airport":"Weda Bay Airport","city":"Maluku Utara (North Maluku), Indonesia"},{"iata":null,"airport":"Tanjung Lesung Airport","city":"Banten, Indonesia"},{"iata":null,"airport":"Sorake Airport","city":"Sumatra Utara (North Sumatra), Indonesia"},{"iata":null,"airport":"Tambling Airport","city":"Lampung, Indonesia"},{"iata":null,"airport":"Korowai Batu Danowage Airport","city":"Papua Selatan (South Papua), Indonesia"},{"iata":null,"airport":"Denom Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":null,"airport":"Maksum Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"},{"iata":"GYO","airport":"Blangkejeren Airport","city":"Aceh, Indonesia"},{"iata":null,"airport":"Bobkamu Airstrip","city":"Papua Pegunungan (Highland Papua), Indonesia"}],[{"iata":"HLP","airport":"Halim Perdanakusuma International Airport","city":"Jakarta Raya, Indonesia"}]]
+[
+  [
+    {
+      "iata": "BPN",
+      "airport": "Sultan Aji Muhammad Sulaiman Sepinggan International Airport",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": "DJJ",
+      "airport": "Dortheys Hiyo Eluay International Airport",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": "UPG",
+      "airport": "Hasanuddin International Airport",
+      "city": "Sulawesi Selatan (South Sulawesi), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "(Duplicate)bandar udara internasional sultan aji muhammad sulaiman sepinggan",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": "SUB",
+      "airport": "Juanda International Airport",
+      "city": "Jawa Timur (East Java), Indonesia"
+    },
+    {
+      "iata": "DPS",
+      "airport": "Ngurah Rai (Bali) International Airport",
+      "city": "Bali, Indonesia"
+    },
+    {
+      "iata": "CGK",
+      "airport": "Soekarno-Hatta International Airport",
+      "city": "Banten, Indonesia"
+    },
+    {
+      "iata": "PLW",
+      "airport": "Mutiara - SIS Al-Jufrie Airport",
+      "city": "Sulawesi Tengah (Central Sulawesi), Indonesia"
+    },
+    {
+      "iata": "TKG",
+      "airport": "Radin Inten II International Airport",
+      "city": "Lampung, Indonesia"
+    },
+    {
+      "iata": "LUV",
+      "airport": "Karel Sadsuitubun Airport",
+      "city": "Maluku, Indonesia"
+    },
+    {
+      "iata": "GNS",
+      "airport": "Binaka Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": "AEG",
+      "airport": "Aek Godang Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tabing Airport",
+      "city": "Sumatra Barat (West Sumatra), Indonesia"
+    },
+    {
+      "iata": "OKL",
+      "airport": "Oksibil Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "KNO",
+      "airport": "Kualanamu International Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": "UGU",
+      "airport": "Bilogai-Sugapa Airport",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": "FLZ",
+      "airport": "Dr. Ferdinand Lumban Tobing Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": "NAH",
+      "airport": "Naha Airport",
+      "city": "Sulawesi Utara (North Sulawesi), Indonesia"
+    },
+    {
+      "iata": "NPO",
+      "airport": "Nanga Pinoh Airport",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": "WMX",
+      "airport": "Wamena Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "KTG",
+      "airport": "Rahadi Osman Airport",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": "NTX",
+      "airport": "Ranai-Natuna Airport",
+      "city": "Riau, Indonesia"
+    },
+    {
+      "iata": "PNK",
+      "airport": "Supadio Airport",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": "PSU",
+      "airport": "Pangsuma Airport",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": "SQG",
+      "airport": "Sintang Airport",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": "LOP",
+      "airport": "Lombok International Airport",
+      "city": "Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "WNI",
+      "airport": "Matahora Airport",
+      "city": "Sulawesi Tenggara (Southeast Sulawesi), Indonesia"
+    },
+    {
+      "iata": "AMQ",
+      "airport": "Pattimura International Airport",
+      "city": "Maluku, Indonesia"
+    },
+    {
+      "iata": "MDC",
+      "airport": "Sam Ratulangi Airport",
+      "city": "Sulawesi Utara (North Sulawesi), Indonesia"
+    },
+    {
+      "iata": "MKQ",
+      "airport": "Mopah International Airport",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": "BKS",
+      "airport": "Fatmawati Soekarno Airport",
+      "city": "Bengkulu, Indonesia"
+    },
+    {
+      "iata": "TIM",
+      "airport": "Mozes Kilangin Airport",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": "PLM",
+      "airport": "Sultan Mahmud Badaruddin II Airport",
+      "city": "Sumatra Selatan (South Sumatra), Indonesia"
+    },
+    {
+      "iata": "PDO",
+      "airport": "Pendopo Airport",
+      "city": "Sumatra Selatan (South Sumatra), Indonesia"
+    },
+    {
+      "iata": "PDG",
+      "airport": "Minangkabau International Airport",
+      "city": "Sumatra Barat (West Sumatra), Indonesia"
+    },
+    {
+      "iata": "SOQ",
+      "airport": "Domine Eduard Osok Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": "TTE",
+      "airport": "Sultan Babullah Airport",
+      "city": "Maluku Utara (North Maluku), Indonesia"
+    },
+    {
+      "iata": "YIA",
+      "airport": "Yogyakarta International Airport",
+      "city": "Yogyakarta, Indonesia"
+    },
+    {
+      "iata": "MEQ",
+      "airport": "Cut Nyak Dhien Airport",
+      "city": "Aceh, Indonesia"
+    },
+    {
+      "iata": "TMH",
+      "airport": "Tanah Merah Airport",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    { "iata": "TXE", "airport": "Rembele Airport", "city": "Aceh, Indonesia" },
+    {
+      "iata": "CXP",
+      "airport": "Tunggul Wulung Airport",
+      "city": "Jawa Tengah (Central Java), Indonesia"
+    },
+    {
+      "iata": "JOG",
+      "airport": "Adisutjipto International Airport",
+      "city": "Yogyakarta, Indonesia"
+    },
+    {
+      "iata": "BTJ",
+      "airport": "Sultan Iskandar Muda International Airport",
+      "city": "Aceh, Indonesia"
+    },
+    {
+      "iata": "SRG",
+      "airport": "Achmad Yani Airport",
+      "city": "Jawa Tengah (Central Java), Indonesia"
+    },
+    {
+      "iata": "PKU",
+      "airport": "Sultan Syarif Kasim II International Airport / Roesmin Nurjadin AFB",
+      "city": "Riau, Indonesia"
+    },
+    {
+      "iata": "DUM",
+      "airport": "Pinang Kampai Airport",
+      "city": "Riau, Indonesia"
+    },
+    {
+      "iata": "BIK",
+      "airport": "Frans Kaisiepo Airport",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": "BEJ",
+      "airport": "Kalimarau Airport",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": "TJG",
+      "airport": "Warukin Airport",
+      "city": "Kalimantan Selatan (South Kalimantan), Indonesia"
+    },
+    {
+      "iata": "BDO",
+      "airport": "Husein Sastranegara International Airport",
+      "city": "Jawa Barat (West Java), Indonesia"
+    },
+    {
+      "iata": "FKQ",
+      "airport": "Fakfak Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": "BTH",
+      "airport": "Hang Nadim International Airport",
+      "city": "Riau, Indonesia"
+    },
+    {
+      "iata": "KNG",
+      "airport": "Kaimana Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": "TRK",
+      "airport": "Juwata International Airport / Suharnoko Harbani AFB",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": "AAP",
+      "airport": "Aji Pangeran Tumenggung Pranoto International Airport",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": "MKW",
+      "airport": "Rendani Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": "TRT",
+      "airport": "Toraja Airport",
+      "city": "Sumatra Selatan (South Sumatra), Indonesia"
+    },
+    {
+      "iata": "HLP",
+      "airport": "Halim Perdanakusuma International Airport",
+      "city": "Jakarta Raya, Indonesia"
+    },
+    {
+      "iata": "NBX",
+      "airport": "Nabire Airport",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": "MES",
+      "airport": "Soewondo Air Force Base",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": "PSJ",
+      "airport": "Kasiguncu Airport",
+      "city": "Sulawesi Tengah (Central Sulawesi), Indonesia"
+    },
+    {
+      "iata": "LUW",
+      "airport": "Syukuran Aminuddin Amir Airport",
+      "city": "Sulawesi Tengah (Central Sulawesi), Indonesia"
+    },
+    {
+      "iata": "LSX",
+      "airport": "Lhok Sukon Airport",
+      "city": "Aceh, Indonesia"
+    },
+    { "iata": "RGT", "airport": "Japura Airport", "city": "Riau, Indonesia" },
+    {
+      "iata": "KJT",
+      "airport": "Kertajati International Airport",
+      "city": "Jawa Barat (West Java), Indonesia"
+    },
+    {
+      "iata": "OTI",
+      "airport": "Pitu Airport",
+      "city": "Maluku Utara (North Maluku), Indonesia"
+    },
+    {
+      "iata": "ZRI",
+      "airport": "Stevanus Rumbewas Airport",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": "BXB",
+      "airport": "Babo Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Long Rungan",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Oklip Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Okyap Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sape Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Syekh Hamzah Fansyuri Airport",
+      "city": "Aceh, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sumtamon Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Yapil Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "BXW",
+      "airport": "Bawean - Harun Thohir Airport",
+      "city": "Jawa Timur (East Java), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Awimbon Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kubibkop Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Molding Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tarup Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tinibil Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Okbab Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Alemson Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kotyobakon Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Mipol Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Binban Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kaklup Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Maksum Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Pedam Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Dumpasik Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Bordamban Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kirimu Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Hangmata Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "KRC",
+      "airport": "Departi Parbo Airport",
+      "city": "Jambi, Indonesia"
+    },
+    {
+      "iata": "TBM",
+      "airport": "Tumbang Samba Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "JIO",
+      "airport": "Jos Orno Imsula Airport",
+      "city": "Maluku, Indonesia"
+    },
+    {
+      "iata": "MOH",
+      "airport": "Maleo Airport",
+      "city": "Sulawesi Tengah (Central Sulawesi), Indonesia"
+    },
+    {
+      "iata": "FOO",
+      "airport": "Kornasoren Airfield",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": "BMU",
+      "airport": "Sultan Muhammad Salahuddin Airport",
+      "city": "Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "SWQ",
+      "airport": "Sumbawa Besar Airport",
+      "city": "Nusa Tenggara Barat (West Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "TMC",
+      "airport": "Tambolaka Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "WGP",
+      "airport": "Umbu Mehang Kunda Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "LLO",
+      "airport": "Bua - Palopo Lagaligo Airport",
+      "city": "Sulawesi Selatan (South Sulawesi), Indonesia"
+    },
+    {
+      "iata": "MXB",
+      "airport": "Andi Jemma Airport",
+      "city": "Sulawesi Selatan (South Sulawesi), Indonesia"
+    },
+    {
+      "iata": "HMS",
+      "airport": "Haji Muhammad Sidik Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "KLP",
+      "airport": "Seruyan Kuala Pembuang Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "PKY",
+      "airport": "Tjilik Riwut Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "KWB",
+      "airport": "Dewadaru - Kemujan Island",
+      "city": "Jawa Tengah (Central Java), Indonesia"
+    },
+    {
+      "iata": "BUI",
+      "airport": "Bokondini Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kiwirok Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "TJS",
+      "airport": "Tanjung Harapan Airport",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": "DTD",
+      "airport": "Datadawai Airport",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    { "iata": "PGQ", "airport": "Buli Airport", "city": "Maluku, Indonesia" },
+    {
+      "iata": "GTO",
+      "airport": "Jalaluddin Airport",
+      "city": "Gorontalo, Indonesia"
+    },
+    {
+      "iata": "UOL",
+      "airport": "Buol Airport",
+      "city": "Sulawesi Tengah (Central Sulawesi), Indonesia"
+    },
+    {
+      "iata": "PKN",
+      "airport": "Iskandar Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "KBU",
+      "airport": "Gusti Syamsir Alam Airport",
+      "city": "Kalimantan Selatan (South Kalimantan), Indonesia"
+    },
+    {
+      "iata": "BDJ",
+      "airport": "Syamsudin Noor International Airport",
+      "city": "Kalimantan Selatan (South Kalimantan), Indonesia"
+    },
+    {
+      "iata": "SMQ",
+      "airport": "Sampit (Hasan) Airport",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": "NDA",
+      "airport": "Bandanaira Airport",
+      "city": "Maluku, Indonesia"
+    },
+    {
+      "iata": "MLG",
+      "airport": "Abdul Rachman Saleh Airport",
+      "city": "Jawa Timur (East Java), Indonesia"
+    },
+    {
+      "iata": "SOC",
+      "airport": "Adisumarmo International Airport",
+      "city": "Jawa Tengah (Central Java), Indonesia"
+    },
+    {
+      "iata": "RJM",
+      "airport": "Marinda Airport",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": "MOF",
+      "airport": "Frans Xavier Seda Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "ENE",
+      "airport": "H. Hasan Aroeboesman (Ende) Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "RTG",
+      "airport": "Frans Sales Lega Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "ARD",
+      "airport": "Alor Island - Mali Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "LBJ",
+      "airport": "Komodo Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "KOE",
+      "airport": "El Tari Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "KSR",
+      "airport": "Selayar - Haji Aroeppala Airport",
+      "city": "Sulawesi Selatan (South Sulawesi), Indonesia"
+    },
+    {
+      "iata": "KDI",
+      "airport": "Haluoleo Airport",
+      "city": "Sulawesi Tenggara (Southeast Sulawesi), Indonesia"
+    },
+    {
+      "iata": "CJN",
+      "airport": "Nusawiru Airport",
+      "city": "Jawa Barat (West Java), Indonesia"
+    },
+    {
+      "iata": "TNJ",
+      "airport": "Raja Haji Fisabilillah International Airport",
+      "city": "Riau, Indonesia"
+    },
+    {
+      "iata": "MPC",
+      "airport": "Muko Muko Airport",
+      "city": "Jambi, Indonesia"
+    },
+    {
+      "iata": "PGK",
+      "airport": "Depati Amir Airport",
+      "city": "Bangka Belitung, Indonesia"
+    },
+    {
+      "iata": "DTB",
+      "airport": "Silangit Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": "TJQ",
+      "airport": "H A S Hanandjoeddin International Airport",
+      "city": "Bangka Belitung, Indonesia"
+    },
+    {
+      "iata": "DJB",
+      "airport": "Sultan Thaha Airport",
+      "city": "Jambi, Indonesia"
+    },
+    {
+      "iata": "BUU",
+      "airport": "Muara Bungo Airport",
+      "city": "Jambi, Indonesia"
+    },
+    {
+      "iata": "LSW",
+      "airport": "Malikus Saleh Airport",
+      "city": "Aceh, Indonesia"
+    },
+    {
+      "iata": "SXK",
+      "airport": "Mathilda Batlayeri Airport",
+      "city": "Maluku, Indonesia"
+    },
+    {
+      "iata": "ABU",
+      "airport": "AA Bere Tallo (Haliwen) Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "LKA",
+      "airport": "Larantuka Gewayentana Airport",
+      "city": "Nusa Tenggara Timur (East Nusa Tenggara), Indonesia"
+    },
+    {
+      "iata": "LBW",
+      "airport": "Long Bawan Airport",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": "BXT",
+      "airport": "Bontang Airport",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": "NNX",
+      "airport": "Nunukan Airport",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": "LPU",
+      "airport": "Long Apung Airport",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    { "iata": "SEH", "airport": "Senggeh Airport", "city": "Papua, Indonesia" },
+    {
+      "iata": "DEX",
+      "airport": "Nop Goliat Dekai Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Okpahik Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "JBB",
+      "airport": "Notohadinegoro Airport",
+      "city": "Jawa Timur (East Java), Indonesia"
+    },
+    {
+      "iata": "BWX",
+      "airport": "Banyuwangi International Airport",
+      "city": "Jawa Timur (East Java), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Lasondre Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Letkol Wisnu Airstrip",
+      "city": "Bali, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Diphikin Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Iwur Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kiwi Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Koropun Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kuala Kurun",
+      "city": "Kalimantan Tengah (Central Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Kuala Randau Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    { "iata": null, "airport": "Kustera Airstrip", "city": "Papua, Indonesia" },
+    { "iata": null, "airport": "Kwerba Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Kwijawagi",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Lake Holmes Airstrip",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Landikma Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Langda Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Lokok Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Long Alango Airstrip",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Long Segar Airstrip",
+      "city": "Kalimantan Timur (East Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Luban Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Lumbis Airstrip",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Madya Raya Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Magoda Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nalca Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nanga Labang Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nanga Mawong Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nanga Merakai Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nanga Nyabu Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nanga Ruan Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nenei Airstrip",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nain Baru Airstrip",
+      "city": "Kalimantan Utara (North Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nania Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Nipsan Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Omban Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Onondowa/Rampi Airport",
+      "city": "Sulawesi Selatan (South Sulawesi), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Padang Pagai Airstrip",
+      "city": "Sumatra Barat (West Sumatra), Indonesia"
+    },
+    { "iata": null, "airport": "Pagai Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Panggema/Hasan Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Papasena Airstrip",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Pass Valley Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Piramid Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Pit River Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Pogapa Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Polimo Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Poga Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Prongkoli Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Puldamat Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Rantau Prapat/Padang Halaban Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Riam Sejawak Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Ros Bori Airstrip",
+      "city": "Papua, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Samboka Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sela Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Seradala Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Serimbu Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Serukam",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    { "iata": null, "airport": "Sikari Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Silimo Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Siriwo Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Soba Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sumo Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sungai Tontang Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Taige Airstrip",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    { "iata": null, "airport": "Taiyeve Airstrip", "city": "Papua, Indonesia" },
+    { "iata": null, "airport": "Takar Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Tangma Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tanjung Maju Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    { "iata": null, "airport": "Tayayi Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Testega Airstrip",
+      "city": "Papua Barat (West Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Timepa Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Turmo Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    { "iata": null, "airport": "Waff Airstrip", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Walerek Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Walma Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Wandama Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Wanggemalu Airstrip",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Wolo Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Wunin Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Yaniruma Airstrip",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Yigi Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Yogosem Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Alama Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Aideralma Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Enggano Airport",
+      "city": "Bengkulu, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Apowo Airstrip",
+      "city": "Papua Tengah (Central Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Aurimi Wzil Airstrip",
+      "city": "Papua, Indonesia"
+    },
+    { "iata": null, "airport": "Bareri Airport", "city": "Papua, Indonesia" },
+    {
+      "iata": null,
+      "airport": "Bari Airport",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Basiem Airport",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Anik Airstrip",
+      "city": "Kalimantan Barat (West Kalimantan), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Yaosakor Airstrip",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Weda Bay Airport",
+      "city": "Maluku Utara (North Maluku), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tanjung Lesung Airport",
+      "city": "Banten, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Sorake Airport",
+      "city": "Sumatra Utara (North Sumatra), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Tambling Airport",
+      "city": "Lampung, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Korowai Batu Danowage Airport",
+      "city": "Papua Selatan (South Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Denom Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Maksum Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    },
+    {
+      "iata": "GYO",
+      "airport": "Blangkejeren Airport",
+      "city": "Aceh, Indonesia"
+    },
+    {
+      "iata": null,
+      "airport": "Bobkamu Airstrip",
+      "city": "Papua Pegunungan (Highland Papua), Indonesia"
+    }
+  ],
+  [
+    {
+      "iata": "HLP",
+      "airport": "Halim Perdanakusuma International Airport",
+      "city": "Jakarta Raya, Indonesia"
+    }
+  ]
+]
