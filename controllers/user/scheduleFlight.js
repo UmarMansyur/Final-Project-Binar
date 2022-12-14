@@ -96,9 +96,7 @@ module.exports = {
     try {
       const { flightId } = req.params;
 
-      const flightDetail = await Flight.findOne({
-        where: { id: flightId }
-      })
+      const flightDetail = await Flight.findOne({ where: { id: flightId } })
 
       if (!flightDetail) return res.status(400).json({ status: false, message: 'flight data not found!' })
 
