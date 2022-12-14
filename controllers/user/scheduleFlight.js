@@ -8,6 +8,7 @@ module.exports = {
 
       const filterSearch = await Flight.findAll({
         attributes: [
+          "id",
           "code",
           "airlineName",
           "departureAirport",
@@ -40,6 +41,7 @@ module.exports = {
       if (filters.tripType == 'one_way') {
         flights = filteredUsers.map((v) => {
           return {
+            id: v.id,
             code: v.code,
             name: v.airlineName,
             departureAirport: v.departureAirport,
@@ -57,6 +59,7 @@ module.exports = {
         }else {
             flights = filteredUsers.map((v) => {
               return {
+                id: v.id,
                 code: v.code,
                 name: v.airlineName,
                 departureAirport: v.departureAirport,
