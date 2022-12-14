@@ -1,6 +1,8 @@
 const { Op } = require("sequelize");
 const { Flight } = require("../../models");
+const sequelize = require("sequelize");
 var moment = require("moment");
+const flight = require("../../models/flight");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const { GOFLIGHTLABS_ACCESS_KEY } = process.env;
@@ -16,6 +18,10 @@ module.exports = {
         arrivalAirport,
         arrival,
         date,
+        returnDate,
+        passengers,
+        tripType,
+        sc,
         departureTime,
         arrivalTime,
         price,
@@ -28,7 +34,10 @@ module.exports = {
         !departure ||
         !arrivalAirport ||
         !arrival ||
-        !date
+        !date ||
+        !passengers ||
+        !tripType ||
+        !sc
       ) {
         return res.status(400).json({
           status: false,
@@ -36,19 +45,19 @@ module.exports = {
         });
       }
 
-      const exist = await Flight.findOne({
-        where: {
-          code: code,
-        },
-      });
+      // const exist = await Flight.findOne({
+      //   where: {
+      //     code: code,
+      //   },
+      // });
 
-      if (exist) {
-        return res.status(409).json({
-          status: false,
-          message: "flight already exist",
-          data: null,
-        });
-      }
+      // if (exist) {
+      //   return res.status(409).json({
+      //     status: false,
+      //     message: "flight already exist",
+      //     data: null,
+      //   });
+      // }
 
       const flight = await Flight.create({
         code,
@@ -58,6 +67,10 @@ module.exports = {
         arrivalAirport,
         arrival,
         date,
+        returnDate,
+        passengers,
+        tripType,
+        sc,
         departureTime,
         arrivalTime,
         price,
@@ -75,7 +88,25 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const allFlight = await Flight.findAll();
+      const allFlight = await Flight.findAll({
+        attributes: [
+        "code",
+        "airlineName",
+        "departureAirport",
+        "departure",
+        "arrivalAirport",
+        "arrival",
+        [sequelize.literal('date("date")'), "date"],
+        [sequelize.literal('date("returnDate")'), "returnDate"],
+        // 'date',
+        "passengers",
+        "tripType",
+        "sc",
+        "departureTime",
+        "arrivalTime",
+        "price",
+      ],
+    });
 
       if (allFlight <= 0) {
         return res.status(400).json({

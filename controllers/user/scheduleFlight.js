@@ -16,7 +16,11 @@ module.exports = {
           "arrivalAirport",
           "arrival",
           [sequelize.literal('date("date")'), "date"],
+          [sequelize.literal('date("returnDate")'), "returnDate"],
           // 'date',
+          "passengers",
+          "tripType",
+          "sc",
           "departureTime",
           "arrivalTime",
           "price",
@@ -39,6 +43,7 @@ module.exports = {
       // console.log(flights)
 
       const filters = req.query;
+      console.log(req.path)
       const filteredUsers = filterSearch.filter((user) => {
         let isValid = true;
         for (key in filters) {
@@ -48,11 +53,11 @@ module.exports = {
         return isValid;
       });
 
-      if (filteredUsers < 1)
-        return res.status(400).json({
-          status: false,
-          message: `flight schedule on ${filters.date} not found`,
-        });
+      // if (filteredUsers < 1)
+      //   return res.status(400).json({
+      //     status: false,
+      //     message: `flight schedule with ${filters.departure} departure and ${filters.arrival} arrival on ${filters.date} for ${filters.passenger} passengers not found`,
+      //   });
 
       // for (const flight of flights) {
       //   await Flight.create({

@@ -29,6 +29,18 @@ module.exports = {
       date: {
         type: Sequelize.DATE,
       },
+      returnDate: {
+        type: Sequelize.DATE,
+      },
+      passengers: {
+        type: Sequelize.INTEGER,
+      },
+      tripType: {
+        type: Sequelize.STRING,
+      },
+      sc: {
+        type: Sequelize.STRING,
+      },
       departureTime: {
         type: Sequelize.TIME,
       },
