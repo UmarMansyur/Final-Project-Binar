@@ -7,7 +7,7 @@ const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = process.env;
 
 webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY);
 
-let sub = require("../../../subscriptions.json");
+let sub = require("../../subscriptions.json");
 sub.splice(1, sub.length);
 
 module.exports = {
