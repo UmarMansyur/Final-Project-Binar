@@ -96,13 +96,50 @@ module.exports = {
     try {
       const { flightId } = req.params;
 
-      const flightDetail = await Flight.findOne({ where: { id: flightId } })
+      const flightDetail = await Flight.findOne({ where: { id: flightId }, attributes: { exclude: ["createdAt", "updatedAt"] } })
 
       if (!flightDetail) return res.status(400).json({ status: false, message: 'flight data not found!' })
 
+      if (flightDetail.tripType == 'one_way') {
+        flight = {
+        id: flightDetail.id,
+        code: flightDetail.code,
+        airlineName: flightDetail.airlineName,
+        departureAirport: flightDetail.departureAirport,
+        departure: flightDetail.departure,
+        arrivalAirport: flightDetail.arrivalAirport,
+        arrival: flightDetail.arrival,
+        date: flightDetail.date,
+        passengers: flightDetail.passengers,
+        tripType: flightDetail.tripType,
+        sc: flightDetail.sc,
+        departureTime: flightDetail.departureTime,
+        arrivalTime: flightDetail.arrivalTime,
+        price: flightDetail.price
+        }
+      } else {
+         flight = {
+          id: flightDetail.id,
+          code: flightDetail.code,
+          airlineName: flightDetail.airlineName,
+          departureAirport: flightDetail.departureAirport,
+          departure: flightDetail.departure,
+          arrivalAirport: flightDetail.arrivalAirport,
+          arrival: flightDetail.arrival,
+          date: flightDetail.date,
+          returnDate: flightDetail.returnDate,
+          passengers: flightDetail.passengers,
+          tripType: flightDetail.tripType,
+          sc: flightDetail.sc,
+          departureTime: flightDetail.departureTime,
+          arrivalTime: flightDetail.arrivalTime,
+          price: flightDetail.price
+          }
+      }
+
       return res.status(200).json({
         status: true,
-        message: flightDetail
+        message: flight
       })
     }catch (err){
       next(err);

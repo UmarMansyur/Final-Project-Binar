@@ -90,6 +90,7 @@ module.exports = {
     try {
       const allFlight = await Flight.findAll({
         attributes: [
+        "id",
         "code",
         "airlineName",
         "departureAirport",
