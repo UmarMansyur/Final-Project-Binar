@@ -54,20 +54,14 @@ module.exports = {
           message: "user not found!",
         });
 
-      if (usercompare.email != email)
-        return res.status(400).json({
-          status: false,
-          message: "e-mail must use the e-mail registered to this account!",
-        });
+      // const file = req.file.buffer.toString("base64");
 
-      const file = req.file.buffer.toString("base64");
+      // const uploadedFile = await imagekit.upload({
+      //   file,
+      //   fileName: req.file.originalname,
+      // });
 
-      const uploadedFile = await imagekit.upload({
-        file,
-        fileName: req.file.originalname,
-      });
-
-      const image = uploadedFile.url;
+      // const image = uploadedFile.url;
 
       const uploadedFile1 = await Passenger.create({
         passenger_id: usercompare.id,
@@ -76,7 +70,7 @@ module.exports = {
         lastName,
         phone,
         type,
-        travelDocument: image,
+        // travelDocument: image,
       });
 
       return res.status(200).json({

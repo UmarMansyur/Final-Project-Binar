@@ -10,14 +10,18 @@ module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { user_id = req.user_id, isPaid = 0, roundTrip, oneWay, flight_id, passenger_id } =
-          req.body;
-          
+        const user = req.user;
+
+        const {
+          user_id = user.id,
+          isPaid = 0,
+          flight_id,
+          passenger_id,
+        } = req.body;
+
         const transaction = await Transaction.create({
           user_id,
           isPaid,
-          roundTrip,
-          oneWay,
         });
 
         const detailTransaction = await DetailTransaction.create({
@@ -42,6 +46,7 @@ module.exports = {
       }
     });
   },
+
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -50,35 +55,39 @@ module.exports = {
             {
               model: User,
               as: "user_transaction",
-              attributes: ['username', 'email']
-
+              attributes: ["username", "email"],
             },
             {
               model: DetailTransaction,
-              attributes: ['transaction_id'],
+              attributes: ["transaction_id"],
               as: "detail_transaction",
               include: [
-                { 
-                  model: Flight, 
+                {
+                  model: Flight,
                   attributes: {
-                    exclude: ["id", "createdAt", "updatedAt"]
+                    exclude: ["id", "createdAt", "updatedAt"],
                   },
-                  as: "flight" 
+                  as: "flight",
                 },
-                { 
-                  model: Passenger, 
+                {
+                  model: Passenger,
                   attributes: {
-                    exclude: ["id", "createdAt", "updatedAt"]
+                    exclude: ["id", "createdAt", "updatedAt"],
                   },
-                  as: "passenger" 
+                  as: "passenger",
                 },
               ],
             },
-            
           ],
           attributes: {
-            exclude : ["id", "user_id", "createdAt", "updatedAt", "detail_transaction"]
-          }
+            exclude: [
+              "id",
+              "user_id",
+              "createdAt",
+              "updatedAt",
+              "detail_transaction",
+            ],
+          },
         });
         const result = {
           success: true,
@@ -120,17 +129,21 @@ module.exports = {
         });
 
         if (!exist) {
-          return resolve(res.status(400).json({
-            status: false,
-            message: "Transaction not found"
-          }));
+          return resolve(
+            res.status(400).json({
+              status: false,
+              message: "Transaction not found",
+            })
+          );
         }
 
-        resolve(res.status(200).json({
-          status: true,
-          message: "Transaction retrived successfully",
-          data: exist
-        }))
+        resolve(
+          res.status(200).json({
+            status: true,
+            message: "Transaction retrived successfully",
+            data: exist,
+          })
+        );
       } catch (error) {
         next(error);
       }
@@ -180,20 +193,23 @@ module.exports = {
         const exist = await Transaction.findOne({ where: { id } });
 
         if (!exist) {
-          return resolve(res.status(400).json({
-            status: false,
-            message: "Transaction not found"
-          }));
+          return resolve(
+            res.status(400).json({
+              status: false,
+              message: "Transaction not found",
+            })
+          );
         }
 
         const data = await Transaction.destroy({ where: { id } });
-        await DetailTransaction.destroy({ where: { transaction_id: id } })
+        await DetailTransaction.destroy({ where: { transaction_id: id } });
 
-        resolve(res.status(200).json({
-          status: true,
-          message: "Transaction deleted successfully"
-        }));
-
+        resolve(
+          res.status(200).json({
+            status: true,
+            message: "Transaction deleted successfully",
+          })
+        );
       } catch (error) {
         next(error);
       }

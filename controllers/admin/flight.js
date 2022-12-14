@@ -1,7 +1,6 @@
 const { Op } = require("sequelize");
 const { Flight } = require("../../models");
 const sequelize = require("sequelize");
-var moment = require("moment");
 const flight = require("../../models/flight");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -126,6 +125,28 @@ module.exports = {
     }
   },
 
+  readDetail: async (req, res, next) => {
+    try {
+      const { flightId } = req.params;
+      const flightData = await Flight.findOne({
+        where: { id: flightId },
+      });
+      if (!flightData) {
+        return res.status(400).json({
+          status: false,
+          message: "Flight not found",
+          data: null,
+        });
+      }
+      return res.status(200).json({
+        status: true,
+        message: "Get detail user success",
+        data: flightData,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
   update: async (req, res, next) => {
     try {
       const { flightId } = req.params;

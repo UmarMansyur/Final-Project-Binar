@@ -5,7 +5,6 @@ const sequelize = require("sequelize");
 module.exports = {
   showFilter: async (req, res, next) => {
     try {
-
       const filterSearch = await Flight.findAll({
         attributes: [
           "id",
@@ -28,7 +27,7 @@ module.exports = {
       });
 
       const filters = req.query;
-      console.log(req.path)
+      console.log(req.path);
       const filteredUsers = filterSearch.filter((user) => {
         let isValid = true;
         for (key in filters) {
@@ -38,7 +37,7 @@ module.exports = {
         return isValid;
       });
 
-      if (filters.tripType == 'one_way') {
+      if (filters.tripType == "one_way") {
         flights = filteredUsers.map((v) => {
           return {
             id: v.id,
@@ -54,31 +53,30 @@ module.exports = {
             sc: v.sc,
             departureTime: v.departureTime,
             arrivalTime: v.arrivalTime,
-            price: v.price
-          }
-         })
-        }else {
-            flights = filteredUsers.map((v) => {
-              return {
-                id: v.id,
-                code: v.code,
-                name: v.airlineName,
-                departureAirport: v.departureAirport,
-                departure: v.departure,
-                arrivalAirport: v.arrivalAirport,
-                arrival: v.arrival,
-                date: v.date,
-                returnDate: v.returnDate,
-                passengers: v.passengers,
-                tripType: v.tripType,
-                sc: v.sc,
-                departureTime: v.departureTime,
-                arrivalTime: v.arrivalTime,
-                price: v.price
-          }
-        })
-          
-        };      
+            price: v.price,
+          };
+        });
+      } else {
+        flights = filteredUsers.map((v) => {
+          return {
+            id: v.id,
+            code: v.code,
+            name: v.airlineName,
+            departureAirport: v.departureAirport,
+            departure: v.departure,
+            arrivalAirport: v.arrivalAirport,
+            arrival: v.arrival,
+            date: v.date,
+            returnDate: v.returnDate,
+            passengers: v.passengers,
+            tripType: v.tripType,
+            sc: v.sc,
+            departureTime: v.departureTime,
+            arrivalTime: v.arrivalTime,
+            price: v.price,
+          };
+        });
+      }
 
       if (filteredUsers < 1)
         return res.status(400).json({
@@ -91,7 +89,6 @@ module.exports = {
         message: "Success Get Data",
         data: flights,
       });
-
     } catch (error) {
       next(error);
     }
@@ -101,29 +98,35 @@ module.exports = {
     try {
       const { flightId } = req.params;
 
-      const flightDetail = await Flight.findOne({ where: { id: flightId }, attributes: { exclude: ["createdAt", "updatedAt"] } })
+      const flightDetail = await Flight.findOne({
+        where: { id: flightId },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
 
-      if (!flightDetail) return res.status(400).json({ status: false, message: 'flight data not found!' })
+      if (!flightDetail)
+        return res
+          .status(400)
+          .json({ status: false, message: "flight data not found!" });
 
-      if (flightDetail.tripType == 'one_way') {
+      if (flightDetail.tripType == "one_way") {
         flight = {
-        id: flightDetail.id,
-        code: flightDetail.code,
-        airlineName: flightDetail.airlineName,
-        departureAirport: flightDetail.departureAirport,
-        departure: flightDetail.departure,
-        arrivalAirport: flightDetail.arrivalAirport,
-        arrival: flightDetail.arrival,
-        date: flightDetail.date,
-        passengers: flightDetail.passengers,
-        tripType: flightDetail.tripType,
-        sc: flightDetail.sc,
-        departureTime: flightDetail.departureTime,
-        arrivalTime: flightDetail.arrivalTime,
-        price: flightDetail.price
-        }
+          id: flightDetail.id,
+          code: flightDetail.code,
+          airlineName: flightDetail.airlineName,
+          departureAirport: flightDetail.departureAirport,
+          departure: flightDetail.departure,
+          arrivalAirport: flightDetail.arrivalAirport,
+          arrival: flightDetail.arrival,
+          date: flightDetail.date,
+          passengers: flightDetail.passengers,
+          tripType: flightDetail.tripType,
+          sc: flightDetail.sc,
+          departureTime: flightDetail.departureTime,
+          arrivalTime: flightDetail.arrivalTime,
+          price: flightDetail.price,
+        };
       } else {
-         flight = {
+        flight = {
           id: flightDetail.id,
           code: flightDetail.code,
           airlineName: flightDetail.airlineName,
@@ -138,16 +141,16 @@ module.exports = {
           sc: flightDetail.sc,
           departureTime: flightDetail.departureTime,
           arrivalTime: flightDetail.arrivalTime,
-          price: flightDetail.price
-          }
+          price: flightDetail.price,
+        };
       }
 
       return res.status(200).json({
         status: true,
-        message: flight
-      })
-    }catch (err){
+        message: flight,
+      });
+    } catch (err) {
       next(err);
     }
-  }
+  },
 };
