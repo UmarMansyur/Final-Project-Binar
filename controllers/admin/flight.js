@@ -90,23 +90,24 @@ module.exports = {
     try {
       const allFlight = await Flight.findAll({
         attributes: [
-        "code",
-        "airlineName",
-        "departureAirport",
-        "departure",
-        "arrivalAirport",
-        "arrival",
-        [sequelize.literal('date("date")'), "date"],
-        [sequelize.literal('date("returnDate")'), "returnDate"],
-        // 'date',
-        "passengers",
-        "tripType",
-        "sc",
-        "departureTime",
-        "arrivalTime",
-        "price",
-      ],
-    });
+          "id",
+          "code",
+          "airlineName",
+          "departureAirport",
+          "departure",
+          "arrivalAirport",
+          "arrival",
+          [sequelize.literal('date("date")'), "date"],
+          [sequelize.literal('date("returnDate")'), "returnDate"],
+          // 'date',
+          "passengers",
+          "tripType",
+          "sc",
+          "departureTime",
+          "arrivalTime",
+          "price",
+        ],
+      });
 
       if (allFlight <= 0) {
         return res.status(400).json({

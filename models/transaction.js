@@ -23,8 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       user_id: DataTypes.INTEGER,
       isPaid: DataTypes.BOOLEAN,
-      roundTrip: DataTypes.DATE,
-      oneWay: DataTypes.DATE,
     },
     {
       sequelize,
