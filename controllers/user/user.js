@@ -4,10 +4,8 @@ module.exports = {
   updateProfile: async (req, res, next) => {
     try {
       const {
-        user_id,
         first_name,
         last_name,
-        fullName,
         gender,
         country,
         province,
@@ -18,6 +16,7 @@ module.exports = {
 
       const id = req.user.id;
       const exist = await DetailUser.findOne({ where: { user_id: id } });
+
       if (!exist)
         return res
           .status(400)
@@ -43,6 +42,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
+        data: exist,
       });
     } catch (err) {
       next(err);

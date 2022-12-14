@@ -227,7 +227,7 @@ module.exports = {
         console.log(url);
         return res.redirect(url);
       }
-f
+
       const token = await googleOauth2.setCredentials(code);
 
       const { data } = await googleOauth2.getUserData();
@@ -237,7 +237,7 @@ f
         token,
       });
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   },
 
