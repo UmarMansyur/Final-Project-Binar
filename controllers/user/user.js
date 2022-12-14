@@ -16,6 +16,7 @@ module.exports = {
 
       const id = req.user.id;
       const exist = await DetailUser.findOne({ where: { user_id: id } });
+
       if (!exist)
         return res
           .status(400)
@@ -41,18 +42,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
-        data: {
-          username: exist.username,
-          email: exist.email,
-          thumbnail: exist.thumbnail,
-          fullName: detail_user.fullName,
-          gender: detail_user.gender,
-          country: detail_user.country,
-          province: detail_user.province,
-          city: detail_user.city,
-          address: detail_user.address,
-          phone: detail_user.phone,
-        },
+        data: exist,
       });
     } catch (err) {
       next(err);
