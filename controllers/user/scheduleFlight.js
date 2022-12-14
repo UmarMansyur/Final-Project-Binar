@@ -53,7 +53,8 @@ module.exports = {
             tripType: v.tripType,
             sc: v.sc,
             departureTime: v.departureTime,
-            arrivalTime: v.arrivalTime
+            arrivalTime: v.arrivalTime,
+            price: v.price
           }
          })
         }else {
@@ -73,6 +74,7 @@ module.exports = {
                 sc: v.sc,
                 departureTime: v.departureTime,
                 arrivalTime: v.arrivalTime,
+                price: v.price
           }
         })
           
