@@ -1,7 +1,7 @@
 const { User, DetailUser } = require("../../models");
 
 module.exports = {
-      //only admin
+  //only admin
   getAllUser: async (req, res, next) => {
     try {
       const { limit = 5, page = 1 } = req.query;
@@ -13,9 +13,9 @@ module.exports = {
           {
             model: DetailUser,
             as: "detail_user",
-            attributes: { exclude: ["password", "thumbnail"] },
-          }
-        ]
+          },
+        ],
+        attributes: { exclude: ["password", "thumbnail"] },
       });
 
       return res.status(200).json({
@@ -87,4 +87,4 @@ module.exports = {
       next(err);
     }
   },
-}
+};
