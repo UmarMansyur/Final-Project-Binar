@@ -5,10 +5,10 @@ const sequelize = require("sequelize");
 module.exports = {
   showFilter: async (req, res, next) => {
     try {
-      const { departure, arrival, date } = req.query;
 
       const filterSearch = await Flight.findAll({
         attributes: [
+          "id",
           "code",
           "airlineName",
           "departureAirport",
@@ -27,21 +27,6 @@ module.exports = {
         ],
       });
 
-      // flights = filterSearch.map((v) => {
-      //   return {
-      //     code: v.code,
-      //     name: v.airlineName,
-      //     departure: v.departure,
-      //     arrival: v.arrival,
-      //     date: v.date,
-      //     departureTime: v.departureTime,
-      //     arrivalTime: v.arrivalTime,
-      //   };
-      // });
-
-      // console.log('log:', req.query)
-      // console.log(flights)
-
       const filters = req.query;
       console.log(req.path)
       const filteredUsers = filterSearch.filter((user) => {
@@ -53,66 +38,116 @@ module.exports = {
         return isValid;
       });
 
-      // if (filteredUsers < 1)
-      //   return res.status(400).json({
-      //     status: false,
-      //     message: `flight schedule with ${filters.departure} departure and ${filters.arrival} arrival on ${filters.date} for ${filters.passenger} passengers not found`,
-      //   });
+      if (filters.tripType == 'one_way') {
+        flights = filteredUsers.map((v) => {
+          return {
+            id: v.id,
+            code: v.code,
+            name: v.airlineName,
+            departureAirport: v.departureAirport,
+            departure: v.departure,
+            arrivalAirport: v.arrivalAirport,
+            arrival: v.arrival,
+            date: v.date,
+            passengers: v.passengers,
+            tripType: v.tripType,
+            sc: v.sc,
+            departureTime: v.departureTime,
+            arrivalTime: v.arrivalTime,
+            price: v.price
+          }
+         })
+        }else {
+            flights = filteredUsers.map((v) => {
+              return {
+                id: v.id,
+                code: v.code,
+                name: v.airlineName,
+                departureAirport: v.departureAirport,
+                departure: v.departure,
+                arrivalAirport: v.arrivalAirport,
+                arrival: v.arrival,
+                date: v.date,
+                returnDate: v.returnDate,
+                passengers: v.passengers,
+                tripType: v.tripType,
+                sc: v.sc,
+                departureTime: v.departureTime,
+                arrivalTime: v.arrivalTime,
+                price: v.price
+          }
+        })
+          
+        };      
 
-      // for (const flight of flights) {
-      //   await Flight.create({
-      //     airlineName: flight.airline.name,
-      //     code: flight.flight.iataNumber,
-      //     departureCity: flight.departure.iataCode,
-      //     arrivalCity: flight.arrival.iataCode,
-      //     departureTime: flight.departure.scheduledTime,
-      //     arrivalTime: flight.arrival.scheduledTime,
-      //   });
-      // }
+      if (filteredUsers < 1)
+        return res.status(400).json({
+          status: false,
+          message: `flight schedule not found`,
+        });
 
       return res.status(200).json({
         status: true,
         message: "Success Get Data",
-        data: filteredUsers,
+        data: flights,
       });
 
-      // if (filterSearch <= 0) {
-      //   return res.status(400).json({
-      //     status: false,
-      //     message: "Empty Flight",
-      //     data: null,
-      //   });
-      // }
-
-      // const result = [];
-      // for (const flightSearch of filterSearch) {
-      //   // const departureDate = flightSearch.departureTime.toDateString();
-      //   // const departureTime = flightSearch.departureTime.toLocaleTimeString();
-      //   // const arrivalDate = flightSearch.arrivalTime.toDateString();
-      //   // const arrivalTime = flightSearch.arrivalTime.toLocaleTimeString();
-      //   const showFlight = {
-      //     code: flightSearch.code,
-      //     airlineName: flightSearch.airlineName,
-      //     departureAirport: flightSearch.departureAirport,
-      //     departure: flightSearch.departure,
-      //     arrivalAirport: flightSearch.arrivalAirport,
-      //     arrival: flightSearch.arrival,
-      //     date: flightSearch.date,
-      //     departureTime: flightSearch.departureTime,
-      //     arrivalTime: flightSearch.arrivalTime,
-      //     price: flightSearch.price,
-      //   };
-
-      //   result.push(showFlight);
-      // }
-
-      // return res.status(200).json({
-      //   status: true,
-      //   message: "Success Get Data",
-      //   data: result,
-      // });
     } catch (error) {
       next(error);
     }
   },
+
+  detailFlight: async (req, res, next) => {
+    try {
+      const { flightId } = req.params;
+
+      const flightDetail = await Flight.findOne({ where: { id: flightId }, attributes: { exclude: ["createdAt", "updatedAt"] } })
+
+      if (!flightDetail) return res.status(400).json({ status: false, message: 'flight data not found!' })
+
+      if (flightDetail.tripType == 'one_way') {
+        flight = {
+        id: flightDetail.id,
+        code: flightDetail.code,
+        airlineName: flightDetail.airlineName,
+        departureAirport: flightDetail.departureAirport,
+        departure: flightDetail.departure,
+        arrivalAirport: flightDetail.arrivalAirport,
+        arrival: flightDetail.arrival,
+        date: flightDetail.date,
+        passengers: flightDetail.passengers,
+        tripType: flightDetail.tripType,
+        sc: flightDetail.sc,
+        departureTime: flightDetail.departureTime,
+        arrivalTime: flightDetail.arrivalTime,
+        price: flightDetail.price
+        }
+      } else {
+         flight = {
+          id: flightDetail.id,
+          code: flightDetail.code,
+          airlineName: flightDetail.airlineName,
+          departureAirport: flightDetail.departureAirport,
+          departure: flightDetail.departure,
+          arrivalAirport: flightDetail.arrivalAirport,
+          arrival: flightDetail.arrival,
+          date: flightDetail.date,
+          returnDate: flightDetail.returnDate,
+          passengers: flightDetail.passengers,
+          tripType: flightDetail.tripType,
+          sc: flightDetail.sc,
+          departureTime: flightDetail.departureTime,
+          arrivalTime: flightDetail.arrivalTime,
+          price: flightDetail.price
+          }
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: flight
+      })
+    }catch (err){
+      next(err);
+    }
+  }
 };
