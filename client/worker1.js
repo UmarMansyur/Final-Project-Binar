@@ -1,5 +1,13 @@
 let notificationUrl = ''
 console.log('notif:', notificationUrl)
+self.addEventListener('install', e => {
+    e.waitUntil();
+})
+console.log('install success')
+
+self.addEventListener('activate', e => {})
+console.log('activate success')
+
 self.addEventListener('push', e => {
     // e.waitUntil();
     const data = e.data.json();
