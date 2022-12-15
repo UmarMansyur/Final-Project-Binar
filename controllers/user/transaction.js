@@ -12,7 +12,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const { user_id, isPaid = 0, flight_id } = req.body;
-        
+
         const transaction = await Transaction.create({
           user_id: req.user.id,
           isPaid,
@@ -208,50 +208,5 @@ module.exports = {
         next(error);
       }
     });
-  },
-  createTransaction: async (req, res, next) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const {
-          user_id = req.user_id,
-          isPaid = 0,
-          flight_id,
-          email,
-          firstName,
-          lastName,
-          type,
-        } = req.body;
-
-        const { flightId } = req.params;
-
-        const transaction = await Transaction.create({
-          user_id,
-          isPaid,
-        });
-
-        const detailTransaction = await DetailTransaction.create({
-          transaction_id: transaction.id,
-          flight_id: flightId,
-          email,
-          firstName,
-          lastName,
-          type,
-        });
-
-        const result = {
-          success: true,
-          message: "Transaction created successfully",
-          data: {
-            transaction: {
-              ...transaction.dataValues,
-              detailTransaction,
-            },
-          },
-        };
-        resolve(res.json(result));
-      } catch (error) {
-        next(error);
-      }
-    });
-  },
+  }
 };
