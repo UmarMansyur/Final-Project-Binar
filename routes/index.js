@@ -9,13 +9,14 @@ const flight = require("./flight");
 const notification = require("./notification");
 const transaction = require("./transaction");
 const schedule = require("./scheduleFlight");
+const webpush = require("./webpush");
 
-router.get("/", (req, res) => {
-  return res.status(200).json({
-    status: true,
-    message: "Welcome to Terbang Tinggi API",
-  });
-});
+// router.get("/", (req, res) => {
+//   return res.status(200).json({
+//     status: true,
+//     message: "Welcome to Terbang Tinggi API",
+//   });
+// });
 
 router.use("/auth", auth);
 router.use("/user", user);
@@ -26,5 +27,6 @@ router.use("/flight", flight);
 router.use("/notification", notification);
 router.use("/schedule", schedule);
 router.use("/transaction", transaction);
+router.use("/webpush", webpush);
 
 module.exports = router;

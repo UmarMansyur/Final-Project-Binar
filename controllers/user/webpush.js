@@ -29,6 +29,8 @@ module.exports = {
       const payload = JSON.stringify({
         title: "Welcome to the Terbang Tinggi",
         body: "Where do you want to go?",
+        url: 'https://youtube.com'
+
       });
 
       const result = await webpush.sendNotification(subscription, payload);
@@ -50,17 +52,19 @@ module.exports = {
     const subscriptions = require("../../subscriptions.json");
 
     const payload = JSON.stringify({
-      title: "",
-      body: "",
-    });
+      title: 'Terbang Tinggi',
+      body: 'hehehe'
+  });
+  
+  // user_id : user.id
+  // data: JSON.stringify(subscription);
 
-    // user_id : user.id
-    // data: JSON.stringify(subscription);
+  subscriptions.forEach(subscription => {
+      webpush.sendNotification(subscription, payload)
+          .then(result => (result))
+          .catch(e => (e.stack));
+  });
 
-    subscriptions.forEach((subscription) => {
-      webpush.sendNotification(subscription, payload).then(result).catch(e);
-    });
-
-    res.status(200).json({ success: true });
+  res.status(200).json({ 'success': true });
   },
 };

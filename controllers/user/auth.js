@@ -83,13 +83,14 @@ module.exports = {
       const payload = JSON.stringify({
         title: `${user.username}, Congratulations, your account has been successfully created`,
         body: "Please check email for notification",
+        url: 'https://mail.google.com'
       });
 
-      subscriptions.forEach((subscription) => {
-        webpush
-          .sendNotification(subscription, payload)
-          .catch((e) => console.log(e.stack));
-      });
+      subscriptions.forEach(subscription => {
+        webpush.sendNotification(subscription, payload)
+            .then(result => (result))
+            .catch(e => (e.stack));
+    });
 
       return res.status(201).json({
         status: true,
@@ -167,6 +168,18 @@ module.exports = {
           },
         }
       );
+
+      const payload1 = JSON.stringify({
+        title: `Terbang Tinggi App`,
+        body: "Congratulations, your account has been verified",
+        url: 'https://terbangtinggi-staging.km3ggwp.com/login'
+      });
+
+      subscriptions.forEach(subscription => {
+        webpush.sendNotification(subscription, payload1)
+            .then(result => (result))
+            .catch(e => (e.stack));
+    });
 
       return res.redirect(
         "https://terbangtinggi-staging.km3ggwp.com/verified-email/"
