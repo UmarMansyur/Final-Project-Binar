@@ -6,20 +6,21 @@ const {
   Flight,
   Passenger,
 } = require("../../models");
+
 module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
         const { user_id, isPaid = 0, flight_id } = req.body;
-          
+        
         const transaction = await Transaction.create({
           user_id: req.user.id,
-          isPaid
+          isPaid,
         });
 
         const detailTransaction = await DetailTransaction.create({
           transaction_id: transaction.id,
-          flight_id
+          flight_id,
         });
 
         const result = {
@@ -38,6 +39,7 @@ module.exports = {
       }
     });
   },
+
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -46,28 +48,39 @@ module.exports = {
             {
               model: User,
               as: "user_transaction",
-              attributes: ['username', 'email']
-
+              attributes: ["username", "email"],
             },
             {
               model: DetailTransaction,
-              attributes: ['transaction_id'],
+              attributes: ["transaction_id"],
               as: "detail_transaction",
               include: [
-                { 
-                  model: Flight, 
+                {
+                  model: Flight,
                   attributes: {
-                    exclude: ["id", "createdAt", "updatedAt"]
+                    exclude: ["id", "createdAt", "updatedAt"],
                   },
-                  as: "flight" 
+                  as: "flight",
+                },
+                {
+                  model: Passenger,
+                  attributes: {
+                    exclude: ["id", "createdAt", "updatedAt"],
+                  },
+                  as: "passenger",
                 },
               ],
             },
-            
           ],
           attributes: {
-            exclude : ["id", "user_id", "createdAt", "updatedAt", "detail_transaction"]
-          }
+            exclude: [
+              "id",
+              "user_id",
+              "createdAt",
+              "updatedAt",
+              "detail_transaction",
+            ],
+          },
         });
         const result = {
           success: true,
@@ -80,6 +93,7 @@ module.exports = {
       }
     });
   },
+
   getTransactionById: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       const { id } = req.params;
@@ -94,7 +108,11 @@ module.exports = {
                 {
                   model: Flight,
                   as: "flight",
-                }
+                },
+                {
+                  model: Passenger,
+                  as: "passenger",
+                },
               ],
             },
             {
@@ -105,17 +123,21 @@ module.exports = {
         });
 
         if (!exist) {
-          return resolve(res.status(400).json({
-            status: false,
-            message: "Transaction not found"
-          }));
+          return resolve(
+            res.status(400).json({
+              status: false,
+              message: "Transaction not found",
+            })
+          );
         }
 
-        resolve(res.status(200).json({
-          status: true,
-          message: "Transaction retrived successfully",
-          data: exist
-        }))
+        resolve(
+          res.status(200).json({
+            status: true,
+            message: "Transaction retrived successfully",
+            data: exist,
+          })
+        );
       } catch (error) {
         next(error);
       }
@@ -165,20 +187,68 @@ module.exports = {
         const exist = await Transaction.findOne({ where: { id } });
 
         if (!exist) {
-          return resolve(res.status(400).json({
-            status: false,
-            message: "Transaction not found"
-          }));
+          return resolve(
+            res.status(400).json({
+              status: false,
+              message: "Transaction not found",
+            })
+          );
         }
 
         const data = await Transaction.destroy({ where: { id } });
-        await DetailTransaction.destroy({ where: { transaction_id: id } })
+        await DetailTransaction.destroy({ where: { transaction_id: id } });
 
-        resolve(res.status(200).json({
-          status: true,
-          message: "Transaction deleted successfully"
-        }));
+        resolve(
+          res.status(200).json({
+            status: true,
+            message: "Transaction deleted successfully",
+          })
+        );
+      } catch (error) {
+        next(error);
+      }
+    });
+  },
+  createTransaction: async (req, res, next) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const {
+          user_id = req.user_id,
+          isPaid = 0,
+          flight_id,
+          email,
+          firstName,
+          lastName,
+          type,
+        } = req.body;
 
+        const { flightId } = req.params;
+
+        const transaction = await Transaction.create({
+          user_id,
+          isPaid,
+        });
+
+        const detailTransaction = await DetailTransaction.create({
+          transaction_id: transaction.id,
+          flight_id: flightId,
+          email,
+          firstName,
+          lastName,
+          type,
+        });
+
+        const result = {
+          success: true,
+          message: "Transaction created successfully",
+          data: {
+            transaction: {
+              ...transaction.dataValues,
+              detailTransaction,
+            },
+          },
+        };
+        resolve(res.json(result));
       } catch (error) {
         next(error);
       }

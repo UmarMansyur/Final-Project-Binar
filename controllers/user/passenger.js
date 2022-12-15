@@ -43,7 +43,6 @@ module.exports = {
 
   passenger: async (req, res, next) => {
     try {
-      
       const user = req.user;
       const {
         detail_transaction_id,
