@@ -10,11 +10,10 @@ module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { user_id = req.user_id, isPaid = 0, flight_id } =
-          req.body;
+        const { user_id, isPaid = 0, flight_id } = req.body;
           
         const transaction = await Transaction.create({
-          user_id,
+          user_id: req.user.id,
           isPaid
         });
 
@@ -39,6 +38,7 @@ module.exports = {
       }
     });
   },
+  
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
