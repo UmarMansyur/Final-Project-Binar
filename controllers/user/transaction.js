@@ -38,7 +38,6 @@ module.exports = {
       }
     });
   },
-  
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
