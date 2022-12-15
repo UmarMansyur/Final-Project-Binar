@@ -14,16 +14,16 @@ module.exports = (sequelize, DataTypes) => {
         as: "transaction",
       });
       DetailTransaction.belongsTo(models.Flight, { foreignKey: "flight_id", as: "flight" });
-      DetailTransaction.belongsTo(models.Passenger, {
-        foreignKey: "passenger_id", as: "passenger"
+      DetailTransaction.hasMany(models.Passenger, {
+        foreignKey: "detail_transaction_id",
+        as: "passenger",
       });
     }
   }
   DetailTransaction.init(
     {
       transaction_id: DataTypes.INTEGER,
-      flight_id: DataTypes.INTEGER,
-      passenger_id: DataTypes.INTEGER,
+      flight_id: DataTypes.INTEGER
     },
     {
       sequelize,

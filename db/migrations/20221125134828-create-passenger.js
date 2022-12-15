@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      detail_transaction_id: {
+        type: Sequelize.INTEGER,
+      },
       email: {
         type: Sequelize.STRING,
       },
