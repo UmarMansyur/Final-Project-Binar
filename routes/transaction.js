@@ -5,9 +5,9 @@ const roles = require("../utils/roles");
 
 // router.post('/', middle(roles.user) ,cont.transaction.createTransaction);
 router.post("/", middle(roles.user), cont.transaction.createTransaction);
-router.get("/", cont.transaction.show);
-router.get("/:id", cont.transaction.getTransactionById);
-router.put("/:id", cont.transaction.update);
-router.delete("/:id", cont.transaction.delete);
+router.get("/", middle(roles.user), cont.transaction.show);
+router.get("/:id", middle(roles.user), cont.transaction.getTransactionById);
+router.put("/:id", middle(roles.user), cont.transaction.update);
+router.delete("/:id", middle(roles.user), cont.transaction.delete);
 
 module.exports = router;

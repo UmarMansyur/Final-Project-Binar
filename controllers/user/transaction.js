@@ -1,4 +1,3 @@
-const { exclude } = require("query-string");
 const {
   Transaction,
   DetailTransaction,
@@ -11,7 +10,7 @@ module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { user_id, isPaid = 0, flight_id } = req.body;
+        const { isPaid = 0, flight_id } = req.body;
 
         const transaction = await Transaction.create({
           user_id: req.user.id,
