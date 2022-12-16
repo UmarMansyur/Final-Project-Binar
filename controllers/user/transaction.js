@@ -93,7 +93,6 @@ module.exports = {
       }
     });
   },
-
   getTransactionById: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       const { id } = req.params;

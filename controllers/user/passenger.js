@@ -1,4 +1,4 @@
-const { User, Passenger, DetailTransaction, Flight } = require("../../models");
+const { User, Passenger, DetailTransaction, Flight, Transaction, sequelize } = require("../../models");
 const multer = require("multer");
 const upload = multer();
 const imagekit = require("../../utils/imagekit");
@@ -7,23 +7,52 @@ module.exports = {
   show: async (req, res, next) => {
     try {
       // passenger_id doesn't colomn exist
-      const ticket = await Passenger.findAll({
-        where: { id: req.user.id },
-        // where: { id: 1 },
-        attributes: {
-          exclude: ["id", "passenger_id", "createdAt", "updatedAt"],
-        },
-        include: [
-          {
-            model: DetailTransaction,
-            as: "passenger",
-            include: {
-              model: Flight,
-              as: "flight",
-            },
-          },
-        ],
-      });
+      // const ticket = await Transaction.findAll({
+      //   where: { user_id: req.user.id },
+      //   include: [
+      //     {
+      //       model: DetailTransaction,
+      //       as: "detail_transaction",
+      //       include: [
+      //         {
+      //           model: Flight,
+      //           as: "flight",
+      //         },
+      //         {
+      //           model: Passenger,
+      //           as: "passenger",
+      //         },
+      //       ],
+      //     },
+          
+      //   ]
+      // });
+      const ticket = await sequelize.query(`SELECT * FROM "Passengers" JOIN "DetailTransactions" ON "Passengers".detail_transaction_id = "DetailTransactions".id JOIN "Transactions" ON "DetailTransactions".id = "Transactions".id JOIN "Flights" ON "DetailTransactions".flight_id = "Flights".id WHERE "Transactions".user_id = ${req.user.id}`, { type: sequelize.QueryTypes.SELECT });
+      // const ticket = await Passenger.findAll({
+      //   // where: { id: 1 },
+      //   attributes: {
+      //     exclude: ["id", "passenger_id", "createdAt", "updatedAt"],
+      //   },
+      //   include: [
+      //     {
+      //       model: DetailTransaction,
+      //       as: "passenger",
+      //       include: [
+      //         {
+      //           model: Flight,
+      //           as: "flight",
+      //         },
+      //         {
+      //           model: Transaction,
+      //           as: "transaction",
+      //           where: { 
+      //             user_id: req.user.id
+      //           }
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
       if (!ticket) {
         return res.status(404).json({
           status: false,
@@ -37,6 +66,7 @@ module.exports = {
         data: ticket,
       });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   },
