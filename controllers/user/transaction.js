@@ -10,10 +10,10 @@ module.exports = {
   createTransaction: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { isPaid = 0, flight_id } = req.body;
+        const { isPaid = 0, flight_id, passenger } = req.body;
 
         const transaction = await Transaction.create({
-          user_id: req.user.id,
+          user_id: 43,
           isPaid,
         });
 
@@ -22,23 +22,37 @@ module.exports = {
           flight_id,
         });
 
+        const passengers = await Passenger.bulkCreate(
+          passenger.map((item) => ({
+            ...item,
+            detail_transaction_id: detailTransaction.id,
+          }))
+        );
+
         const result = {
           success: true,
           message: "Transaction created successfully",
           data: {
             transaction: {
               ...transaction.dataValues,
-              detailTransaction,
+              detail_transaction: {
+                ...detailTransaction.dataValues,
+                passenger: passengers.map((item) => ({
+                  ...item.dataValues,
+                })),
+              }
             },
           },
         };
+
         resolve(res.json(result));
       } catch (error) {
+        console.log(error);
         next(error);
       }
     });
   },
-
+  
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {

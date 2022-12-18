@@ -137,4 +137,51 @@ module.exports = {
       next(err);
     }
   },
+
+  uploadDocument: async (req, res, next) => {
+    try {
+      const user = req.user;
+      const { id } = req.params;
+      const usercompare = await User.findOne({
+        where: {
+          id: user.id,
+        },
+      });
+      if (!usercompare)
+        return res.status(400).json({
+          status: false,
+          message: "user not found!",
+        });
+      let uploadedFile1 = null;
+      if (req.file != undefined) {
+        const file = req.file.buffer.toString("base64");
+
+        const uploadedFile = await imagekit.upload({
+          file,
+          fileName: req.file.originalname,
+        });
+
+        const image = uploadedFile.url;
+
+        uploadedFile1 = await Passenger.update(
+          {
+            travelDocument: image,
+          },
+          {
+            where: {
+              id: id,
+            },
+          }
+        );
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: "success upload document",
+        data: uploadedFile1,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 };

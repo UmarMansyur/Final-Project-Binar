@@ -771,6 +771,11 @@ paths:
         required: true
         schema:
           type: string
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
       tags:
         - "User : My Ticket"
       responses:
@@ -1046,10 +1051,88 @@ paths:
       description: Get Notification By Id
       security:
         - Authorization: []
-
-  /transaction:
+  /transaction/:
     get:
       summary: Get All Transaction
+      parameters:
+      - name: authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+        - "Admin : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Transaction data retrived successfully
+                    data:
+                    - id: 1
+                      isPaid: false
+                      roundTrip: "2022-12-20T00:00:00.000Z"
+                      oneWay: "2022-12-23T00:00:00.000Z"
+                      user_transaction:
+                        username: Admin
+                        email: umar@unira.ac.id
+                      detail_transaction:
+                        transaction_id: 1
+                        flight:
+                          code: JT999
+                    - id: 2
+                      isPaid: false
+                      roundTrip: "2022-12-20T00:00:00.000Z"
+                      oneWay: "2022-12-23T00:00:00.000Z"
+                      user_transaction:
+                        username: Admin
+                        email:
+                      detail_transaction:
+                        transaction_id: 2
+                        flight:
+                          code: JT999
+                    - id: 3
+                      isPaid: false
+                      roundTrip: "2022-12-20T00:00:00.000Z"
+                      oneWay: "2022-12-23T00:00:00.000Z"
+                      user_transaction:
+                        username: Admin
+                        email:
+                      detail_transaction:
+                        transaction_id: 3
+                        flight:
+                          code: JT999
+                    - id: 4
+                      isPaid: false
+                      roundTrip: "2022-12-20T00:00:00.000Z"
+                      oneWay: "2022-12-23T00:00:00.000Z"
+                      user_transaction:
+                        username: Admin
+                        email:
+                      detail_transaction:
+                        transaction_id: 4
+                        flight:
+                          code: JT999
+
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: get-transaction
+      parameters: []
+      description: Get All Transaction
+      security:
+        - Authorization: []
+  /transaction/{id}:
+   get: 
+      summary: Get Transaction By Id
       tags:
         - "Admin : Transaction"
       responses:
@@ -1071,7 +1154,7 @@ paths:
                     oneWay: "2022-12-23T00:00:00.000Z"
                     user_transaction:
                       username: Admin
-                      email: terbangtinggiapp@gmail.com
+                      email: umar@unira.ac.id
                     detail_transaction:
                       transaction_id: 8
                       flight:
@@ -1090,111 +1173,71 @@ paths:
                         firstName: -
                         lastName: -
                         phone: -
-      operationId: get-transaction
-      parameters: []
-      description: Get All Transaction
-      security:
-        - Authorization: []              
-  /transaction/{id}:
-    get:
-      tags:
-        - "Admin : Transaction"
-      summary: Get Transaction By Id
-      parameters:
-        - name: id
-          in: path
-          description: id
-          required: true
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Transaction data retrived successfully
-                    data:
-                      id: 8
-                      userId: 1
-                      flightId: 2
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      createdAt: "2022-12-10T05:19:12.000Z"
-                      updatedAt: "2022-12-10T05:19:12.000Z"
-                      user_transaction:
-                        username: Admin
-                        email: admin@gmail.com
-                      detail_transaction:
-                        transaction_id: 8
-                        flight:
-                          code: JT999
-                          airlineName: Lion Air
-                          departureAirport: Kuala Namu
-                          departure: KNO
-                          arrivalAirport: Soekarno Hatta
-                          arrival: CGK
-                          date: "2022-12-21T00:00:00.000Z"
-                          departureTime: "11:00:00"
-                          arrivalTime: "22:35:00"
-                          price: 2500000
-                        passenger:
-                          email: -
-                          firstName: -
-                          lastName: -
-                          phone: -
       operationId: get-transaction-id
+      parameters: []
       description: Get Transaction By Id
       security:
         - Authorization: []
-  /transaction/:
+  /transaction:
     post:
       summary: Creates a new transaction.
       tags:
         - "User : Transaction"
       consumes:
         - application/json
-      parameters:
-        - in: body
-          name: Transaction
-          description: The user to create.
+      parameters: 
+        - in: header
+          name: authorization
+          required: true
           schema:
-            type: object
-            required:
-              - user_id
-              - isPaid
-              - roundTrip
-              - oneWay
-              - flight_id
-              - passenger_id
-            properties:
-              user_id:
-                type: integer
-                minimum: 1
-              isPaid:
-                type: boolean
-                default: false
-              roundTrip:
-                type: string
-                format: date
-              oneWay:
-                type: string
-                format: date
-              flight_id:
-                type: integer
-                minimum: 1
-              passenger_id:
-                type: integer
-                minimum: 1
+            type: string
+      requestBody:
+        description: Transaction object that needs to be added to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - flightId
+                - Passenger
+              properties:
+                flightId:
+                  type: integer
+                Passenger:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      firstName:
+                        type: string
+                      lastName:
+                        type: string
+                      email:
+                        type: string
+                      phone:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                          - adult
+                          - child
+                          - infant
+            examples:
+              Example 1:
+                value:
+                  flightId: 2
+                  Passenger:
+                    - firstName: Umar
+                      lastName: Mansyur
+                      email: umar@unira.ac.id
+                      phone: 081234567890
+                      type: adult
+                    - firstName: Ahmad
+                      lastName: Fadilah
+                      email: fadilah@gmail.com
+                      phone: 081234567890
+                      type: child
       responses:
         201:
           description: Created
@@ -1206,28 +1249,44 @@ paths:
               examples:
                 Example 1:
                   value:
-                    status: true
-                    message: Transaction data retrived successfully
+                    success: true
+                    message: Transaction created successfully
                     data:
-                      id: 8
-                      userId: 1
-                      flightId: 2
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      createdAt: "2022-12-10T05:19:12.000Z"
-                      updatedAt: "2022-12-10T05:19:12.000Z"
-                      user_transaction:
+                      transaction:
                         id: 1
-                        transaction_id: 8
-                        user_id: 1
-                        id: 7
-                        transaction_id: 8
-                        flight_id: 1
-                        passenger_id: 1
-                        updatedAt: "2022-12-11T23:51:37.876Z"
-                        createdAt: "2022-12-11T23:51:37.876Z"
- 
+                        user_id: 43
+                        isPaid: false
+                        updatedAt: '2022-12-18T14:45:27.275Z'
+                        createdAt: '2022-12-18T14:45:27.275Z'
+                        detail_transaction:
+                          id: 1
+                          transaction_id: 1
+                          flight_id: 2
+                          updatedAt: '2022-12-18T14:45:29.588Z'
+                          createdAt: '2022-12-18T14:45:29.588Z'
+                          passenger:
+                          - id: 100
+                            email: umar.@unira.ac.id
+                            firstName: Umar
+                            lastName: M
+                            phone: '085231339223'
+                            travelDocument:
+                            detail_transaction_id: 1
+                            createdAt: '2022-12-18T14:45:29.778Z'
+                            updatedAt: '2022-12-18T14:45:29.778Z'
+                            type: Adult
+                          - id: 101
+                            email: john@gmail.com
+                            firstName: John
+                            lastName: Putra
+                            phone: '085231339223'
+                            travelDocument:
+                            detail_transaction_id: 1
+                            createdAt: '2022-12-18T14:45:29.778Z'
+                            updatedAt: '2022-12-18T14:45:29.778Z'
+                            type: Adult
+                
+     
 components:
   schemas:
     User:
