@@ -9,7 +9,8 @@ const roles = require("../utils/roles");
 const storage = require('../utils/storage')
 
 router.get("/myTicket", middle(roles.user), cont.passenger.show);
-router.post('/upload-document/:id', upload.single('image'), middle(roles.user), cont.passenger.uploadDocument);
+router.get("/document/:payment_code", middle(roles.user), cont.passenger.getAllDocument)
+router.patch('/upload-document/:id', upload.single('image'), middle(roles.user), cont.passenger.uploadDocument);
 
 
 module.exports = router;

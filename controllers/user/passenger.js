@@ -151,15 +151,27 @@ module.exports = {
   getAllDocument: async (req, res, next) => {
     try {
       const { payment_code } = req.params;
-      const trans = await Transaction.findAll({ where: { payment_code: payment_code }})
-      const doc = await DetailTransaction.findAll({ where: { transaction_id: trans.id}})
+      const trans = await Transaction.findOne({ where: { payment_code: payment_code }})
+      if (!trans) return res.status(400).json({ status: false, message: 'payment code not found'})
+
+      const doc = await DetailTransaction.findOne({ where: { transaction_id: trans.id}})
       const usercompare = await Passenger.findAll({
         where: {
           detail_transaction_id: doc.id,
         },
       });
+
+      return res.status(200).json({
+        status: true,
+        message: 'success get data',
+        data: {
+          trans,
+          doc,
+          usercompare
+        }
+      })
     }catch (err){
-      next(error)
+      next(err)
     }
   },
 
@@ -190,10 +202,12 @@ module.exports = {
         );
       }
 
+     const upload = await Passenger.findOne({ where: { id: id }})
+
       return res.status(200).json({
         status: true,
         message: "success upload document",
-        data: uploadedFile1,
+        data: upload,
       });
     } catch (err) {
       next(err);
