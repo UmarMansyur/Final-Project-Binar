@@ -14,6 +14,9 @@ module.exports = {
       isPaid: {
         type: Sequelize.BOOLEAN,
       },
+      payment_code: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

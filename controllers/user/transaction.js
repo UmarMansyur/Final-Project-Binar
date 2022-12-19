@@ -5,6 +5,8 @@ const {
   Flight,
   Passenger,
 } = require("../../models");
+const { Op } = require("sequelize");
+const crypto = require("crypto");
 
 module.exports = {
   createTransaction: async (req, res, next) => {
@@ -12,10 +14,13 @@ module.exports = {
       try {
         const { isPaid = 0, flight_id, passenger } = req.body;
         const user = req.user;
+        var payment_code = crypto.randomBytes(20).toString("hex");
+        console.log(payment_code);
         // console.log(user);
         const transaction = await Transaction.create({
           user_id: user.id,
           isPaid,
+          payment_code,
         });
 
         const detailTransaction = await DetailTransaction.create({
@@ -107,12 +112,13 @@ module.exports = {
       }
     });
   },
+
   getTransactionById: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
-      const { id } = req.params;
+      const { payment_code } = req.params;
       try {
         const exist = await Transaction.findOne({
-          where: { id },
+          where: { payment_code },
           include: [
             {
               model: DetailTransaction,
