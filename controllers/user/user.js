@@ -34,23 +34,27 @@ module.exports = {
         },
         {
           where: {
-            user_id: exist.id,
+            user_id: id,
           },
         }
       );
 
+      console.log(detail_user)
+
+      const n = await DetailUser.findOne({ where: { user_id: id },
+        attributes: {
+          exclude: [
+            "id",
+            "user_id",
+            "createdAt",
+            "updatedAt"
+          ],
+        }, })
+
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
-        data: {
-          username: detail_user.fullName,
-          gender: detail_user.gender,
-          country: detail_user.country,
-          province: detail_user.province,
-          city: detail_user.city,
-          address: detail_user.address,
-          phone: detail_user.phone
-        },
+        data: n
       });
     } catch (err) {
       next(err);
