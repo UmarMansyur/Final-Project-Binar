@@ -152,9 +152,10 @@ module.exports = {
     try {
       const user = req.user;
       const { id } = req.params;
-      const usercompare = await User.findOne({
+      const doc = await DetailTransaction.findAll({ where: { id: id}})
+      const usercompare = await Passenger.findAll({
         where: {
-          id: user.id,
+          detail_transaction_id: doc.id,
         },
       });
       if (!usercompare)
