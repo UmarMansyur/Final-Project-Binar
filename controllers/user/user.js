@@ -42,7 +42,15 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
-        data: detail_user,
+        data: {
+          username: detail_user.fullName,
+          gender: detail_user.gender,
+          country: detail_user.country,
+          province: detail_user.province,
+          city: detail_user.city,
+          address: detail_user.address,
+          phone: detail_user.phone
+        },
       });
     } catch (err) {
       next(err);

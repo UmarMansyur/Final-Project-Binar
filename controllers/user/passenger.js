@@ -148,21 +148,25 @@ module.exports = {
     }
   },
 
-  uploadDocument: async (req, res, next) => {
+  getAllDocument: async (req, res, next) => {
     try {
-      const user = req.user;
-      const { id } = req.params;
-      const doc = await DetailTransaction.findAll({ where: { id: id}})
+      const { payment_code } = req.params;
+      const trans = await Transaction.findAll({ where: { payment_code: payment_code }})
+      const doc = await DetailTransaction.findAll({ where: { transaction_id: trans.id}})
       const usercompare = await Passenger.findAll({
         where: {
           detail_transaction_id: doc.id,
         },
       });
-      if (!usercompare)
-        return res.status(400).json({
-          status: false,
-          message: "user not found!",
-        });
+    }catch (err){
+      next(error)
+    }
+  },
+
+  uploadDocument: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
       let uploadedFile1 = null;
       if (req.file != undefined) {
         const file = req.file.buffer.toString("base64");
