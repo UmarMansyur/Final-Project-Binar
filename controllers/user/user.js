@@ -34,7 +34,7 @@ module.exports = {
         },
         {
           where: {
-            user_id: id,
+            user_id: exist.id,
           },
         }
       );
@@ -42,7 +42,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
-        data: exist,
+        data: detail_user,
       });
     } catch (err) {
       next(err);
