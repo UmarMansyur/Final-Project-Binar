@@ -5,6 +5,13 @@ const roles = require("../utils/roles");
 
 router.post("/", middle(roles.user), cont.transaction.createTransaction);
 
+///get history user transaction
+router.get(
+  "/",
+  middle(roles.user),
+  cont.transaction.getHistoryTransactionByUserId
+);
+
 // router.get("/", middle(roles.user), cont.transaction.show);
 
 router.put("/:id", middle(roles.user), cont.transaction.update);
