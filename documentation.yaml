@@ -1199,8 +1199,8 @@ paths:
             schema:
               type: object
               required:
-                - flightId
-                - Passenger
+                - flight_id
+                - passenger
               properties:
                 flightId:
                   type: integer

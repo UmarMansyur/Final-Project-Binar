@@ -11,9 +11,10 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const { isPaid = 0, flight_id, passenger } = req.body;
-
+        const user = req.user;
+        // console.log(user);
         const transaction = await Transaction.create({
-          user_id: req.userid,
+          user_id: user.id,
           isPaid,
         });
 
@@ -161,7 +162,7 @@ module.exports = {
       const { user_id, isPaid, roundTrip, oneWay } = req.body;
       try {
         const exist = await Transaction.findOne({ where: { id } });
-        console.log(exist);
+        // console.log(exist);
         if (!exist) {
           return resolve(
             res.status(400).json({
