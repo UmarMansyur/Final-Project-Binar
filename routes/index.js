@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const user = require("./user");
-const admin = require("./admin")
+const admin = require("./admin");
 const auth = require("./auth");
 const airport = require("./airport");
 const passenger = require("./passenger");
@@ -10,6 +10,7 @@ const notification = require("./notification");
 const transaction = require("./transaction");
 const schedule = require("./scheduleFlight");
 const webpush = require("./webpush");
+const ticket = require("./ticket");
 
 // router.get("/", (req, res) => {
 //   return res.status(200).json({
@@ -28,5 +29,6 @@ router.use("/notification", notification);
 router.use("/schedule", schedule);
 router.use("/transaction", transaction);
 router.use("/webpush", webpush);
+router.use("/ticket", ticket);
 
 module.exports = router;

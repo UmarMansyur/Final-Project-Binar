@@ -201,7 +201,7 @@ module.exports = {
       const { name, email, picture } = response.data;
 
       let user = await User.findOne({ where: { email: email } });
-      console.log(user);
+      // console.log(user);
       if (!user)
         user = await User.create({
           username: name,

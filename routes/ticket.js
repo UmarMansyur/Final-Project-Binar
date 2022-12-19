@@ -3,11 +3,16 @@ const cont = require("../controllers/user");
 const middle = require("../middlewares/authorize");
 const roles = require("../utils/roles");
 
-router.post("/", middle(roles.user), cont.transaction.createTransaction);
+///get history user transaction
+router.get("/", middle(roles.user), cont.ticket.getHistoryTransactionByUserId);
 
 // router.get("/", middle(roles.user), cont.transaction.show);
 
-router.put("/:id", middle(roles.user), cont.transaction.update);
-router.delete("/:id", middle(roles.user), cont.transaction.delete);
+//get ticket by payment code
+router.get(
+  "/:payment_code",
+  middle(roles.user),
+  cont.ticket.getTransactionByCode
+);
 
 module.exports = router;

@@ -4,7 +4,8 @@ const airport = require("./airport");
 const passenger = require("./passenger");
 const scheduleFlight = require("./scheduleFlight");
 const transaction = require("./transaction");
-const user = require("./user")
+const user = require("./user");
+const ticket = require("./ticket");
 
 module.exports = {
   user,
@@ -14,4 +15,5 @@ module.exports = {
   passenger,
   transaction,
   scheduleFlight,
+  ticket,
 };

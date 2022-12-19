@@ -1,4 +1,11 @@
-const { User, Passenger, DetailTransaction, Flight, Transaction, sequelize } = require("../../models");
+const {
+  User,
+  Passenger,
+  DetailTransaction,
+  Flight,
+  Transaction,
+  sequelize,
+} = require("../../models");
 const multer = require("multer");
 const upload = multer();
 const imagekit = require("../../utils/imagekit");
@@ -24,10 +31,13 @@ module.exports = {
       //         },
       //       ],
       //     },
-          
+
       //   ]
       // });
-      const ticket = await sequelize.query(`SELECT * FROM "Passengers" JOIN "DetailTransactions" ON "Passengers".detail_transaction_id = "DetailTransactions".id JOIN "Transactions" ON "DetailTransactions".id = "Transactions".id JOIN "Flights" ON "DetailTransactions".flight_id = "Flights".id WHERE "Transactions".user_id = ${req.user.id}`, { type: sequelize.QueryTypes.SELECT });
+      const ticket = await sequelize.query(
+        `SELECT * FROM "Passengers" JOIN "DetailTransactions" ON "Passengers".detail_transaction_id = "DetailTransactions".id JOIN "Transactions" ON "DetailTransactions".id = "Transactions".id JOIN "Flights" ON "DetailTransactions".flight_id = "Flights".id WHERE "Transactions".user_id = ${req.user.id}`,
+        { type: sequelize.QueryTypes.SELECT }
+      );
       // const ticket = await Passenger.findAll({
       //   // where: { id: 1 },
       //   attributes: {
@@ -45,7 +55,7 @@ module.exports = {
       //         {
       //           model: Transaction,
       //           as: "transaction",
-      //           where: { 
+      //           where: {
       //             user_id: req.user.id
       //           }
       //         },
@@ -66,7 +76,7 @@ module.exports = {
         data: ticket,
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       next(err);
     }
   },
@@ -183,5 +193,5 @@ module.exports = {
     } catch (err) {
       next(err);
     }
-  }
+  },
 };
