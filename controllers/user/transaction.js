@@ -13,7 +13,7 @@ module.exports = {
         const { isPaid = 0, flight_id, passenger } = req.body;
 
         const transaction = await Transaction.create({
-          user_id: 43,
+          user_id: req.userid,
           isPaid,
         });
 
@@ -40,19 +40,19 @@ module.exports = {
                 passenger: passengers.map((item) => ({
                   ...item.dataValues,
                 })),
-              }
+              },
             },
           },
         };
 
         resolve(res.json(result));
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         next(error);
       }
     });
   },
-  
+
   show: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -220,5 +220,5 @@ module.exports = {
         next(error);
       }
     });
-  }
+  },
 };
