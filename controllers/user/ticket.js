@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const {
   Transaction,
   DetailTransaction,
@@ -160,5 +161,63 @@ module.exports = {
         next(error);
       }
     });
+  },
+
+  payment: async (req, res, next) => {
+    try {
+      const { payment_code } = req.params;
+
+      if (!payment_code) {
+        return res.status(400).json({
+          status: false,
+          message: "payment code is required",
+        });
+      }
+
+      const transaction = await Transaction.findOne({
+        where: {
+          payment_code,
+        },
+      });
+
+      const detail_transaction = await DetailTransaction.findOne({
+        where: {
+          transaction_id: transaction.id,
+        },
+      });
+
+      await Transaction.update(
+        {
+          isPaid: true,
+        },
+        {
+          where: {
+            payment_code,
+          },
+        }
+      );
+
+      const capacities = await Flight.findByPk(detail_transaction.flight_id);
+
+      const flight = await Flight.update(
+        {
+          capacity: capacities.capacity - transaction.total,
+        },
+        {
+          where: {
+            id: detail_transaction.flight_id,
+          },
+          returning: true,
+        }
+      );
+
+      return res.status(200).json({
+        status: true,
+        message: "Success payment",
+        data: flight,
+      });
+    } catch (error) {
+      next(error);
+    }
   },
 };
