@@ -17,6 +17,10 @@ module.exports = {
       payment_code: {
         type: Sequelize.STRING,
       },
+      total: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -10,4 +10,6 @@ router.get(
   cont.ticket.getTransactionByCode
 );
 
+router.post('/', middle(roles.user), cont.ticket.payment);
+
 module.exports = router;

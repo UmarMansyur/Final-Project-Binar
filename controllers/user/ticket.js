@@ -1,3 +1,4 @@
+const { isRedirect } = require("node-fetch");
 const {
   Transaction,
   DetailTransaction,
@@ -161,4 +162,52 @@ module.exports = {
       }
     });
   },
+
+  payment: async (req, res, next) => {
+    try {
+      const { payment_code } = req.query;
+      
+      if (!payment_code) {
+        return res.status(400).json({
+          status: false,
+          message: 'payment code is required'
+        })
+      }
+      
+      const transaction = await Transaction.findOne({
+        where : {
+          payment_code
+        }
+      });
+
+      await Transaction.update({
+        isPaid : 1,
+        where : {
+          payment_code
+        }
+      });
+
+      const capacities = await Flight.findOne({
+        where: {
+          flight_id: transaction.flight_id
+        }
+      });
+
+      await Flight.update({
+        capacity: capacities.capacity - transaction.total,
+        where : {
+         flight_id: transaction.flight_id
+        }
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: 'Success payment'
+      });
+
+    } catch (error) {
+      next(error);      
+    }
+  }
+
 };

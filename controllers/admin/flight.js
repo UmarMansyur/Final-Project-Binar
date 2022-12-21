@@ -1,7 +1,6 @@
 const { Op } = require("sequelize");
 const { Flight } = require("../../models");
 const sequelize = require("sequelize");
-var moment = require("moment");
 const flight = require("../../models/flight");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -19,7 +18,7 @@ module.exports = {
         arrival,
         date,
         returnDate,
-        passengers,
+        capacity,
         tripType,
         sc,
         departureTime,
@@ -35,7 +34,7 @@ module.exports = {
         !arrivalAirport ||
         !arrival ||
         !date ||
-        !passengers ||
+        !capacity ||
         !tripType ||
         !sc
       ) {
@@ -68,7 +67,7 @@ module.exports = {
         arrival,
         date,
         returnDate,
-        passengers,
+        capacity,
         tripType,
         sc,
         departureTime,
@@ -100,7 +99,7 @@ module.exports = {
           [sequelize.literal('date("date")'), "date"],
           [sequelize.literal('date("returnDate")'), "returnDate"],
           // 'date',
-          "passengers",
+          "capacity",
           "tripType",
           "sc",
           "departureTime",
