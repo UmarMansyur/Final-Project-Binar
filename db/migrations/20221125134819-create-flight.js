@@ -27,12 +27,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       date: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
       returnDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
-      passengers: {
+      capacity: {
         type: Sequelize.INTEGER,
       },
       tripType: {
