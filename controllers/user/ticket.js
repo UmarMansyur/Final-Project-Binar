@@ -1,4 +1,4 @@
-
+const { where } = require("sequelize");
 const {
   Transaction,
   DetailTransaction,
@@ -165,49 +165,60 @@ module.exports = {
 
   payment: async (req, res, next) => {
     try {
-      const { payment_code } = req.query;
-      
+      const { payment_code } = req.params;
+
       if (!payment_code) {
         return res.status(400).json({
           status: false,
-          message: 'payment code is required'
-        })
+          message: "payment code is required",
+        });
       }
 
       const transaction = await Transaction.findOne({
-        where : {
-          payment_code
-        }
-      });
-
-      await Transaction.update({
-        isPaid : 1,
-        where : {
-          payment_code
-        }
-      });
-
-      const capacities = await Flight.findOne({
         where: {
-          flight_id: transaction.flight_id
-        }
+          payment_code,
+        },
       });
 
-      await Flight.update({
-        capacity: capacities.capacity - transaction.total,
-        where : {
-         flight_id: transaction.flight_id
-        }
+      const detail_transaction = await DetailTransaction.findOne({
+        where: {
+          transaction_id: transaction.id,
+        },
       });
+
+      await Transaction.update(
+        {
+          isPaid: true,
+        },
+        {
+          where: {
+            payment_code,
+          },
+        }
+      );
+
+      const capacities = await Flight.findByPk(detail_transaction.flight_id);
+
+      const flight = await Flight.update(
+        {
+          capacity: capacities.capacity - transaction.total,
+        },
+        {
+          where: {
+            id: detail_transaction.flight_id,
+          },
+          returning: true,
+        },
+        
+      );
 
       return res.status(200).json({
         status: true,
-        message: 'Success payment'
+        message: "Success payment",
+        data: flight
       });
-
     } catch (error) {
-      next(error);      
+      next(error);
     }
-  }
-
+  },
 };
