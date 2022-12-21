@@ -1,4 +1,4 @@
-const { isRedirect } = require("node-fetch");
+
 const {
   Transaction,
   DetailTransaction,
@@ -173,7 +173,7 @@ module.exports = {
           message: 'payment code is required'
         })
       }
-      
+
       const transaction = await Transaction.findOne({
         where : {
           payment_code
