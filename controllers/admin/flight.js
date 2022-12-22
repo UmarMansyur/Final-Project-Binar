@@ -84,6 +84,30 @@ module.exports = {
     }
   },
 
+  readDetailFlight: async (req, res, next) => {
+    try {
+      const { flightId } = req.params;
+
+      const flightDetail = await Flight.findOne({
+        where: { id: flightId },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+
+      if (!flightDetail)
+        return res
+          .status(400)
+          .json({ status: false, message: "flight data not found!" });
+
+      return res.status(200).json({
+        status: true,
+        message: "Success get detail flights",
+        data: flightDetail,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
   read: async (req, res, next) => {
     try {
       const allFlight = await Flight.findAll({
