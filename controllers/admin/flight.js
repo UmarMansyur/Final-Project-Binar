@@ -43,20 +43,6 @@ module.exports = {
         });
       }
 
-      // const exist = await Flight.findOne({
-      //   where: {
-      //     code: code,
-      //   },
-      // });
-
-      // if (exist) {
-      //   return res.status(409).json({
-      //     status: false,
-      //     message: "flight already exist",
-      //     data: null,
-      //   });
-      // }
-
       const flight = await Flight.create({
         code,
         airlineName,
@@ -67,8 +53,8 @@ module.exports = {
         date,
         returnDate,
         capacity,
-        tripType,
-        sc,
+        tripType: tripType.toLowerCase(),
+        sc: sc.toLowerCase(),
         departureTime,
         arrivalTime,
         price,

@@ -4,6 +4,6 @@ const cont = require("../controllers/user");
 
 router.get("/search", cont.scheduleFlight.showFilter);
 
-router.get("/search/:flightId", cont.scheduleFlight.detailFlight);
+// router.get("/search/:flightId", cont.scheduleFlight.detailFlight);
 
 module.exports = router;
