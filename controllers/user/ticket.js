@@ -199,7 +199,7 @@ module.exports = {
 
       const capacities = await Flight.findByPk(detail_transaction.flight_id);
 
-      const flight = await Flight.update(
+      await Flight.update(
         {
           capacity: capacities.capacity - transaction.total,
         },
@@ -211,10 +211,61 @@ module.exports = {
         }
       );
 
+      const exist = await Transaction.findOne({
+        where: { payment_code },
+        include: [
+          {
+            model: DetailTransaction,
+            as: "detail_transaction",
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+            include: [
+              {
+                model: Flight,
+                as: "flight",
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+              {
+                model: Passenger,
+                as: "passenger",
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+          {
+            model: User,
+            as: "user_transaction",
+            attributes: {
+              exclude: [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "password",
+                "thumbnail",
+              ],
+            },
+          },
+        ],
+        attributes: {
+          exclude: [
+            "id",
+            "user_id",
+            "createdAt",
+            "updatedAt",
+            "detail_transaction",
+          ],
+        },
+      });
+
       return res.status(200).json({
         status: true,
         message: "Success payment",
-        data: flight,
+        data: exist,
       });
     } catch (error) {
       next(error);

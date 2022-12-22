@@ -7,6 +7,7 @@ module.exports = {
     try {
       const { departure, arrival, date, sc, tripType, passengers, returnDate } =
         req.query;
+
       const attributes = ["updateAt", "createdAt"];
       let data = "";
       if (tripType == "one_way") {
