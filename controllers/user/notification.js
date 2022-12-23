@@ -9,7 +9,8 @@ module.exports = {
 
       if (!exist) {
         return res.status(400).json({
-          status: false,
+          status: null,
+          message: "No Notif",
         });
       }
 
