@@ -96,7 +96,12 @@ module.exports = {
 
   read: async (req, res, next) => {
     try {
-      const allFlight = await Flight.findAll({
+      const { limit = 5, page = 1, order = "id", by = "ASC" } = req.query;
+      const offset = (page - 1) * limit;
+      const {count, rows} = await Flight.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        order: [[order, by.toUpperCase()]],
         attributes: [
           "id",
           "code",
@@ -116,18 +121,25 @@ module.exports = {
           "price",
         ],
       });
+      const totalPage = Math.ceil(count/limit);
+      const totalData = count;
 
-      if (allFlight <= 0) {
+      if (count <= 0) {
         return res.status(400).json({
           status: false,
-          message: "No Flight",
+          message: "Flights not found",
         });
       }
 
       return res.status(200).json({
         status: true,
         message: "Success Get All Data",
-        data: allFlight,
+        data: {
+          page: parseInt(page),
+          totalPage,
+          totalData,
+          rows,
+        }
       });
     } catch (err) {
       next(err);
