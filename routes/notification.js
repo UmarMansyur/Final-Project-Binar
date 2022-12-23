@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cont = require("../controllers/admin");
+const userCont = require("../controllers/user");
 const middle = require("../middlewares/authorize");
 const roles = require("../utils/roles");
 
@@ -21,6 +22,13 @@ router.delete(
   "/:notificationId",
   middle([roles.admin]),
   cont.notification.delete
+);
+
+// get all notif created user
+router.get(
+  "/user/data",
+  middle([roles.user]),
+  userCont.userNotification.getNotifications
 );
 
 module.exports = router;

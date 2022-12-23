@@ -6,7 +6,7 @@ const scheduleFlight = require("./scheduleFlight");
 const transaction = require("./transaction");
 const user = require("./user");
 const ticket = require("./ticket");
-
+const userNotification = require("./notification");
 module.exports = {
   user,
   auth,
@@ -16,4 +16,5 @@ module.exports = {
   transaction,
   scheduleFlight,
   ticket,
+  userNotification,
 };

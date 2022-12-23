@@ -5,6 +5,7 @@ const {
   User,
   Flight,
   Passenger,
+  Notification,
 } = require("../../models");
 
 module.exports = {
@@ -210,6 +211,14 @@ module.exports = {
           returning: true,
         }
       );
+
+      if (transaction) {
+        await Notification.create({
+          user_id: req.user.id,
+          title: "Your Transaction Success",
+          detail_message: "Check your Order Flight",
+        });
+      }
 
       const exist = await Transaction.findOne({
         where: { payment_code },
