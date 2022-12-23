@@ -6,7 +6,7 @@ module.exports = {
     try {
       const { limit = 5, page = 1 } = req.query;
       const offset = (page - 1) * limit;
-      const user = await User.findAll({
+      const {count, rows} = await User.findAndCountAll({
         limit: limit,
         offset: offset,
         include: [
@@ -17,13 +17,18 @@ module.exports = {
         ],
         attributes: { exclude: ["password", "thumbnail"] },
       });
+      const totalPage = Math.ceil(count/limit);
+      const totalData = count;
 
       return res.status(200).json({
         status: true,
         message: "Sucess get data!",
         data: {
-          user,
-        },
+          page: parseInt(page),
+          totalPage,
+          totalData,
+          rows,
+        }
       });
     } catch (err) {
       next(err);
