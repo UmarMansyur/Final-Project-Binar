@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, "client")));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/pdf', (req, res) => {
-  return res.render('report');
+  return res.render('report-template');
 });
 
 // 404 handler

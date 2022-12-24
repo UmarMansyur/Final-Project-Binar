@@ -7,12 +7,13 @@ const {
   Ticket
 } = require("../../models");
 const crypto = require("crypto");
-const pdf = require('html-pdf')
+const pdf = require('pdf-node')
 const ejs = require('ejs')
 const path = require('path')
 const imagekit = require("../../utils/imagekit");
 const fs = require('fs')
 const qr = require('qr-image');
+const { changePassword } = require("./auth");
 
 module.exports = {
   createTransaction: async (req, res, next) => {
@@ -262,6 +263,7 @@ module.exports = {
       }
     });
   },
+  
   pdf: async (req, res, next) => {
     const { payment_code } = req.params;
 
@@ -271,58 +273,74 @@ module.exports = {
     const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
     const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
     const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
+
+    console.log(flight.dataValues.departure)
+
+    console.log(pass)
+    console.log(pass[0].dataValues.lastName)
+
     try{
-      ejs.renderFile(path.join(__dirname, '../../views/', "report-template.ejs"), {trans: trans, pass: pass, detailtrans: detailtrans, flight: flight}, (err, data) => {
-        if (err) {
-              res.send(err);
-        } else {
-            let options = {
-                "height": "7.25in",
-                "width": "8.5in",
-                "header": {
-                    "height": "20mm"
-                },
-                "footer": {
-                    "height": "20mm",
-                },
-                "phantomPath": "./node_modules/phantomjs-prebuilt/bin/phantomjs"
-            };
-            pdf.create(data, options).toFile(`ticket-${payment_code}.pdf`, function (err, data) {
-                if (err) {
-                    res.send(err);
-                } else {
-                  const file1 = fs.readFileSync(data.filename)
-                  const file = file1.toString('base64')
 
-                   imagekit.upload({
-                      file,
-                      fileName: `ticket-${payment_code}.pdf`
-                  })
-                  .then(function(result) {
-                    const link = result.url;
+      var html = fs.readFileSync("./views/report-template.html", "utf8");
+  
+      var options = {
+        format: "A3",
+        orientation: "portrait",
+        border: "10mm",
+        header: {
+            height: "45mm",
+  
+        },
+        footer: {
+            height: "28mm",
+        }
+    };
+  
+    var document = {
+      html: html,
+      data: {
+        trans: trans,
+        detailtrans: detailtrans,
+        flight: flight,
+        pass: pass
+      },
+      path: `./ticket -${payment_code}.pdf`,
+      type: "pdf",
+    };
+  
+    let p = {}
+    pdf(document, options).then(function(document) {
+      const link = document;
 
-                    const buffer = qr.imageSync(link)
+      const file1 = fs.readFileSync(link.filename)
+      const file = file1.toString('base64')
 
-                    const b = buffer.toString("base64");
-
-                     Ticket.create({
-                    detail_transaction_id: pass.detail_transaction_id,
-                    ticket_pdf: link,
-                    qr_code: b
-                    })
-                    return res.status(200).json({
-                      status: true,
-                      message: 'success',
-                      url: link,
-                      buffer: b
-                    })
-                  })
-                }
-              });
-            }
-          });
+      const upload1 = imagekit.upload({
+        file,
+        fileName: `ticket-${payment_code}.pdf`
+      })
+      .then(function(result) {
+        const link = result.url;
+        const buffer = qr.imageSync(link)
+        
+        const b = buffer.toString("base64");
+        
+        Ticket.create({
+          detail_transaction_id: pass.detail_transaction_id,
+          ticket_pdf: link,
+          qr_code: b
+        })
+        
+      })
+    })
+  //   return res.json({
+  //    status: true,
+  //    message: 'success',
+  //   url: link,
+  //    buffer: b
+  // })
     }catch (err){
       next(err)
     }
   }
-};
+}
