@@ -5,7 +5,6 @@ const router = require("./routes");
 const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const pdf = require('html-pdf')
 const path = require("path");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");

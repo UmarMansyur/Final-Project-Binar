@@ -8,12 +8,9 @@ const {
 } = require("../../models");
 const crypto = require("crypto");
 const pdf = require('pdf-node')
-const ejs = require('ejs')
-const path = require('path')
 const imagekit = require("../../utils/imagekit");
 const fs = require('fs')
 const qr = require('qr-image');
-const { changePassword } = require("./auth");
 
 module.exports = {
   createTransaction: async (req, res, next) => {
