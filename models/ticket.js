@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init(
     {
       detail_transaction_id: DataTypes.INTEGER,
-      ticket_code: DataTypes.STRING,
-      qr_code: DataTypes.STRING,
+      ticket_pdf: DataTypes.STRING,
+      qr_code: DataTypes.TEXT,
     },
     {
       sequelize,
