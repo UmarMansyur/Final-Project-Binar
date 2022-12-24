@@ -40,6 +40,7 @@
     "node-fetch": "^3.3.0",
     "node-mailer": "^0.1.1",
     "pg": "^8.8.0",
+    "phantomjs-prebuilt": "^2.1.13",
     "qr-image": "^3.2.0",
     "query-string": "^7.1.1",
     "sequelize": "^6.25.8",
