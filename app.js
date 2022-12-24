@@ -5,6 +5,7 @@ const router = require("./routes");
 const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const pdf = require('html-pdf')
 const path = require("path");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
@@ -31,6 +32,10 @@ app.use(express.static(path.join(__dirname, "client")));
 
 //documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get('/pdf', (req, res) => {
+  return res.render('report');
+});
 
 // 404 handler
 app.use((req, res, next) => {

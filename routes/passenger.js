@@ -14,7 +14,7 @@ router.get(
   middle(roles.user),
   cont.passenger.getAllDocument
 );
-router.post(
+router.patch(
   "/upload-document/:id",
   upload.single("image"),
   middle(roles.user),
