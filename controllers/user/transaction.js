@@ -274,11 +274,6 @@ module.exports = {
     const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
     const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
 
-    console.log(flight.dataValues.departure)
-
-    console.log(pass)
-    console.log(pass[0].dataValues.lastName)
-
     try{
 
       var html = fs.readFileSync("./views/report-template.html", "utf8");
