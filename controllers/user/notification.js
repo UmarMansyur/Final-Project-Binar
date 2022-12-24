@@ -7,6 +7,16 @@ module.exports = {
 
       const exist = await Notification.findAll({ where: { user_id: id } });
 
+      await Notification.update(
+        {
+          is_read: true,
+        },
+        {
+          where: {
+            user_id: id,
+          },
+        }
+      );
       if (!exist) {
         return res.status(400).json({
           status: null,

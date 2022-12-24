@@ -217,6 +217,7 @@ module.exports = {
           user_id: req.user.id,
           title: "Your Transaction Success",
           detail_message: "Check your Order Flight",
+          is_read: false,
         });
       }
 
