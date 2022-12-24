@@ -285,8 +285,9 @@ module.exports = {
                 "footer": {
                     "height": "20mm",
                 },
+                 "phantomPath": "./node_modules/phantomjs-prebuilt/bin/phantomjs" 
             };
-            pdf.create(data, options,{ "phantomPath": "../../node_modules/phantomjs-prebuilt/bin/phantomjs" }).toFile(`ticket-${payment_code}.pdf`, function (err, data) {
+            pdf.create(data, options).toFile(`ticket-${payment_code}.pdf`, function (err, data) {
                 if (err) {
                     res.send(err);
                 } else {
