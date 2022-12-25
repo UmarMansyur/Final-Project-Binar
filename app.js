@@ -14,7 +14,7 @@ const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const graphql = require("./routes/graphql");
 
-const { DB_PORT } = process.env;
+const { HTTP_PORT } = process.env;
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -59,7 +59,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(DB_PORT, () => console.log("listening on port", DB_PORT));
+app.listen(HTTP_PORT, () => console.log("listening on port", HTTP_PORT));
 
 //User
 //npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,thumbnail:string,role:string,user_type:string,is_verified:integer
