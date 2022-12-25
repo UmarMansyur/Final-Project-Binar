@@ -274,7 +274,7 @@ module.exports = {
     const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
     
     try{
-      ejs.renderFile(path.join(__dirname, '../../views/', "report-template.ejs"), {trans: trans, detailtrans: detailtrans, flight: flight, pass: pass}, (err, data) => {
+      ejs.renderFile(path.join(__dirname, '/../../views/', "report-template.ejs"), {trans: trans, detailtrans: detailtrans, flight: flight, pass: pass}, (err, data) => {
         if (err) {
               res.send(err);
         } else {
