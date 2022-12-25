@@ -287,7 +287,6 @@ module.exports = {
                 "footer": {
                     "height": "20mm",
                 },
-                "phantomPath": "./node_modules/phantomjs/bin/phantomjs"
             };
             pdf.create(data, options).toFile(`ticket-${payment_code}.pdf`, function (err, data) {
                 if (err) {
@@ -308,7 +307,7 @@ module.exports = {
                     const b = buffer.toString("base64");
 
                     const uploadedFile1 = Ticket.create({
-                    detail_transaction_id: pass.detail_transaction_id,
+                    detail_transaction_id: pass[0].detail_transaction_id,
                     ticket_pdf: link,
                     qr_code: b
                     })
