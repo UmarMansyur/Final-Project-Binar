@@ -7,7 +7,9 @@ const {
   Ticket
 } = require("../../models");
 const crypto = require("crypto");
-const pdf = require('pdf-node')
+const pdf = require('html-pdf')
+const ejs = require('ejs')
+const path = require('path')
 const imagekit = require("../../utils/imagekit");
 const fs = require('fs')
 const qr = require('qr-image');
@@ -261,78 +263,52 @@ module.exports = {
     });
   },
   
-  pdf: async (req, res, next) => {
-    const { payment_code } = req.params;
+  pdf: async (req, res) => {
+    let students = [
+      {name: "Joy",
+       email: "joy@example.com",
+       city: "New York",
+       country: "USA"},
+      {name: "John",
+       email: "John@example.com",
+       city: "San Francisco",
+       country: "USA"},
+      {name: "Clark",
+       email: "Clark@example.com",
+       city: "Seattle",
+       country: "USA"},
+      {name: "Watson",
+       email: "Watson@example.com",
+       city: "Boston",
+       country: "USA"},
+      {name: "Tony",
+       email: "Tony@example.com",
+       city: "Los Angels",
+       country: "USA"
+   }];
 
-    const trans = await Transaction.findOne({ where: { payment_code: payment_code } })
-    if (!trans) return res.status(400).json({ status: false, message: 'payment code not found' })
-
-    const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
-    const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
-    const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
-
-    try{
-
-      var html = fs.readFileSync("./views/report-template.html", "utf8");
-  
-      var options = {
-        format: "A3",
-        orientation: "portrait",
-        border: "10mm",
-        header: {
-            height: "45mm",
-  
-        },
-        footer: {
-            height: "28mm",
-        }
-    };
-  
-    var document = {
-      html: html,
-      data: {
-        trans: trans,
-        detailtrans: detailtrans,
-        flight: flight,
-        pass: pass
-      },
-      path: `./ticket -${payment_code}.pdf`,
-      type: "pdf",
-    };
-  
-    let p = {}
-    pdf(document, options).then(function(document) {
-      const link = document;
-
-      const file1 = fs.readFileSync(link.filename)
-      const file = file1.toString('base64')
-
-      const upload1 = imagekit.upload({
-        file,
-        fileName: `ticket-${payment_code}.pdf`
-      })
-      .then(function(result) {
-        const link = result.url;
-        const buffer = qr.imageSync(link)
-        
-        const b = buffer.toString("base64");
-        
-        Ticket.create({
-          detail_transaction_id: pass.detail_transaction_id,
-          ticket_pdf: link,
-          qr_code: b
-        })
-        
-      })
-    })
-  //   return res.json({
-  //    status: true,
-  //    message: 'success',
-  //   url: link,
-  //    buffer: b
-  // })
-    }catch (err){
-      next(err)
+    ejs.renderFile(path.join(__dirname, '../../views/', "report.ejs"), {students: students}, (err, data) => {
+    if (err) {
+          res.send(err);
+    } else {
+        let options = {
+            "height": "11.25in",
+            "width": "8.5in",
+            "header": {
+                "height": "20mm"
+            },
+            "footer": {
+                "height": "20mm",
+            },
+        };
+        pdf.create(data, options).toFile("report.pdf", function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send("File created successfully");
+            }
+        });
     }
+})
   }
 }
