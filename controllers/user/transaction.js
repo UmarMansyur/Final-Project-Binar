@@ -10,10 +10,10 @@ const crypto = require("crypto");
 const imagekit = require("../../utils/imagekit");
 const fs = require('fs')
 const qr = require('qr-image');
-const pdf = require('html-pdf')
 const ejs = require('ejs')
 const path = require('path')
 const puppeteer = require('puppeteer');
+const email1 = require("../../utils/sendEmail");
 
 module.exports = {
   createTransaction: async (req, res, next) => {
@@ -365,6 +365,8 @@ module.exports = {
       printBackground: true,
       format: 'A4',
     });
+     // Close the browser instance
+     await browser.close();
 
     const p = pdf.toString('base64')
     
@@ -374,8 +376,7 @@ module.exports = {
         data: p
       })
   
-    // Close the browser instance
-    await browser.close();
+   
   }
 }
 
