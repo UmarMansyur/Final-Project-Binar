@@ -336,7 +336,7 @@ module.exports = {
       const b = buffer.toString("base64");
   
       const uploadedFile1 = Ticket.create({
-      detail_transaction_id: 999,
+      detail_transaction_id: pass[0].detail_transaction_id,
       ticket_pdf: link,
       qr_code: b
       })
