@@ -69,7 +69,7 @@ module.exports = {
 
   getHtml1: async (filename, data) => {
     return new Promise((resolve, reject) => {
-      const p = path.join(__dirname, '/../views/', + filename);
+      const p = path.join(__dirname, '/../views/', 'report-template.ejs');
 
       ejs.renderFile(p, data, (err, data) => {
         if (err) {
