@@ -29,7 +29,7 @@ module.exports = {
           total: countPassenger,
         });
 
-        let detailTransaction = await DetailTransaction.findOne({ where : {transaction_id : 34} });
+        let detailTransaction = await DetailTransaction.findOne({ where : {transaction_id : transaction.id} });
 
         if(detailTransaction) {
           return res.status(400).json({
