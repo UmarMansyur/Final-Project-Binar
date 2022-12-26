@@ -313,7 +313,7 @@ module.exports = {
     
        // Downlaod the PDF
       const pdf = await page.pdf({
-        path: `ticket-${payment_code}.pdf`,
+        path: `ticket.pdf`,
         margin: { top: '100px', right: '50px', bottom: '50px', left: '50px' },
         printBackground: true,
         format: 'A4',
@@ -326,7 +326,7 @@ module.exports = {
       
      const up = await imagekit.upload({
         file,
-        fileName: `ticket-${payment_code}.pdf`
+        fileName: `ticket.pdf`
     })
     
       const link = up.url;
