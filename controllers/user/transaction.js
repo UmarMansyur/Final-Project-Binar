@@ -10,6 +10,7 @@ const crypto = require("crypto");
 const imagekit = require("../../utils/imagekit");
 const fs = require('fs')
 const qr = require('qr-image');
+const pdf = require('html-pdf')
 const ejs = require('ejs')
 const path = require('path')
 const puppeteer = require('puppeteer');
@@ -272,8 +273,9 @@ module.exports = {
       }
     });
   },
-  
-  pdf: async (req, res, next) => {
+
+  pdf1: async (req, res, next) => {
+
     const { payment_code } = req.params;
 
     const trans = await Transaction.findOne({ where: { payment_code: payment_code } })
@@ -282,102 +284,70 @@ module.exports = {
     const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
     const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
     const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
-    
+
     try{
-      ejs.renderFile(path.join(__dirname, '/../../views/', "report-template.ejs"), {trans: trans, detailtrans: detailtrans, flight: flight, pass: pass}, (err, data) => {
-        if (err) {
-              res.send(err);
-        } else {
-            let options = {
-                "height": "7.25in",
-                "width": "8.5in",
-                "header": {
-                    "height": "20mm"
-                },
-                "footer": {
-                    "height": "20mm",
-                },
-            };
-            pdf.create(data, options).toFile(`ticket-${payment_code}.pdf`, function (err, data) {
-                if (err) {
-                    res.send(err);
-                } else {
-                  const file1 = fs.readFileSync(data.filename)
-                  const file = file1.toString('base64')
 
-                   imagekit.upload({
-                      file,
-                      fileName: `ticket-${payment_code}.pdf`
-                  })
-                  .then(function(result) {
-                    const link = result.url;
-
-                    const buffer = qr.imageSync(link)
-
-                    const b = buffer.toString("base64");
-
-                    const uploadedFile1 = Ticket.create({
-                    detail_transaction_id: pass[0].detail_transaction_id,
-                    ticket_pdf: link,
-                    qr_code: b
-                    })
-                    return res.status(200).json({
-                      status: true,
-                      message: 'success',
-                      url: link,
-                      buffer: b
-                    })
-                  })
-                }
-              });
-            }
-          });
-    }catch (err){
-      next(err)
-    }
-  },
-
-  pdf1: async (req, res, next) => {
-
-    const student = [
-      {
-        name: 'fadil'
-      }
-    ]
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    // Create a new page
-    const page = await browser.newPage();
-
-    const a = path.join(__dirname, '/../../views/', "tes.ejs")
+      const browser = await puppeteer.launch();
   
-    //Get HTML content from HTML file
-    const html = fs.readFileSync(a, 'utf-8');
-    await page.setContent(html, { waitUntil: 'domcontentloaded' });
+      // Create a new page
+      const page = await browser.newPage();
   
-    // To reflect CSS used for screens instead of print
-    await page.emulateMediaType('screen');
+      const a = path.join(__dirname, '/../../views/', "tes.ejs")
+      const html1 = await email1.getHtml("report-template.ejs", {
+        trans: trans,
+        detailtrans: detailtrans,
+        flight: flight,
+        pass: pass
+      });
   
-    // Downlaod the PDF
-    const pdf = await page.pdf({
-      path: 'result.pdf',
-      margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-      printBackground: true,
-      format: 'A4',
-    });
-     // Close the browser instance
-     await browser.close();
-
-    const p = pdf.toString('base64')
+      // return res.send(html1)
     
+      //Get HTML content from HTML file
+      // const html = fs.readFileSync(pdf);
+       await page.setContent(html1, { waitUntil: 'domcontentloaded' });
+       
+       // To reflect CSS used for screens instead of print
+       await page.emulateMediaType('screen');
+    
+       // Downlaod the PDF
+      const pdf = await page.pdf({
+        path: `ticket-${payment_code}.pdf`,
+        margin: { top: '100px', right: '50px', bottom: '50px', left: '50px' },
+        printBackground: true,
+        format: 'A4',
+      });
+  
+      // Close the browser instance
+      await browser.close();
+  
+      const file = pdf.toString('base64')
+      
+     const up = await imagekit.upload({
+        file,
+        fileName: `ticket-${payment_code}.pdf`
+    })
+    
+      const link = up.url;
+  
+      const buffer = qr.imageSync(link)
+  
+      const b = buffer.toString("base64");
+  
+      const uploadedFile1 = Ticket.create({
+      detail_transaction_id: pass[0].detail_transaction_id,
+      ticket_pdf: link,
+      qr_code: b
+      })
       return res.status(200).json({
         status: true,
         message: 'success',
-        data: p
+        url: link,
+        buffer: b
       })
-  
+    
+    }catch (err){
+      next(err)
+    }
    
   }
 }

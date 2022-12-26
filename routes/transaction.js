@@ -16,7 +16,6 @@ router.get(
 
 router.put("/:id", middle(roles.user), cont.transaction.update);
 router.delete("/:id", middle(roles.user), cont.transaction.delete);
-router.get('/generate/:payment_code', cont.transaction.pdf)
-router.get('/generatepdf', cont.transaction.pdf1)
+router.get('/generatepdf/:payment_code', cont.transaction.pdf1)
 
 module.exports = router;
