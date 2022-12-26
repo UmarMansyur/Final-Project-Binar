@@ -65,4 +65,18 @@ module.exports = {
       });
     });
   },
+
+  getHtml1: async (filename, data) => {
+    return new Promise((resolve, reject) => {
+      const path = path.join(__dirname, '/../views/', + filename);
+
+      ejs.renderFile(path, data, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  },
 };

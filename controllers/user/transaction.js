@@ -276,14 +276,14 @@ module.exports = {
 
   pdf1: async (req, res, next) => {
 
-    // const { payment_code } = req.params;
+    const { payment_code } = req.params;
 
-    // const trans = await Transaction.findOne({ where: { payment_code: payment_code } })
-    // if (!trans) return res.status(400).json({ status: false, message: 'payment code not found' })
+    const trans = await Transaction.findOne({ where: { payment_code: payment_code } })
+    if (!trans) return res.status(400).json({ status: false, message: 'payment code not found' })
 
-    // const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
-    // const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
-    // const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
+    const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
+    const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
+    const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
 
     try{
 
@@ -294,19 +294,19 @@ module.exports = {
       // Create a new page
       const page = await browser.newPage();
   
-      const a = path.join(__dirname, '/../../views/', "tes.ejs")
-      // const html1 = await email1.getHtml("report-template.ejs", {
-      //   trans: trans,
-      //   detailtrans: detailtrans,
-      //   flight: flight,
-      //   pass: pass
-      // });
+      // const a = path.join(__dirname, '/../../views/', "tes.ejs")
+      const html1 = await email1.getHtml1("report-template.ejs", {
+        trans: trans,
+        detailtrans: detailtrans,
+        flight: flight,
+        pass: pass
+      });
   
       // return res.send(html1)
     
       //Get HTML content from HTML file
-      const html = fs.readFileSync(a);
-       await page.setContent(html, { waitUntil: 'domcontentloaded' });
+      // const html = fs.readFileSync(a);
+       await page.setContent(html1, { waitUntil: 'domcontentloaded' });
        
        // To reflect CSS used for screens instead of print
        await page.emulateMediaType('screen');
