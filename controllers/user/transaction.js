@@ -13,6 +13,7 @@ const qr = require('qr-image');
 const pdf = require('html-pdf')
 const ejs = require('ejs')
 const path = require('path')
+const puppeteer = require('puppeteer');
 
 module.exports = {
   createTransaction: async (req, res, next) => {
@@ -334,5 +335,47 @@ module.exports = {
     }catch (err){
       next(err)
     }
+  },
+
+  pdf1: async (req, res, next) => {
+
+    const student = [
+      {
+        name: 'fadil'
+      }
+    ]
+    const browser = await puppeteer.launch();
+
+    // Create a new page
+    const page = await browser.newPage();
+
+    const a = path.join(__dirname, '/../../views/', "tes.ejs")
+  
+    //Get HTML content from HTML file
+    const html = fs.readFileSync(a, 'utf-8');
+    await page.setContent(html, { waitUntil: 'domcontentloaded' });
+  
+    // To reflect CSS used for screens instead of print
+    await page.emulateMediaType('screen');
+  
+    // Downlaod the PDF
+    const pdf = await page.pdf({
+      path: 'result.pdf',
+      margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+      printBackground: true,
+      format: 'A4',
+    });
+
+    const p = pdf.toString('base64')
+    
+      return res.status(200).json({
+        status: true,
+        message: 'success',
+        data: p
+      })
+  
+    // Close the browser instance
+    await browser.close();
   }
 }
+
