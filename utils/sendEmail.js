@@ -2,6 +2,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const ejs = require("ejs");
+const path = require('path')
 
 const {
   GOOGLE_REFRESH_TOKEN3,
