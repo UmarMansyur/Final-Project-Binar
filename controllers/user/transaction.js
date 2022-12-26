@@ -306,7 +306,7 @@ module.exports = {
     
       //Get HTML content from HTML file
       // const html = fs.readFileSync(pdf);
-       await page.setContent(html1, { waitUntil: 'domcontentloaded' });
+       await page.setContent(a, { waitUntil: 'domcontentloaded' });
        
        // To reflect CSS used for screens instead of print
        await page.emulateMediaType('screen');
