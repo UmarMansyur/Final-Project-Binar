@@ -295,18 +295,18 @@ module.exports = {
       const page = await browser.newPage();
   
       const a = path.join(__dirname, '/../../views/', "tes.ejs")
-      const html1 = await email1.getHtml("report-template.ejs", {
-        trans: trans,
-        detailtrans: detailtrans,
-        flight: flight,
-        pass: pass
-      });
+      // const html1 = await email1.getHtml("report-template.ejs", {
+      //   trans: trans,
+      //   detailtrans: detailtrans,
+      //   flight: flight,
+      //   pass: pass
+      // });
   
       // return res.send(html1)
     
       //Get HTML content from HTML file
-      // const html = fs.readFileSync(pdf);
-       await page.setContent(a, { waitUntil: 'domcontentloaded' });
+      const html = fs.readFileSync(a);
+       await page.setContent(html, { waitUntil: 'domcontentloaded' });
        
        // To reflect CSS used for screens instead of print
        await page.emulateMediaType('screen');
