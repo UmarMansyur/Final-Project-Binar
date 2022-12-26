@@ -69,7 +69,7 @@ module.exports = {
 
   getHtml1: async (filename, data) => {
     return new Promise((resolve, reject) => {
-      const p = __dirname + filename;
+      const p = __dirname + "/" + filename;
 
       ejs.renderFile(p, data, (err, data) => {
         if (err) {
