@@ -29,10 +29,19 @@ module.exports = {
           total: countPassenger,
         });
 
-        const detailTransaction = await DetailTransaction.create({
-          transaction_id: transaction.id,
-          flight_id,
-        });
+        let detailTransaction = await DetailTransaction.findOne({ where : {transaction_id : 34} });
+
+        if(detailTransaction) {
+          return res.status(400).json({
+            status: false,
+            message: 'Wrong! Duplicate Transaction'
+          })
+        } else {
+          detailTransaction = await DetailTransaction.create({
+            transaction_id: transaction.id,
+            flight_id,
+          });
+        }
 
         const passengers = await Passenger.bulkCreate(
           passenger.map((item) => ({
