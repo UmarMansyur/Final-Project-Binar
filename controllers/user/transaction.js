@@ -319,9 +319,6 @@ module.exports = {
         format: 'A4',
       });
   
-      // Close the browser instance
-      await browser.close();
-  
       const file = pdf.toString('base64')
       
      const up = await imagekit.upload({
@@ -334,20 +331,60 @@ module.exports = {
       const buffer = qr.imageSync(link)
   
       const b = buffer.toString("base64");
+
+      const html2 = await email1.getHtml1("report-template1.ejs", {
+        trans: trans,
+        detailtrans: detailtrans,
+        flight: flight,
+        pass: pass,
+        barcode: b
+      });
+
+      //Get HTML content from HTML file
+      // const html = fs.readFileSync(a);
+      await page.setContent(html2, { waitUntil: 'domcontentloaded' });
+       
+      // To reflect CSS used for screens instead of print
+      await page.emulateMediaType('screen');
+   
+      // Downlaod the PDF
+     const pdf1 = await page.pdf({
+       path: `ticket.pdf`,
+       margin: { top: '100px', right: '50px', bottom: '50px', left: '50px' },
+       printBackground: true,
+       format: 'A4',
+     });
+
+     
+     const file1 = pdf1.toString('base64')
+     
+     const up1 = await imagekit.upload({
+       file: file1,
+       fileName: `ticket.pdf`
+      })
+      
+      const link1 = up1.url;
+      
+      const buffer1 = qr.imageSync(link1)
+      
+      const b1 = buffer1.toString("base64");
+      // Close the browser instance
+      await browser.close();
   
       const uploadedFile1 = Ticket.create({
       detail_transaction_id: pass[0].detail_transaction_id,
-      ticket_pdf: link,
-      qr_code: b
+      ticket_pdf: link1,
+      qr_code: b1
       })
       return res.status(200).json({
         status: true,
         message: 'success',
-        url: link,
-        buffer: b
+        url: link1,
+        buffer: b1
       })
     
     }catch (err){
+      console.log(err)
       next(err)
     }
    

@@ -22,7 +22,7 @@
 .box{
   position: absolute;
   top: calc(50% - 125px);
-  top: -webkit-calc(50%);
+  top: -webkit-calc(1%);
   left: calc(50% - 300px);
   left: -webkit-calc(50% - 300px);
 }
@@ -389,7 +389,7 @@
 .seat{
   position: absolute;
   top: 10px;
-  left: 316px;
+  left: 286px;
   font-family: Arial Narrow, Arial;
   font-weight: bold;
   font-size: 14px;
@@ -494,7 +494,7 @@
 }
 
 .seatslip{
-  left: 515px;
+  left: 506px;
 }
 
 .jfkslip{
@@ -515,7 +515,7 @@
 }
 
 .airlineslip{
-  left: 455px;
+  left: 437px;
 }
 
 .box1 img{
@@ -531,7 +531,7 @@
 .box1 {
   position: absolute;
   top: calc(50% - 125px);
-  top: -webkit-calc(50% - -280px);
+  top: -webkit-calc(30%);
   left: calc(50% - 300px);
   left: -webkit-calc(50% - 300px);
 }
@@ -898,7 +898,7 @@
 .seat1{
   position: absolute;
   top: 10px;
-  left: 316px;
+  left: 286px;
   font-family: Arial Narrow, Arial;
   font-weight: bold;
   font-size: 14px;
@@ -1003,7 +1003,7 @@
 }
 
 .seatslip1{
-  left: 515px;
+  left: 506px;
 }
 
 .jfkslip1{
@@ -1024,12 +1024,12 @@
 }
 
 .airlineslip1{
-  left: 455px;
+  left: 437px;
 }
         </style>
     </head>
     <body>
-
+      <% if (trans.total > 1) { %>
 
         <div class="box">
             <ul class="left">
@@ -1071,7 +1071,7 @@
               <span class="airline airlineslip">Terbang Tinggi</span>
               <span class="boarding">Boarding pass</span>
               <div class="content">
-                <span class="jfk"></span>
+                <span class="jfk"><%= flight.departure %></span>
                 <span class="plane">
                   <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="#222">
@@ -1080,9 +1080,9 @@
                     </g>
                   </svg>
                 </span>
-                <span class="sfo"></span>
+                <span class="sfo"><%= flight.arrival %></span>
           
-                <span class="jfk jfkslip"></span>
+                <span class="jfk jfkslip"><%= flight.departure %></span>
                 <span class="plane planeslip">
                   <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="#222">
@@ -1091,29 +1091,14 @@
                     </g>
                   </svg>
                 </span>
-                <span class="sfo sfoslip"></span>
+                <span class="sfo sfoslip"><%= flight.arrival %></span>
                 <div class="sub-content">
                   <span class="watermark">Postsnap</span>
-                  <span class="name">PASSENGER NAME<br><span></span></span>
-                  <span class="flight">FLIGHT N&deg;<br><span></span></span>
-                  <span class="seat">CLASS<br><span>Economy</span></span>
-                  <span class="boardingtime">BOARDING TIME<br><span></span></span>
-                  <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAAAAAA+
-                  16u1AAACN0lEQVR42u3bSU7DQBAFUN//0rBEQsT5v9rtJOj1iiE4/ViUasrx9Z/OQUNDQ0NDQ0N
-                  DQ0NDQ0NDs6o5np9fr/v5Nv3Fw5dUN6ChodmoeRw4Vu92/r+rbkBDQ7Nbk171r0j28I3PH9DfgI
-                  aG5mWaIfM8sNHQ0HyQJrhHkJi8X4SmoaGpqoug/XFe5ATJzy3VGg0NzbDXue+rV3RuaWhoujHj8
-                  5JlWMG8YopLQ0OT9ifOf9aPQfsSaL1ao6GhqWJav6NQZSxpAJx2OWhoaFY0/TZUmu0c9Zl2OWho
-                  aJZ7nWkmkgasPr1JCx8aGpqLNGlXIqg9+rHHcORJQ0OzR1NVHGkmElRJwQ1oaGh2a6rNhH52mWZ
-                  KKYSGhmaPpof06U3aQKWhoblPM+xXLt93OCSloaG5XDMMZ33hM8Stb0LS0NAMY1q/rxhA+k7KRR
-                  Gahoam0gQLCMN15vSTEsEb0dDQXKTp64y4DfE8van+jIaGZo+mWmEKkpXlJy/tQ9PQ0AxzgfPmZ
-                  hVvgs9MBD3Ri3o2NDQ0fWZTZR3DGUmVYNHQ0OzWpC3I1Hqe8lRPXup10tDQDDObqkvZJzVV+4OGh
-                  uYWzfH8rEwort58oqGh2aPp55SD/eVwmLreuaWhoVnZfqiSiz6fCcJonEfR0NDcq0ljUNC0TD9SR
-                  UND836aag9iy5yDhoZmo2ZlHpJOT89D15Xb3TQ0NPt6nUE8rJKkYdeThobmIs3HHhoaGhoaGhoaG
-                  hoaGhoamuZ8AyzUh4MaK/TSAAAAAElFTkSuQmCC" alt="Red dot" />
-          
-                  <span class="flight flightslip">FLIGHT N&deg;<br><span></span></span>
-                  <span class="seat seatslip">CLASS<br><span>Economy</span></span>
-                  <span class="name nameslip">PASSENGER NAME<br><span></span></span>
+                  <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
+                  <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
+                  <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <img src="data:image/png;base64, <%= barcode %>" alt="Red dot" />
                 </div>
               </div>
             </div>
@@ -1158,7 +1143,7 @@
               <span class="airline airlineslip1">Terbang Tinggi</span>
               <span class="boarding1">Boarding pass</span>
               <div class="content1">
-                <span class="jfk1"></span>
+                <span class="jfk1"><%= flight.departure %></span>
                 <span class="plane1">
                   <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="#222">
@@ -1167,9 +1152,9 @@
                     </g>
                   </svg>
                 </span>
-                <span class="sfo1"></span>
+                <span class="sfo1"><%= flight.arrival %></span>
           
-                <span class="jfk jfkslip1"></span>
+                <span class="jfk jfkslip1"><%= flight.departure %></span>
                 <span class="plane planeslip1">
                   <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="#222">
@@ -1178,32 +1163,91 @@
                     </g>
                   </svg>
                 </span>
-                <span class="sfo sfoslip1"></span>
+                <span class="sfo sfoslip1"><%= flight.arrival %></span>
                 <div class="sub-content1">
                   <span class="watermark1">Postsnap</span>
-                  <span class="name1">PASSENGER NAME<br><span></span></span>
-                  <span class="flight1">FLIGHT N&deg;<br><span></span></span>
-                  <span class="seat1">CLASS<br><span>Economy</span></span>
-                  <span class="boardingtime1">BOARDING TIME<br><span></span></span>
-                  <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAAAAAA+
-                  16u1AAACN0lEQVR42u3bSU7DQBAFUN//0rBEQsT5v9rtJOj1iiE4/ViUasrx9Z/OQUNDQ0NDQ0N
-                  DQ0NDQ0NDs6o5np9fr/v5Nv3Fw5dUN6ChodmoeRw4Vu92/r+rbkBDQ7Nbk171r0j28I3PH9DfgI
-                  aG5mWaIfM8sNHQ0HyQJrhHkJi8X4SmoaGpqoug/XFe5ATJzy3VGg0NzbDXue+rV3RuaWhoujHj8
-                  5JlWMG8YopLQ0OT9ifOf9aPQfsSaL1ao6GhqWJav6NQZSxpAJx2OWhoaFY0/TZUmu0c9Zl2OWho
-                  aJZ7nWkmkgasPr1JCx8aGpqLNGlXIqg9+rHHcORJQ0OzR1NVHGkmElRJwQ1oaGh2a6rNhH52mWZ
-                  KKYSGhmaPpof06U3aQKWhoblPM+xXLt93OCSloaG5XDMMZ33hM8Stb0LS0NAMY1q/rxhA+k7KRR
-                  Gahoam0gQLCMN15vSTEsEb0dDQXKTp64y4DfE8van+jIaGZo+mWmEKkpXlJy/tQ9PQ0AxzgfPmZ
-                  hVvgs9MBD3Ri3o2NDQ0fWZTZR3DGUmVYNHQ0OzWpC3I1Hqe8lRPXup10tDQDDObqkvZJzVV+4OGh
-                  uYWzfH8rEwort58oqGh2aPp55SD/eVwmLreuaWhoVnZfqiSiz6fCcJonEfR0NDcq0ljUNC0TD9SR
-                  UND836aag9iy5yDhoZmo2ZlHpJOT89D15Xb3TQ0NPt6nUE8rJKkYdeThobmIs3HHhoaGhoaGhoaG
-                  hoaGhoamuZ8AyzUh4MaK/TSAAAAAElFTkSuQmCC" alt="Red dot" />
-          
-                  <span class="flight flightslip1">FLIGHT N&deg;<br><span></span></span>
-                  <span class="seat seatslip1">CLASS<br><span>Economy</span></span>
-                  <span class="name nameslip1">PASSENGER NAME<br><span></span></span>
+                  <span class="name1">PASSENGER NAME<br><span><%= pass[1].lastName %>, <%= pass[1].firstName %></span></span>
+                  <span class="flight1">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
+                  <span class="seat1">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="boardingtime1">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <img src="data:image/png;base64, <%= barcode %>" alt="Red dot" />
                 </div>
               </div>
             </div>
           </div>
+        <% } else { %>
+          <div class="box">
+            <ul class="left">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          
+            <ul class="right">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          
+            <div class="ticket">
+              <span class="airline">Terbang Tinggi</span>
+              <span class="airline airlineslip">Terbang Tinggi</span>
+              <span class="boarding">Boarding pass</span>
+              <div class="content">
+                <span class="jfk"><%= flight.departure %></span>
+                <span class="plane">
+                  <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="#222">
+                      <line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390" />
+                      <path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10" />
+                    </g>
+                  </svg>
+                </span>
+                <span class="sfo"><%= flight.arrival %></span>
+          
+                <span class="jfk jfkslip"><%= flight.departure %></span>
+                <span class="plane planeslip">
+                  <?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="#222">
+                      <line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390" />
+                      <path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10" />
+                    </g>
+                  </svg>
+                </span>
+                <span class="sfo sfoslip"><%= flight.arrival %></span>
+                <div class="sub-content">
+                  <span class="watermark">Postsnap</span>
+                  <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
+                  <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
+                  <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <img src="data:image/png;base64, <%= barcode %>" alt="Red dot" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
     </body>
 </html>
