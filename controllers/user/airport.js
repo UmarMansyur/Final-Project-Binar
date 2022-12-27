@@ -72,4 +72,41 @@ module.exports = {
       next(err);
     }
   },
+
+  getAllAirport: async (req, res, next) => {
+    try {
+      const url =
+        "https://gist.githubusercontent.com/tdreyno/4278655/raw/7b0762c09b519f40397e4c3e100b097d861f5588/airports.json";
+      const options = {
+        method: "GET",
+
+        headers: {
+          "X-RapidAPI-Host": "gist.githubusercontent.com",
+        },
+      };
+      const result = await fetch(url, options);
+      const json = await result.json();
+      const airports = json;
+
+      const allAirport = [];
+      for (const airport of airports) {
+        const schedule = {
+          airportCode: airport.code,
+          airportName: airport.name,
+          airportLocation: airport.state,
+          cityName: airport.city,
+          countryName: airport.country,
+        };
+
+        allAirport.push(schedule);
+      }
+      return res.status(200).json({
+        status: true,
+        message: "Success Get Data",
+        data: allAirport,
+      });
+    } catch (error) {
+      next(err);
+    }
+  },
 };
