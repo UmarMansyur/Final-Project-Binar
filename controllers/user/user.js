@@ -39,7 +39,7 @@ module.exports = {
         }
       );
 
-      const n = await DetailUser.findOne({
+      const updatedProfile = await DetailUser.findOne({
         where: { user_id: id },
         attributes: {
           exclude: ["id", "user_id", "createdAt", "updatedAt"],
@@ -49,7 +49,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Profile updated successfully",
-        data: n,
+        data: updatedProfile,
       });
     } catch (err) {
       next(err);
