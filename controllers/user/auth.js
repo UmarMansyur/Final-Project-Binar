@@ -347,42 +347,4 @@ module.exports = {
       next(err);
     }
   },
-
-  resetPassword: async (req, res, next) => {
-    try {
-      const { newPassword, confirmPassword } = req.body;
-      const { token } = req.query;
-
-      if (!token) {
-        return res.status(400).json({
-          status: false,
-          message: "invalid token!",
-        });
-      }
-      if (newPassword != confirmPassword) {
-        return res.status(400).json({
-          status: false,
-          message: "password and confirm password doesn't match",
-        });
-      }
-
-      const payload = jwt.verify(token, JWT_SECRET_KEY);
-
-      const encryptedPassword = await bcrypt.hash(newPassword, 10);
-
-      const user = await User.update(
-        { password: encryptedPassword },
-        { where: { id: payload.id } }
-      );
-
-      if (user) {
-        return res.status(200).json({
-          status: true,
-          message: "password updated successfully",
-        });
-      }
-    } catch (err) {
-      next(err);
-    }
-  },
 };
