@@ -301,11 +301,8 @@ module.exports = {
         flight: flight,
         pass: pass
       });
-  
-      // return res.send(html1)
     
       //Get HTML content from HTML file
-      // const html = fs.readFileSync(a);
        await page.setContent(html1, { waitUntil: 'domcontentloaded' });
        
        // To reflect CSS used for screens instead of print
@@ -341,7 +338,6 @@ module.exports = {
       });
 
       //Get HTML content from HTML file
-      // const html = fs.readFileSync(a);
       await page.setContent(html2, { waitUntil: 'domcontentloaded' });
        
       // To reflect CSS used for screens instead of print
