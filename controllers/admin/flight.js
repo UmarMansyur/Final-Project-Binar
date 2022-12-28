@@ -198,6 +198,7 @@ module.exports = {
 
       let {
         code,
+        airlineIata,
         airlineName,
         departureAirport,
         departure,
@@ -227,9 +228,52 @@ module.exports = {
         });
       }
 
+      switch ((airlineIata = airlineIata.toUpperCase())) {
+        case "JT":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/JT.png";
+          break;
+        case "IU":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IU.png";
+          break;
+        case "QZ":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/QZ.png";
+          break;
+        case "QG":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/QG.png";
+          break;
+        case "GA":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/GA.png";
+          break;
+        case "ID":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/ID.png";
+          break;
+        case "IW":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IW.png";
+          break;
+        case "MH":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/MH.png";
+          break;
+        case "SQ":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/SQ.png";
+          break;
+        default:
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/EK.png";
+      }
+
       const updatedFlight = await flight.update(
         {
           code,
+          airlineIata,
           airlineName,
           departureAirport,
           departure,
