@@ -102,6 +102,13 @@ module.exports = {
                     exclude: ["createdAt", "updatedAt"],
                   },
                 },
+                {
+                  model: Ticket,
+                  as: "tiket",
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
+                },
               ],
             },
             // {
