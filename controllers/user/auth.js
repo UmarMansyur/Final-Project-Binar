@@ -207,7 +207,7 @@ module.exports = {
           username: name,
           email,
           thumbnail: picture,
-          role: roles.basic,
+          role: roles.user,
           user_type: userTypes.google,
           is_verified: 1,
         });
@@ -220,6 +220,7 @@ module.exports = {
         username: user.username,
         email: user.email,
         user_type: user.user_type,
+        role: user.role
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
 
