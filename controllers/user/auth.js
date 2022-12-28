@@ -246,14 +246,14 @@ module.exports = {
           is_verified: userExist.is_verified,
         };
 
-        const token = jwt.sign(payload, JWT_SECRET_KEY);
-
-        return res.status(200).json({
-          status: true,
-          message: "Data retrived successfully",
-          data: token,
-        });
       }
+      const token = jwt.sign(payload, JWT_SECRET_KEY);
+
+      return res.status(200).json({
+        status: true,
+        message: "Data retrived successfully",
+        data: token,
+      });
     } catch (error) {
       console.log(error);
     }
