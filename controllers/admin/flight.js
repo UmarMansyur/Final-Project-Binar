@@ -63,6 +63,9 @@ module.exports = {
           airlineLogo =
             "https://sta.nusatrip.net/static/img/front/V2/icon-flight/SQ.png";
           break;
+        default:
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/EK.png";
       }
 
       if (
