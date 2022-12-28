@@ -151,6 +151,8 @@ module.exports = {
         attributes: [
           "id",
           "code",
+          "airlineIata",
+          "airlineLogo",
           "airlineName",
           "departureAirport",
           "departure",
@@ -275,6 +277,7 @@ module.exports = {
           code,
           airlineIata,
           airlineName,
+          airlineLogo,
           departureAirport,
           departure,
           arrivalAirport,
