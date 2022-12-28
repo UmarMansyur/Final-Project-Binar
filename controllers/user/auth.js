@@ -142,6 +142,7 @@ module.exports = {
         username: user.username,
         email: user.email,
         role: user.role,
+        user_type: user.user_type
       },
     });
   },
