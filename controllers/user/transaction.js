@@ -4,16 +4,12 @@ const {
   User,
   Flight,
   Passenger,
-  Ticket
+  Ticket,
 } = require("../../models");
 const crypto = require("crypto");
 const imagekit = require("../../utils/imagekit");
-const fs = require('fs')
-const qr = require('qr-image');
-const pdf = require('html-pdf')
-const ejs = require('ejs')
-const path = require('path')
-const puppeteer = require('puppeteer');
+const qr = require("qr-image");
+const puppeteer = require("puppeteer");
 const email1 = require("../../utils/sendEmail");
 
 module.exports = {
@@ -31,13 +27,15 @@ module.exports = {
           total: countPassenger,
         });
 
-        let detailTransaction = await DetailTransaction.findOne({ where : {transaction_id : transaction.id} });
+        let detailTransaction = await DetailTransaction.findOne({
+          where: { transaction_id: transaction.id },
+        });
 
-        if(detailTransaction) {
+        if (detailTransaction) {
           return res.status(400).json({
             status: false,
-            message: 'Wrong! Duplicate Transaction'
-          })
+            message: "Wrong! Duplicate Transaction",
+          });
         } else {
           detailTransaction = await DetailTransaction.create({
             transaction_id: transaction.id,
@@ -275,58 +273,67 @@ module.exports = {
   },
 
   pdf1: async (req, res, next) => {
-
     const { payment_code } = req.params;
 
-    const trans = await Transaction.findOne({ where: { payment_code: payment_code } })
-    if (!trans) return res.status(400).json({ status: false, message: 'payment code not found' })
+    const trans = await Transaction.findOne({
+      where: { payment_code: payment_code },
+    });
+    if (!trans)
+      return res
+        .status(400)
+        .json({ status: false, message: "payment code not found" });
 
-    const detailtrans = await DetailTransaction.findOne({ where: { transaction_id: trans.id } })
-    const flight = await Flight.findOne({ where: { id: detailtrans.flight_id } })
-    const pass = await Passenger.findAll({ where: { detail_transaction_id: detailtrans.id } })
+    const detailtrans = await DetailTransaction.findOne({
+      where: { transaction_id: trans.id },
+    });
+    const flight = await Flight.findOne({
+      where: { id: detailtrans.flight_id },
+    });
+    const pass = await Passenger.findAll({
+      where: { detail_transaction_id: detailtrans.id },
+    });
 
-    try{
-
+    try {
       const browser = await puppeteer.launch({
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
-  
+
       // Create a new page
       const page = await browser.newPage();
-  
+
       // const a = path.join(__dirname, '/../../views/', "tes.ejs")
       const html1 = await email1.getHtml1("report-template.ejs", {
         trans: trans,
         detailtrans: detailtrans,
         flight: flight,
-        pass: pass
+        pass: pass,
       });
-    
+
       //Get HTML content from HTML file
-       await page.setContent(html1, { waitUntil: 'domcontentloaded' });
-       
-       // To reflect CSS used for screens instead of print
-       await page.emulateMediaType('screen');
-    
-       // Downlaod the PDF
+      await page.setContent(html1, { waitUntil: "domcontentloaded" });
+
+      // To reflect CSS used for screens instead of print
+      await page.emulateMediaType("screen");
+
+      // Downlaod the PDF
       const pdf = await page.pdf({
         path: `ticket.pdf`,
-        margin: { top: '100px', right: '50px', bottom: '50px', left: '50px' },
+        margin: { top: "100px", right: "50px", bottom: "50px", left: "50px" },
         printBackground: true,
-        format: 'A4',
+        format: "A4",
       });
-  
-      const file = pdf.toString('base64')
-      
-     const up = await imagekit.upload({
+
+      const file = pdf.toString("base64");
+
+      const up = await imagekit.upload({
         file,
-        fileName: `ticket.pdf`
-    })
-    
+        fileName: `ticket.pdf`,
+      });
+
       const link = up.url;
-  
-      const buffer = qr.imageSync(link)
-  
+
+      const buffer = qr.imageSync(link);
+
       const b = buffer.toString("base64");
 
       const html2 = await email1.getHtml1("report-template1.ejs", {
@@ -334,56 +341,53 @@ module.exports = {
         detailtrans: detailtrans,
         flight: flight,
         pass: pass,
-        barcode: b
+        barcode: b,
       });
 
       //Get HTML content from HTML file
-      await page.setContent(html2, { waitUntil: 'domcontentloaded' });
-       
-      // To reflect CSS used for screens instead of print
-      await page.emulateMediaType('screen');
-   
-      // Downlaod the PDF
-     const pdf1 = await page.pdf({
-       path: `ticket.pdf`,
-       margin: { top: '100px', right: '50px', bottom: '50px', left: '50px' },
-       printBackground: true,
-       format: 'A4',
-     });
+      await page.setContent(html2, { waitUntil: "domcontentloaded" });
 
-     
-     const file1 = pdf1.toString('base64')
-     
-     const up1 = await imagekit.upload({
-       file: file1,
-       fileName: `ticket.pdf`
-      })
-      
+      // To reflect CSS used for screens instead of print
+      await page.emulateMediaType("screen");
+
+      // Downlaod the PDF
+      const pdf1 = await page.pdf({
+        path: `ticket.pdf`,
+        margin: { top: "100px", right: "50px", bottom: "50px", left: "50px" },
+        printBackground: true,
+        format: "A4",
+      });
+
+      const file1 = pdf1.toString("base64");
+
+      const up1 = await imagekit.upload({
+        file: file1,
+        fileName: `ticket.pdf`,
+      });
+
       const link1 = up1.url;
-      
-      const buffer1 = qr.imageSync(link1)
-      
+
+      const buffer1 = qr.imageSync(link1);
+
       const b1 = buffer1.toString("base64");
       // Close the browser instance
       await browser.close();
-  
+
       const uploadedFile1 = Ticket.create({
-      detail_transaction_id: pass[0].detail_transaction_id,
-      ticket_pdf: link1,
-      qr_code: b1
-      })
+        detail_transaction_id: pass[0].detail_transaction_id,
+        ticket_pdf: link1,
+        qr_code: b1,
+      });
+
       return res.status(200).json({
         status: true,
-        message: 'success',
+        message: "success",
         url: link1,
-        buffer: b1
-      })
-    
-    }catch (err){
-      console.log(err)
-      next(err)
+        buffer: b1,
+      });
+    } catch (err) {
+      console.log(err);
+      next(err);
     }
-   
-  }
-}
-
+  },
+};
