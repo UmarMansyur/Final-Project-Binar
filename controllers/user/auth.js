@@ -8,6 +8,7 @@ const roles = require("../../utils/roles");
 const userTypes = require("../../utils/userType");
 const email1 = require("../../utils/sendEmail");
 const webpush = require("web-push");
+const validator = require("validator");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../../subscriptions.json");
@@ -39,6 +40,14 @@ module.exports = {
           status: false,
           message: "e-mail already in use!!!",
         });
+
+        if (!validator.isEmail(email)) {
+          return res.status(400).json({ message: "Email is not valid" });
+        }
+
+        let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})')
+        let check = strongPassword.test(password)
+        if (!check) return res.status(400).json({status: false, message: "Password min 6 character, include a minimum of 1 lower case letter [a-z], a minimum of 1 upper case letter [A-Z] , and a minimum of 1 numeric character [0-9]"})
 
       if (password != confirmPassword)
         return res.status(400).json({
