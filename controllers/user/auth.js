@@ -11,7 +11,6 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../../subscriptions.json");
-const { google } = require("../../utils/userType");
 //tes
 module.exports = {
   register: async (req, res, next) => {
@@ -132,28 +131,19 @@ module.exports = {
     }
   },
 
-  auth: async (req, res, next) => {
+  auth: (req, res, next) => {
     const user = req.user;
-
-    const detailUser = await DetailUser.findOne(
-      {
-        include: [
-          {
-            model: User,
-            as: "user",
-            where: {
-              id: user.id,
-            },
-          },
-        ],
-      },
-      { where: {user_id: user.id} }
-    );
 
     return res.status(200).json({
       status: true,
       message: "successful authentication",
-      data: detailUser,
+      data: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        user_type: user.user_type,
+      },
     });
   },
 
@@ -204,56 +194,67 @@ module.exports = {
 
   loginGoogle: async (req, res, next) => {
     try {
-      const code = req.query.code;
+      const { access_token } = req.body;
+      const response = await axios.get(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
+      );
 
-      if (!code) {
-        const url = googleOauth2.generateAuthURL();
-        return res.redirect(url);
-      }
-      await googleOauth2.setCredentials(code);
-      const { data } = await googleOauth2.getUserData();
-      let userExist = await User.findOne({ where: { email: data.email } });
+      const { name, email, picture } = response.data;
 
-      if (!userExist) {
-        userExist = await User.create({
-          username: data.name,
-          email: data.email,
-          thumbnail: data.picture,
+      let user = await User.findOne({ where: { email: email } });
+      // console.log(user);
+      if (!user)
+        user = await User.create({
+          username: name,
+          email,
+          thumbnail: picture,
           role: roles.user,
+          user_type: userTypes.google,
           is_verified: 1,
         });
 
-        await DetailUser.create({
-          user_id: userExist.id,
-          fullName: data.name,
-        });
-      } else {
-        await User.update(
-          {
-            username: data.name,
-            email: data.email,
-            thumbnail: data.picture,
-          },
-          { where: { id: userExist.id } }
-        );  
-      }
+      delete user.encryptedPassword;
+
+      // generate token
       const payload = {
-        id: userExist.id,
-        username: userExist.username,
-        email: userExist.email,
-        role: userExist.role,
-        user_type: userExist.user_type,
-        is_verified: userExist.is_verified,
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        user_type: user.user_type,
+        role: user.role,
       };
-      const token = jwt.sign(payload, JWT_SECRET_KEY);
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+
+      res.status(201).json({
+        status: true,
+        message: "Success get token",
+        token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  //get credential token
+  loginGoogleGetData: async (req, res, next) => {
+    try {
+      const code = req.query.code;
+      if (!code) {
+        const url = googleOauth2.generateAuthURL();
+        console.log(url);
+        return res.redirect(url);
+      }
+
+      const token = await googleOauth2.setCredentials(code);
+
+      const { data } = await googleOauth2.getUserData();
 
       return res.status(200).json({
-        status: true,
-        message: "Data retrived successfully",
-        data: token,
+        data,
+        token,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   },
 
