@@ -9,7 +9,7 @@ const userTypes = require("../../utils/userType");
 const email1 = require("../../utils/sendEmail");
 const webpush = require("web-push");
 const validator = require("validator");
-const { JWT_SECRET_KEY, API_HOST } = process.env;
+const { JWT_SECRET_KEY, API_HOST, FE_HOST } = process.env;
 
 const subscriptions = require("../../subscriptions.json");
 //tes
@@ -161,7 +161,6 @@ module.exports = {
     try {
       const { token } = req.query;
       if (!token)
-        // return res.render("auth/verif", { message: "invalid token", token });
         return res.status(400).json({
           status: false,
           message: "invalid token",
@@ -194,9 +193,7 @@ module.exports = {
           .catch((e) => e.stack);
       });
 
-      return res.redirect(
-        "https://terbangtinggi-staging.km3ggwp.com/verified-email/"
-      );
+      return res.redirect(`${FE_HOST}/verified-email/`);
     } catch (err) {
       next(err);
     }
@@ -337,7 +334,7 @@ module.exports = {
         const apiHost = API_HOST;
         const payload = { id: user.id };
         const token = jwt.sign(payload, JWT_SECRET_KEY);
-        const link = `https://terbangtinggi-staging.km3ggwp.com/reset-password?token=${token}`;
+        const link = `${FE_HOST}/reset-password?token=${token}`;
         htmlEmail = await email1.getHtml("email/reset-password.ejs", {
           name: user.name,
           link: link,
