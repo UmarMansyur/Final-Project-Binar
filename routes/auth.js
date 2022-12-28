@@ -6,8 +6,7 @@ const roles = require("../utils/roles");
 
 router.post("/register", cont.auth.register);
 router.post("/login", cont.auth.login);
-router.post("/google", cont.auth.loginGoogle);
-router.get("/login/google", cont.auth.loginGoogleGetData);
+router.get('/login/google', cont.auth.loginGoogle);
 router.get("/login/facebook", cont.auth.loginFacebook);
 router.patch("/change-password", cont.auth.changePassword);
 router.post("/forgot-password", cont.auth.forgotPassword);

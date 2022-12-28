@@ -11,6 +11,7 @@ const webpush = require("web-push");
 const { JWT_SECRET_KEY, API_HOST } = process.env;
 
 const subscriptions = require("../../subscriptions.json");
+const { google } = require("../../utils/userType");
 //tes
 module.exports = {
   register: async (req, res, next) => {
@@ -131,19 +132,28 @@ module.exports = {
     }
   },
 
-  auth: (req, res, next) => {
+  auth: async (req, res, next) => {
     const user = req.user;
+
+    const detailUser = await DetailUser.findOne(
+      {
+        include: [
+          {
+            model: User,
+            as: "user",
+            where: {
+              id: user.id,
+            },
+          },
+        ],
+      },
+      { where: {user_id: user.id} }
+    );
 
     return res.status(200).json({
       status: true,
       message: "successful authentication",
-      data: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        user_type: user.user_type
-      },
+      data: detailUser,
     });
   },
 
@@ -194,65 +204,58 @@ module.exports = {
 
   loginGoogle: async (req, res, next) => {
     try {
-      const { access_token } = req.body;
-      const response = await axios.get(
-        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
-      );
-
-      const { name, email, picture } = response.data;
-
-      let user = await User.findOne({ where: { email: email } });
-      if (!user)
-        user = await User.create({
-          username: name,
-          email,
-          thumbnail: picture,
-          role: roles.user,
-          user_type: userTypes.google,
-          is_verified: 1,
-        });
-
-      delete user.encryptedPassword;
-
-      // generate token
-      const payload = {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        user_type: user.user_type,
-        role: user.role
-      };
-      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-
-      res.status(201).json({
-        status: true,
-        message: "Success get token",
-        token,
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  //get credential token
-  loginGoogleGetData: async (req, res, next) => {
-    try {
       const code = req.query.code;
+
       if (!code) {
         const url = googleOauth2.generateAuthURL();
         return res.redirect(url);
       }
-
-      const token = await googleOauth2.setCredentials(code);
-
+      await googleOauth2.setCredentials(code);
       const { data } = await googleOauth2.getUserData();
+      let userExist = await User.findOne({ where: { email: data.email } });
 
-      return res.status(200).json({
-        data,
-        token,
-      });
-    } catch (err) {
-      next(err);
+      if (!userExist) {
+        userExist = await User.create({
+          username: data.name,
+          email: data.email,
+          thumbnail: data.picture,
+          role: roles.user,
+          is_verified: 1,
+        });
+
+        await DetailUser.create({
+          user_id: userExist.id,
+          fullName: data.name,
+        });
+      } else {
+        await User.update(
+          {
+            username: data.name,
+            email: data.email,
+            thumbnail: data.picture,
+          },
+          { where: { id: userExist.id } }
+        );
+
+        const payload = {
+          id: userExist.id,
+          username: userExist.username,
+          email: userExist.email,
+          role: userExist.role,
+          user_type: userExist.user_type,
+          is_verified: userExist.is_verified,
+        };
+
+        const token = jwt.sign(payload, JWT_SECRET_KEY);
+
+        return res.status(200).json({
+          status: true,
+          message: "Data retrived successfully",
+          data: token,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
 
@@ -265,6 +268,7 @@ module.exports = {
       }
       const access_token = await facebookOauth2.getAccessToken(code);
       const userInfo = await facebookOauth2.getUserInfo(access_token);
+      console.log(userInfo.picture.data.url);
       res.send(userInfo);
     } catch (err) {
       next(err);
