@@ -68,7 +68,6 @@ module.exports = {
 
         resolve(res.json(result));
       } catch (error) {
-        // console.log(error);
         next(error);
       }
     });
@@ -217,7 +216,7 @@ module.exports = {
       const { user_id, isPaid, roundTrip, oneWay } = req.body;
       try {
         const exist = await Transaction.findOne({ where: { id } });
-        // console.log(exist);
+
         if (!exist) {
           return resolve(
             res.status(400).json({
@@ -393,7 +392,6 @@ module.exports = {
         buffer: b1,
       });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },

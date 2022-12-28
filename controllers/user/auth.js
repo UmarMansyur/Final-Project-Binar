@@ -209,7 +209,7 @@ module.exports = {
       const { name, email, picture } = response.data;
 
       let user = await User.findOne({ where: { email: email } });
-      // console.log(user);
+
       if (!user)
         user = await User.create({
           username: name,
@@ -248,7 +248,7 @@ module.exports = {
       const code = req.query.code;
       if (!code) {
         const url = googleOauth2.generateAuthURL();
-        console.log(url);
+
         return res.redirect(url);
       }
 
@@ -274,7 +274,7 @@ module.exports = {
       }
       const access_token = await facebookOauth2.getAccessToken(code);
       const userInfo = await facebookOauth2.getUserInfo(access_token);
-      console.log(userInfo.picture.data.url);
+
       res.send(userInfo);
     } catch (err) {
       next(err);
