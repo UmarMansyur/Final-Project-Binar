@@ -235,18 +235,16 @@ module.exports = {
             thumbnail: data.picture,
           },
           { where: { id: userExist.id } }
-        );
-
-        const payload = {
-          id: userExist.id,
-          username: userExist.username,
-          email: userExist.email,
-          role: userExist.role,
-          user_type: userExist.user_type,
-          is_verified: userExist.is_verified,
-        };
-
+        );  
       }
+      const payload = {
+        id: userExist.id,
+        username: userExist.username,
+        email: userExist.email,
+        role: userExist.role,
+        user_type: userExist.user_type,
+        is_verified: userExist.is_verified,
+      };
       const token = jwt.sign(payload, JWT_SECRET_KEY);
 
       return res.status(200).json({
