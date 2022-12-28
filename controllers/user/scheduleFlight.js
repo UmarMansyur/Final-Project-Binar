@@ -1,7 +1,5 @@
 const { Flight } = require("../../models");
 const { Op } = require("sequelize");
-const sequelize = require("sequelize");
-const moment = require("moment");
 module.exports = {
   showFilter: async (req, res, next) => {
     try {

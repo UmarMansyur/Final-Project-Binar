@@ -35,7 +35,10 @@ module.exports = {
         });
 
       if (!validator.isEmail(email)) {
-        return res.status(400).json({ message: "Email is not valid" });
+        return res.status(400).json({
+          status: false,
+          message: "Email is not valid",
+        });
       }
 
       let strongPassword = new RegExp(
