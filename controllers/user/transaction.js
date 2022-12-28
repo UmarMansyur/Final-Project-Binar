@@ -127,7 +127,6 @@ module.exports = {
           ],
           attributes: {
             exclude: [
-              "id",
               "user_id",
               "createdAt",
               "updatedAt",
@@ -249,6 +248,7 @@ module.exports = {
       }
     });
   },
+
   delete: async (req, res, next) => {
     return new Promise(async (resolve, reject) => {
       const { id } = req.params;
@@ -396,5 +396,77 @@ module.exports = {
       console.log(err);
       next(err);
     }
+  },
+
+  //get history transaksi user
+  getHistoryTransactionById: async (req, res, next) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { id } = req.params;
+        const exist = await Transaction.findOne({
+          where: { id },
+          include: [
+            {
+              model: DetailTransaction,
+              as: "detail_transaction",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+              include: [
+                {
+                  model: Flight,
+                  as: "flight",
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
+                },
+                {
+                  model: Passenger,
+                  as: "passenger",
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
+                },
+                {
+                  model: Ticket,
+                  as: "tiket",
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
+                },
+              ],
+            },
+          ],
+          attributes: {
+            exclude: [
+              "id",
+              "user_id",
+              "createdAt",
+              "updatedAt",
+              "detail_transaction",
+            ],
+          },
+        });
+
+        if (!exist) {
+          return resolve(
+            res.status(400).json({
+              status: false,
+              message: "Data not found",
+            })
+          );
+        }
+
+        resolve(
+          res.status(200).json({
+            status: true,
+            message: "Success get all transaction",
+            data: exist,
+          })
+        );
+      } catch (error) {
+        next(error);
+      }
+    });
   },
 };

@@ -12,10 +12,16 @@ router.get(
   cont.transaction.getHistoryTransactionByUserId
 );
 
+router.get(
+  "/:id",
+  middle(roles.user),
+  cont.transaction.getHistoryTransactionById
+);
+
 // router.get("/", middle(roles.user), cont.transaction.show);
 
 router.put("/:id", middle(roles.user), cont.transaction.update);
 router.delete("/:id", middle(roles.user), cont.transaction.delete);
-router.get('/generatepdf/:payment_code', cont.transaction.pdf1)
+router.get("/generatepdf/:payment_code", cont.transaction.pdf1);
 
 module.exports = router;
