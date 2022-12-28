@@ -27,13 +27,6 @@ module.exports = {
         is_verified = 0,
       } = req.body;
 
-      const exist1 = await User.findOne({ where: { username } });
-      if (exist1)
-        return res.status(400).json({
-          status: false,
-          message: `username ${username} already in use!!!`,
-        });
-
       const exist = await User.findOne({ where: { email } });
       if (exist)
         return res.status(400).json({
@@ -41,13 +34,20 @@ module.exports = {
           message: "e-mail already in use!!!",
         });
 
-        if (!validator.isEmail(email)) {
-          return res.status(400).json({ message: "Email is not valid" });
-        }
+      if (!validator.isEmail(email)) {
+        return res.status(400).json({ message: "Email is not valid" });
+      }
 
-        let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})')
-        let check = strongPassword.test(password)
-        if (!check) return res.status(400).json({status: false, message: "Password min 6 character, include a minimum of 1 lower case letter [a-z], a minimum of 1 upper case letter [A-Z] , and a minimum of 1 numeric character [0-9]"})
+      let strongPassword = new RegExp(
+        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})"
+      );
+      let check = strongPassword.test(password);
+      if (!check)
+        return res.status(400).json({
+          status: false,
+          message:
+            "Password min 6 character, include a minimum of 1 lower case letter [a-z], a minimum of 1 upper case letter [A-Z] , and a minimum of 1 numeric character [0-9]",
+        });
 
       if (password != confirmPassword)
         return res.status(400).json({
@@ -104,7 +104,8 @@ module.exports = {
 
       return res.status(201).json({
         status: true,
-        message: "account successfully registered",
+        message:
+          "account successfully registered, check your email to verif your account",
         data: {
           id: user.id,
           username: user.username,
@@ -283,48 +284,41 @@ module.exports = {
     }
   },
 
-  changePassword: async (req, res, next) => {
+  resetPassword: async (req, res, next) => {
     try {
-      const { passwordLama, passwordBaru, passwordBaru2 } = req.body;
+      const { newPassword, confirmPassword } = req.body;
+      const { token } = req.query;
 
-      const usercompare = await User.findOne({
-        where: {
-          id: req.user.id,
-        },
-      });
-      if (!usercompare) {
+      if (!token) {
         return res.status(400).json({
           status: false,
-          message: "user not found!",
+          message: "invalid token!",
+        });
+      }
+      if (newPassword != confirmPassword) {
+        return res.status(400).json({
+          status: false,
+          message: "password and confirm password doesn't match",
         });
       }
 
-      const pass = await bcrypt.compare(passwordLama, usercompare.password);
-      if (!pass) {
-        return res.status(400).json({
-          status: false,
-          message: "incorrect password!!",
+      const payload = jwt.verify(token, JWT_SECRET_KEY);
+
+      const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+      const user = await User.update(
+        { password: encryptedPassword },
+        { where: { id: payload.id } }
+      );
+
+      if (user) {
+        return res.status(200).json({
+          status: true,
+          message: "password updated successfully",
         });
       }
-
-      if (passwordBaru !== passwordBaru2)
-        return res.status(422).json({
-          status: false,
-          message: "password 1 dan password 2 doesn'\t match!",
-        });
-
-      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
-      await usercompare.update({ password: hashedPassword });
-
-      return res.status(200).json({
-        success: true,
-        message: "The password has been successfully changed",
-      });
     } catch (err) {
-      res.status(500).json({
-        status: false,
-        message: err.message,
-      });
+      next(err);
     }
   },
 
