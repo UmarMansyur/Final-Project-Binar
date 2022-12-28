@@ -4,7 +4,7 @@ const cont = require("../controllers/admin");
 const middle = require("../middlewares/authorize");
 const roles = require("../utils/roles");
 
-router.post("/data", middle([roles.admin]), cont.flight.create);
+router.post("/data", middle([roles.admin, roles.user]), cont.flight.create);
 
 router.get("/data", middle([roles.admin]), cont.flight.read);
 

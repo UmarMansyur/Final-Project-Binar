@@ -8,8 +8,9 @@ const fetch = (...args) =>
 module.exports = {
   create: async (req, res, next) => {
     try {
-      const {
+      let {
         code,
+        airlineIata,
         airlineName,
         departureAirport,
         departure,
@@ -25,8 +26,48 @@ module.exports = {
         price,
       } = req.body;
 
+      switch ((airlineIata = airlineIata.toUpperCase())) {
+        case "JT":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/JT.png";
+          break;
+        case "IU":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IU.png";
+          break;
+        case "QZ":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/QZ.png";
+          break;
+        case "QG":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/QG.png";
+          break;
+        case "GA":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/GA.png";
+          break;
+        case "ID":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/ID.png";
+          break;
+        case "IW":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IW.png";
+          break;
+        case "MH":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/MH.png";
+          break;
+        case "SQ":
+          airlineLogo =
+            "https://sta.nusatrip.net/static/img/front/V2/icon-flight/SQ.png";
+          break;
+      }
+
       if (
         !airlineName ||
+        !airlineIata ||
         !code ||
         !departureAirport ||
         !departure ||
@@ -44,12 +85,14 @@ module.exports = {
       }
 
       const flight = await Flight.create({
-        code,
+        code: code.toUpperCase(),
+        airlineIata: airlineIata.toUpperCase(),
+        airlineLogo,
         airlineName,
         departureAirport,
-        departure,
+        departure: departure.toUpperCase(),
         arrivalAirport,
-        arrival,
+        arrival: arrival.toUpperCase(),
         date,
         returnDate,
         capacity,
@@ -98,7 +141,7 @@ module.exports = {
     try {
       const { limit = 5, page = 1, order = "id", by = "ASC" } = req.query;
       const offset = (page - 1) * limit;
-      const {count, rows} = await Flight.findAndCountAll({
+      const { count, rows } = await Flight.findAndCountAll({
         limit: limit,
         offset: offset,
         order: [[order, by.toUpperCase()]],
@@ -121,7 +164,7 @@ module.exports = {
           "price",
         ],
       });
-      const totalPage = Math.ceil(count/limit);
+      const totalPage = Math.ceil(count / limit);
       const totalData = count;
 
       if (count <= 0) {
@@ -139,7 +182,7 @@ module.exports = {
           totalPage,
           totalData,
           rows,
-        }
+        },
       });
     } catch (err) {
       next(err);
