@@ -11,6 +11,12 @@ module.exports = {
       code: {
         type: Sequelize.STRING,
       },
+      airlineIata: {
+        type: Sequelize.STRING,
+      },
+      airlineLogo: {
+        type: Sequelize.STRING,
+      },
       airlineName: {
         type: Sequelize.STRING,
       },
