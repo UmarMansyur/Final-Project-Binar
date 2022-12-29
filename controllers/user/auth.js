@@ -233,6 +233,18 @@ module.exports = {
 
       delete user.encryptedPassword;
 
+      await DetailUser.create({
+        user_id: user.id,
+      });
+
+      await Notification.create({
+        user_id: user.id,
+        title: "Welcome!",
+        detail_message:
+          "Welcome to Terbang Tinggi App!, Book Your Flight Now!, Cheap,Fast,and Easy",
+        is_read: false,
+      });
+
       // generate token
       const payload = {
         id: user.id,
