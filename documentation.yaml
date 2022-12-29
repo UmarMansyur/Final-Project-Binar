@@ -1,14 +1,16 @@
 openapi: 3.0.0
 x-stoplight:
-  id: afhuwuwcragg4
+  id: ftki8vs5viyyl
 info:
   title: Terbang Tinggi App
   version: "1.0"
-  description: |
-    Terbang Tinggi Api
+  description: API Terbang Tinggi App For Final Project Backend Javascript Binar Academy
+  contact:
+    email: terbangtinggiapp@gmail.com
+    name: Developer
 servers:
-  - url: "https://terbangtinggi-api-staging.km3ggwp.com/"
-    description: ""
+  - description: ""
+    url: "https://terbangtinggi-api-staging.km3ggwp.com/"
   - url: "http://localhost:3000"
     description: ""
 paths:
@@ -17,27 +19,22 @@ paths:
       summary: Register User
       tags:
         - Auth
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
       operationId: post-auth-register
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              properties:
-                username:
-                  type: string
-                email:
-                  type: string
-                password:
-                  type: string
-                confirmPassword:
-                  type: string
-              x-examples:
-                Example 1:
-                  username: john_123
-                  email: johnsihombing80@gmail.com
-                  password: tes1234
-                  confirmPassword: tes1234
+              properties: {}
             examples:
               Example 1:
                 value:
@@ -45,42 +42,10 @@ paths:
                   email: johnsihombing80@gmail.com
                   password: tes1234
                   confirmPassword: tes1234
-        description: ""
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: account successfully registered
-                    data:
-                      id: 6
-                      username: Basic
-                      email: johnsihombing80@gmail.com
-                      role: User
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: false
-                    message: e-mail already in use!!!
-        "404":
-          description: Not Found
-        "500":
-          description: |
-            Internal Server Error
+          application/xml:
+            schema:
+              type: object
+              properties: {}
   /auth/login:
     post:
       summary: Login User
@@ -104,8 +69,15 @@ paths:
                       email: johnsihombing80@gmail.com
                       role: User
                       token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzMsInVzZXJuYW1lIjoiam9obl8xMjMiLCJlbWFpbCI6ImpvaG5zaWhvbWJpbmc4MEBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsInVzZXJfdHlwZSI6IkJhc2ljIiwiaXNfdmVyaWZpZWQiOjEsImlhdCI6MTY3MDA1Njc3N30.wSw7sI3l24RQP6XOeVne93Wu2xb-AfYOm2yhyn-i-Gc
-        "400":
-          description: Bad Request
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1: {}
         "404":
           description: Not Found
         "500":
@@ -128,7 +100,7 @@ paths:
       tags:
         - Auth
       responses:
-        "201":
+        "200":
           description: OK
           content:
             application/json:
@@ -140,8 +112,6 @@ paths:
                   value:
                     success: true
                     message: Success send email forgot password to user
-        "400":
-          description: Bad Request
         "404":
           description: Not Found
         "500":
@@ -163,9 +133,8 @@ paths:
       tags:
         - Auth
       responses:
-        "201":
-          description: |
-            OK
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -174,18 +143,18 @@ paths:
               examples:
                 Example 1:
                   value:
-                    access_token: ya29.a0AeTM1ie-SkXBb65317yime-6KcRflZmerzaYjm3zNYLS9Y5wjk2u-EVluXQj8yr8Xpp5rtQTjcCKYkomi1qzewcJHJsmPWgPN3fLRBzIYcqXlY2nARlIpFHLMz8VRN2fK3UZyRSQhFy8FmZI9HNFACE1tVg3aCgYKAcoSARISFQHWtWOmfJ8BdPCdMrNouJcD0JcWWg0163
+                    status: true
+                    message: password updated successfully
         "404":
           description: Not Found
         "500":
           description: Internal Server Error
-      operationId: patch-auth-reset-password-?token=
+      operationId: patch-auth-reset-password
       parameters:
         - schema:
             type: string
-          in: query
-          name: token
-          description: token
+          in: header
+          name: Token
       requestBody:
         content:
           application/json:
@@ -197,18 +166,14 @@ paths:
                 value:
                   newPassword: tes123
                   confirmPassword: tes123
-        description: |
-          Reset Password
-    parameters: []
   /auth/google:
     post:
       summary: Login Google Oauth
       tags:
         - Auth
       responses:
-        "201":
-          description: |
-            OK
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -220,8 +185,6 @@ paths:
                     status: true
                     message: Success get token
                     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzQsInVzZXJuYW1lIjoiS29tIEJfSm9obiBUcmkgUHV0cmFfIDA1MCIsImVtYWlsIjoiam9obnRyaXNpaG9tYmluZ0BnbWFpbC5jb20iLCJ1c2VyX3R5cGUiOiJHb29nbGUiLCJpYXQiOjE2NzAwNTY0ODV9.89ueO3ZEKGZL-ihkIVYFkN4rCH1b5Dh_R3k42QHBwZk
-        "400":
-          description: Bad Request
         "404":
           description: Not Found
         "500":
@@ -237,227 +200,9 @@ paths:
               Example 1:
                 value:
                   access_token: ya29.a0AeTM1ie-SkXBb65317yime-6KcRflZmerzaYjm3zNYLS9Y5wjk2u-EVluXQj8yr8Xpp5rtQTjcCKYkomi1qzewcJHJsmPWgPN3fLRBzIYcqXlY2nARlIpFHLMz8VRN2fK3UZyRSQhFy8FmZI9HNFACE1tVg3aCgYKAcoSARISFQHWtWOmfJ8BdPCdMrNouJcD0JcWWg0163
-  /user/updateProfile:
-    patch:
-      summary: Update Profile
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - User
-      responses:
-        "201":
-          description: |
-            OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success update profile
-                    data:
-                      id: 74
-                      username: UmarMansyur
-                      email: umar.mansyur@gmail.com
-                      user_type: Google
-                      createdAt: "2021-10-13T07:00:00.000Z"
-                      updatedAt: "2021-10-13T07:00:00.000Z"
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: patch-user-update-profile
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            examples:
-              Example 1:
-                value:
-                  username: UmarMansyur
-                  email: umar.mansyur@gmail.com
-                  user_type: Google
-                  createdAt: "2021-10-13T07:00:00.000Z"
-                  updatedAt: "2021-10-13T07:00:00.000Z"
-        description: |
-          Update Profile 
-    parameters: []
-  /user/myProfile:
-    get:
-      summary: Get My Profile
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - User
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success get profile
-                    data:
-                      id: 74
-                      username: UmarMansyur
-                      email: umar.mansyur@gmail.com
-                      user_type: Google
-                      createdAt: "2021-10-13T07:00:00.000Z"
-                      updatedAt: "2021-10-13T07:00:00.000Z"
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: get-user-my-profile  
-  /user/data:
-    get:
-      summary: Get All User
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - User
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success get all user
-                    data:
-                      - id: 74
-                        username: UmarMansyur
-                        email: umar.mansyur@gmail.com
-                        user_type: Google
-                        createdAt: "2021-10-13T07:00:00.000Z"
-                        updatedAt: "2021-10-13T07:00:00.000Z"
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: get-user-data
-  /user/{userId}:
-    get:
-      summary: Get User By Id
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: integer
-      tags:
-        - User
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success get user by id
-                    data:
-                      id: 74
-                      username: UmarMansyur
-                      email: umar.mansyur@gmail.com
-                      user_type: Google
-                      createdAt: "2021-10-13T07:00:00.000Z"
-                      updatedAt: "2021-10-13T07:00:00.000Z"
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: get-user-userid
-  /user/delete/{userId}:
-    delete:
-      summary: Delete User By Id
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: integer
-      tags:
-        - User
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success delete user
-                    data: {}
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: delete-user-userid
   /auth/me:
     get:
-      summary: Get data user login
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
+      summary: Get Data User Login
       tags:
         - Auth
       responses:
@@ -472,31 +217,94 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success get data user login
+                    message: successful authentication
                     data:
-                      id: 1
-                      username: Umar Mansyur Tinggi Apps
-                      email: "umar.ovie@gmail.com"
-                      role: "User"
-
-        "400":
-          description: Bad Request
+                      id: 48
+                      username: john123
+                      email: johnsihombing80@gmail.com
+                      role: User
         "404":
           description: Not Found
         "500":
           description: Internal Server Error
       operationId: get-auth-me
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
   /flight/data:
     post:
       summary: Create Flight
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
       tags:
-        - "Admin : Flight"
+        - "Admin : CRUD Flight"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success create flight
+                    data:
+                      id: 1
+                      code: JT777
+                      airlineName: Lion Air
+                      departureAirport: Kuala Namu
+                      departure: KNO
+                      arrivalAirport: Ngurah Rai
+                      arrival: DPS
+                      date: "2022-12-22"
+                      returnDate: null
+                      capacity: 250
+                      tripType: one_way
+                      sc: Economy
+                      departureTime: "13:00:00"
+                      arrivalTime: "16:35:00"
+                      price: 2500000
+                      updatedAt: "2022-12-21T16:52:57.404Z"
+                      createdAt: "2022-12-21T16:52:57.404Z"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      operationId: post-flight-data
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  code: JT787
+                  airlineName: Lion Air
+                  departureAirport: Kuala Namu
+                  departure: KNO
+                  arrivalAirport: Ngurah Rai
+                  arrival: DPS
+                  date: "2022-12-22"
+                  capacity: 250
+                  tripType: one_way
+                  sc: Economy
+                  departureTime: "14:00"
+                  arrivalTime: "16:35"
+                  price: 2500000
+    get:
+      summary: Get All Data Flight
+      tags:
+        - "Admin : CRUD Flight"
       responses:
         "200":
           description: OK
@@ -509,120 +317,53 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success create flight
+                    message: Success Get All Data
                     data:
-                      id: 2
-                      code: JT999
-                      airlineName: Lion Air
-                      departureAirport: Kuala Namu
-                      departure: KNO
-                      arrivalAirport: Ngurah Rai
-                      arrival: DPS
-                      date: "2022-12-11T00:00:00.000Z"
-                      departureTime: "13:00:00"
-                      arrivalTime: "16:35:00"
-                      price: 2500000
-                      updatedAt: "2022-12-10T05:19:11.997Z"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
-      operationId: post-flight-data
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            examples:
-              Example 1:
-                value:
-                  code: JT777
-                  airlineName: Lion Air
-                  departureAirport: Kuala Namu
-                  departure: KNO
-                  arrivalAirport: Ngurah Rai
-                  arrival: DPS
-                  date: "2022-12-11"
-                  departureTime: "13:00:00"
-                  arrivalTime: "16:35:00"
-                  price: 2500000
-      parameters: []
-      description: Create Flight
-      security:
-        - Authorization: []
-  /flight/data/:
-    get:
-      summary: Get All Flight
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - "Admin : Flight"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
+                      - id: 1
+                        code: CT404
+                        airlineName: Citilink
+                        departureAirport: Kuala Namu
+                        departure: KNO
+                        arrivalAirport: Hang Nadim
+                        arrival: HGN
+                        date: "2022-12-20T00:00:00.000Z"
+                        departureTime: "11:00:00"
+                        arrivalTime: "22:35:00"
+                        price: 2500000
+                        createdAt: "2022-12-10T05:16:59.999Z"
+                        updatedAt: "2022-12-10T05:16:59.999Z"
+                      - id: 2
+                        code: JT999
+                        airlineName: Lion Air
+                        departureAirport: Kuala Namu
+                        departure: KNO
+                        arrivalAirport: Soekarno Hatta
+                        arrival: CGK
+                        date: "2022-12-21T00:00:00.000Z"
+                        departureTime: "11:00:00"
+                        arrivalTime: "22:35:00"
+                        price: 2500000
+                        createdAt: "2022-12-10T05:19:11.997Z"
+                        updatedAt: "2022-12-10T05:19:11.997Z"
+            application/xml:
               schema:
                 type: object
                 properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Flight data retrived successfully
-                    data:
-                    - id: 1
-                      code: JT999
-                      airlineName: Lion Air
-                      departureAirport: Kuala Namu
-                      departure: KNO
-                      arrivalAirport: Ngurah Rai
-                      arrival: DPS
-                      date: "2022-12-11T00:00:00.000Z"
-                      departureTime: "13:00:00"
-                      arrivalTime: "16:35:00"
-                      price: 2500000
-                      updatedAt: "2022-12-10T05:19:11.997Z"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-                    - id: 2
-                      code: JT999
-                      airlineName: Lion Air
-                      departureAirport: Kuala Namu
-                      departure: KNO
-                      arrivalAirport: Ngurah Rai
-                      arrival: DPS
-                      date: "2022-12-11T00:00:00.000Z"
-                      departureTime: "13:00:00"
-                      arrivalTime: "16:35:00"
-                      price: 2500000
-                      updatedAt: "2022-12-10T05:19:11.997Z"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-        401:
-          description: Unauthorized
-        500:
+        "404":
+          description: Not Found
+        "500":
           description: Internal Server Error
-  /flight/data/{flightId}:
+      operationId: get-flight-data
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  "/flight/data/{flightId}":
     put:
       summary: Update Flight
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: flightId
-        in: path
-        required: true
-        schema:
-          type: integer
       tags:
-        - "Admin : Flight"
+        - "Admin : CRUD Flight"
       responses:
         "200":
           description: OK
@@ -638,23 +379,28 @@ paths:
                     message: Success update flight
                     data:
                       id: 2
-                      code: JT999
+                      code: JT100
                       airlineName: Lion Air
                       departureAirport: Kuala Namu
                       departure: KNO
-                      arrivalAirport: Ngurah Rai
-                      arrival: DPS
-                      date: "2022-12-11T00:00:00.000Z"
-                      departureTime: "13:00:00"
-                      arrivalTime: "16:35:00"
+                      arrivalAirport: Soekarno Hatta
+                      arrival: CGK
+                      date: "2022-12-21T00:00:00.000Z"
+                      departureTime: "13:00"
+                      arrivalTime: "15:00"
                       price: 2500000
-                      updatedAt: "2022-12-10T05:19:11.997Z"
                       createdAt: "2022-12-10T05:19:11.997Z"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
-      operationId: put-flight-data-flightId
+                      updatedAt: "2022-12-10T05:21:36.441Z"
+      operationId: put-flight-data-2
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+        - schema:
+            type: string
+          in: header
+          name: flightId
       requestBody:
         content:
           application/json:
@@ -664,36 +410,36 @@ paths:
             examples:
               Example 1:
                 value:
-                  code: JT777
+                  code: JT100
                   airlineName: Lion Air
                   departureAirport: Kuala Namu
                   departure: KNO
-                  arrivalAirport: Ngurah Rai
-                  arrival: DPS
-                  date: "2022-12-11"
-                  departureTime: "13:00:00"
-                  arrivalTime: "16:35:00"
+                  arrivalAirport: Soekarno Hatta
+                  arrival: CGK
+                  date: "2022-12-21T00:00:00.000Z"
+                  departureTime: "13:00"
+                  arrivalTime: "15:00"
                   price: 2500000
-      parameters: []
-      description: Update Flight
-      security:
-        - Authorization: []
-  /flight/data/{flightId}/:
+    parameters:
+      - schema:
+          type: string
+        name: flightId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: flightId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: flightId
+        in: path
+        required: true
     delete:
       summary: Delete Flight
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: flightId
-        in: path
-        required: true
-        schema:
-          type: integer
       tags:
-        - "Admin : Flight"
+        - "Admin : CRUD Flight"
       responses:
         "200":
           description: OK
@@ -706,78 +452,22 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success delete flight
-                    data: null
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
+                    message: delete flight success
+                    data: 1
       operationId: delete-flight-data-flightId
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            examples:
-              Example 1:
-                value: {}
-      parameters: []
-      description: Delete Flight
-      security:
-        - Authorization: []
-  /passenger:
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+        - schema:
+            type: string
+          in: header
+          name: flightId
     get:
-      summary: Get My Ticket
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
+      summary: Show Flight By Id
       tags:
-        - "User : My Ticket"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: My Ticket data retrived successfully
-                    data:
-                      email: umar@unira.ac.id
-                      firstName: "Umar"
-                      lastName: "Mansyur"
-                      phone: "085231339223"
-                      type: "Adult"
-                      travelDocument: "KTP"
-        401:
-          description: Unauthorized
-        500:
-          description: Internal Server Error
-      operationId: get-passenger
-  /passenger/:
-    post:
-      summary: Upload Document
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: id
-        in: query
-        required: true
-        schema:
-          type: integer
-      tags:
-        - "User : My Ticket"
+        - "Admin : CRUD Flight"
       responses:
         "200":
           description: OK
@@ -790,136 +480,191 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success upload document
+                    message: Success get detail flights
                     data:
-                      id: 1
-                      email:
-                      firstName: "Umar"
-                      lastName: "Mansyur"
-                      phone: "085231339223"
-                      type: "Adult"
-                      travelDocument: "https://res.cloudinary.com/dzqkqzjxk/image/upload/v1639130009/airplane/airplane/2021-12-10T05:19:11.997Z-IMG_20211030_165000_1.jpg"
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                travelDocument:
-                  type: string
-                  format: binary
-            examples:
-              Example 1:
-                value:
-                  travelDocument: "https://res.cloudinary.com/dzqkqzjxk/image/upload/v1639130009/airplane/airplane/2021-12-10T05:19:11.997Z-IMG_20211030_165000_1.jpg"
-      operationId: post-passenger
-      description: Upload Document
-      security:
-        - Authorization: []
-  /notification:
-    get:
-      summary: Get Notification
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - "User : Notification"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Notification data retrived successfully
-                    data:
-                      - id: 1
-                        user_id: 1
-                        title: "Flight Delay"
-                        detail_message: "Your flight JT999 has been delayed"
-                        createdAt: "2022-12-10T05:19:11.997Z"
-                        updatedAt: "2022-12-10T05:19:11.997Z"
-        401:
-          description: Unauthorized
-        500:
-          description: Internal Server Error
-      operationId: get-notification
-  /notification/:
-    post:
-      summary: Create Notification
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      tags:
-        - "Admin : Notification"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success create notification
-                    data:
-                      id: 1
-                      user_id: 1
-                      title: "Flight Delay"
-                      detail_message: "Your flight JT999 has been delayed"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-                      updatedAt: "2022-12-10T05:19:11.997Z"
+                      id: 18
+                      code: IU123
+                      airlineIata: IU
+                      airlineLogo: "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IU.png"
+                      airlineName: Super Air Jet
+                      departureAirport: Abdul Rachman Saleh
+                      departure: MLG
+                      arrivalAirport: Juanda
+                      arrival: SUB
+                      date: "2022-12-29"
+                      returnDate: null
+                      capacity: 0
+                      tripType: one_way
+                      sc: economy
+                      departureTime: "06:00:00"
+                      arrivalTime: "07:00:00"
+                      price: 90000
         "401":
           description: Unauthorized
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
-      operationId: post-notification
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            examples:
-              Example 1:
-                value:
-                  user_id: 1
-                  title: "Flight Delay"
-                  detail_message: "Your flight JT999 has been delayed"
-      parameters: []
-      description: Create Notification
-      security:
-        - Authorization: []
-  /notification/{notificationId}/:
-    put:
-      summary: Update Notification
+      operationId: get-flight-data-flightId
       parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /admin/data:
+    get:
+      summary: Get All User
+      tags:
+        - "Admin : CRUD User"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Sucess get data!
+                    data:
+                      page: 1
+                      totalPage: 2
+                      totalData: 10
+                      rows:
+                        - id: 2
+                          username: john12
+                          email: johnsihombing80@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T03:44:47.695Z"
+                          updatedAt: "2022-12-19T03:44:47.695Z"
+                          detail_user:
+                            id: 2
+                            user_id: 2
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-19T03:44:47.929Z"
+                            updatedAt: "2022-12-19T03:44:47.929Z"
+                        - id: 3
+                          username: john122
+                          email: johnsihombing42@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T03:48:40.860Z"
+                          updatedAt: "2022-12-19T03:49:13.710Z"
+                          detail_user:
+                            id: 3
+                            user_id: 3
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-19T03:48:41.174Z"
+                            updatedAt: "2022-12-19T03:48:41.174Z"
+                        - id: 4
+                          username: aroyan
+                          email: aroyanbakti2@gmail.com
+                          role: Admin
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T04:06:28.400Z"
+                          updatedAt: "2022-12-19T04:06:40.488Z"
+                          detail_user:
+                            id: 4
+                            user_id: 4
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-19T04:06:28.408Z"
+                            updatedAt: "2022-12-19T04:06:28.408Z"
+                        - id: 1
+                          username: tejxdxsudjdjdjser
+                          email: iklcusu@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T03:29:04.321Z"
+                          updatedAt: "2022-12-19T04:14:23.911Z"
+                          detail_user:
+                            id: 1
+                            user_id: 1
+                            fullName: John Binar Academy Tes
+                            gender: Male
+                            country: America
+                            province: Sumut
+                            city: Medan
+                            address: Jalan Terbang Tinggi
+                            phone: "0813"
+                            createdAt: "2022-12-19T03:29:04.357Z"
+                            updatedAt: "2022-12-19T17:04:09.922Z"
+                        - id: 6
+                          username: frans
+                          email: drmundo280199@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T04:45:43.932Z"
+                          updatedAt: "2022-12-19T04:45:55.189Z"
+                          detail_user:
+                            id: 6
+                            user_id: 6
+                            fullName: " "
+                            gender: Male
+                            country: america
+                            province: Sumut
+                            city: Medan
+                            address: Jalan Terbang Tinggi
+                            phone: "0813"
+                            createdAt: "2022-12-19T04:45:43.937Z"
+                            updatedAt: "2022-12-24T17:10:52.600Z"
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-admin-data
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  "/admin/data/{userId}":
+    parameters:
+      - schema:
           type: string
-      - name: notificationId
+        name: userId
         in: path
         required: true
-        schema:
-          type: integer
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Get Detail User
       tags:
-        - "Admin : Notification"
+        - "Admin : CRUD User"
       responses:
         "200":
           description: OK
@@ -932,51 +677,38 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success update notification
+                    message: Get detail user success
                     data:
-                      id: 1
-                      user_id: 1
-                      title: "Flight Delay"
-                      detail_message: "Your flight JT999 has been delayed"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-                      updatedAt: "2022-12-10T05:19:11.997Z"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
-      operationId: put-notification-notificationId
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            examples:
-              Example 1:
-                value:
-                  user_id: 1
-                  title: "Flight Delay"
-                  detail_message: "Your flight JT999 has been delayed"
-      parameters: []
-      description: Update Notification
-      security:
-        - Authorization: []
-  /notification/{notificationId}:
+                      id: 6
+                      username: frans
+                      email: drmundo280199@gmail.com
+                      role: User
+                      user_type: Basic
+                      is_verified: 1
+                      createdAt: "2022-12-19T04:45:43.932Z"
+                      updatedAt: "2022-12-19T04:45:55.189Z"
+                      detail_user:
+                        id: 6
+                        user_id: 6
+                        fullName: " "
+                        gender: Male
+                        country: america
+                        province: Sumut
+                        city: Medan
+                        address: Jalan Terbang Tinggi
+                        phone: "0813"
+                        createdAt: "2022-12-19T04:45:43.937Z"
+                        updatedAt: "2022-12-24T17:10:52.600Z"
+      operationId: get-user-data-userId
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
     delete:
-      summary: Delete Notification
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: notificationId
-        in: path
-        required: true
-        schema:
-          type: integer
+      summary: Delete User
       tags:
-        - "Admin : Notification"
+        - "Admin : CRUD User"
       responses:
         "200":
           description: OK
@@ -989,79 +721,24 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Success delete notification
-                    data:
-                      id: 1
-                      user_id: 1
-                      title: "Flight Delay"
-                      detail_message: "Your flight JT999 has been delayed"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-                      updatedAt: "2022-12-10T05:19:11.997Z"
+                    message: delete user success
         "401":
           description: Unauthorized
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
-      operationId: delete-notification-notificationId
-      parameters: []
-      description: Delete Notification
-      security:
-        - Authorization: []
-  /notification/{id}/:
-    get:
-      summary: Get Notification By Id
+      operationId: delete-admin-data-userId
       parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-      tags:
-        - "User : Notification"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Notification data retrived successfully
-                    data:
-                      id: 1
-                      user_id: 1
-                      title: "Flight Delay"
-                      detail_message: "Your flight JT999 has been delayed"
-                      createdAt: "2022-12-10T05:19:11.997Z"
-                      updatedAt: "2022-12-10T05:19:11.997Z"
-        401:
-          description: Unauthorized
-        500:
-          description: Internal Server Error
-      operationId: get-notification-notificationId
-      parameters: []
-      description: Get Notification By Id
-      security:
-        - Authorization: []
-  /transaction/:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /admin/data?limit=5&page=1&order=asc:
     get:
-      summary: Get All Transaction
-      parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
+      summary: Paginate User
       tags:
-        - "Admin : Transaction"
+        - "Admin : CRUD User"
       responses:
         "200":
           description: OK
@@ -1074,67 +751,119 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Transaction data retrived successfully
+                    message: Sucess get data!
                     data:
-                    - id: 1
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      user_transaction:
-                        username: Admin
-                        email: umar@unira.ac.id
-                      detail_transaction:
-                        transaction_id: 1
-                        flight:
-                          code: JT999
-                    - id: 2
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      user_transaction:
-                        username: Admin
-                        email:
-                      detail_transaction:
-                        transaction_id: 2
-                        flight:
-                          code: JT999
-                    - id: 3
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      user_transaction:
-                        username: Admin
-                        email:
-                      detail_transaction:
-                        transaction_id: 3
-                        flight:
-                          code: JT999
-                    - id: 4
-                      isPaid: false
-                      roundTrip: "2022-12-20T00:00:00.000Z"
-                      oneWay: "2022-12-23T00:00:00.000Z"
-                      user_transaction:
-                        username: Admin
-                        email:
-                      detail_transaction:
-                        transaction_id: 4
-                        flight:
-                          code: JT999
-
-        "401":
-          description: Unauthorized
+                      page: 1
+                      totalPage: 6
+                      totalData: 30
+                      rows:
+                        - id: 2
+                          username: john12
+                          email: johnsihombing80@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T03:44:47.695Z"
+                          updatedAt: "2022-12-19T03:44:47.695Z"
+                          detail_user:
+                            id: 2
+                            user_id: 2
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-19T03:44:47.929Z"
+                            updatedAt: "2022-12-19T03:44:47.929Z"
+                        - id: 4
+                          username: aroyan
+                          email: aroyanbakti2@gmail.com
+                          role: Admin
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T04:06:28.400Z"
+                          updatedAt: "2022-12-19T04:06:40.488Z"
+                          detail_user:
+                            id: 4
+                            user_id: 4
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-19T04:06:28.408Z"
+                            updatedAt: "2022-12-19T04:06:28.408Z"
+                        - id: 50
+                          username: hehehe
+                          email: achmadfadilla112@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-28T15:30:01.899Z"
+                          updatedAt: "2022-12-28T15:31:22.586Z"
+                          detail_user:
+                            id: 41
+                            user_id: 50
+                            fullName: null
+                            gender: null
+                            country: null
+                            province: null
+                            city: null
+                            address: null
+                            phone: null
+                            createdAt: "2022-12-28T15:30:01.904Z"
+                            updatedAt: "2022-12-28T15:30:01.904Z"
+                        - id: 6
+                          username: frans
+                          email: drmundo280199@gmail.com
+                          role: User
+                          user_type: Basic
+                          is_verified: 1
+                          createdAt: "2022-12-19T04:45:43.932Z"
+                          updatedAt: "2022-12-19T04:45:55.189Z"
+                          detail_user:
+                            id: 6
+                            user_id: 6
+                            fullName: " "
+                            gender: Male
+                            country: indonesia
+                            province: Sumut
+                            city: Medan
+                            address: Jalan Terbang Tinggi
+                            phone: "0813"
+                            createdAt: "2022-12-19T04:45:43.937Z"
+                            updatedAt: "2022-12-27T09:55:10.015Z"
+                        - id: 7
+                          username: SENA PRATAMA
+                          email: 2010631170031@student.unsika.ac.id
+                          role: null
+                          user_type: Google
+                          is_verified: 1
+                          createdAt: "2022-12-19T05:55:53.568Z"
+                          updatedAt: "2022-12-19T05:55:53.568Z"
+                          detail_user: null
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
-      operationId: get-transaction
-      parameters: []
-      description: Get All Transaction
-      security:
-        - Authorization: []
-  /transaction/{id}:
-   get: 
-      summary: Get Transaction By Id
+      operationId: get-admin-data?limit=5&page=1&order=asc
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    parameters: []
+  /schedule/search:
+    get:
+      summary: Search Flight By User
       tags:
-        - "Admin : Transaction"
+        - "Flight : User"
       responses:
         "200":
           description: OK
@@ -1147,100 +876,577 @@ paths:
                 Example 1:
                   value:
                     status: true
-                    message: Transaction data retrived successfully
+                    message: Success Get Data
                     data:
-                    isPaid: false
-                    roundTrip: "2022-12-20T00:00:00.000Z"
-                    oneWay: "2022-12-23T00:00:00.000Z"
-                    user_transaction:
-                      username: Admin
-                      email: umar@unira.ac.id
-                    detail_transaction:
-                      transaction_id: 8
-                      flight:
-                        code: JT999
+                      - id: 2
+                        code: JT767
                         airlineName: Lion Air
                         departureAirport: Kuala Namu
                         departure: KNO
-                        arrivalAirport: Soekarno Hatta
-                        arrival: CGK
-                        date: "2022-12-21T00:00:00.000Z"
-                        departureTime: "11:00:00"
-                        arrivalTime: "22:35:00"
+                        arrivalAirport: Ngurah Rai
+                        arrival: DPS
+                        date: "2022-12-22"
+                        capacity: 242
+                        tripType: one_way
+                        sc: Economy
+                        departureTime: "14:00:00"
+                        arrivalTime: "16:35:00"
                         price: 2500000
-                      passenger:
-                        email: -
-                        firstName: -
-                        lastName: -
-                        phone: -
-      operationId: get-transaction-id
-      parameters: []
-      description: Get Transaction By Id
-      security:
-        - Authorization: []
-  /transaction:
-    post:
-      summary: Creates a new transaction.
-      tags:
-        - "User : Transaction"
-      consumes:
-        - application/json
-      parameters: 
-        - in: header
-          name: authorization
-          required: true
-          schema:
+                        updatedAt: "2022-12-21T17:22:25.972Z"
+                      - id: 5
+                        code: JT787
+                        airlineName: Lion Air
+                        departureAirport: Kuala Namu
+                        departure: KNO
+                        arrivalAirport: Ngurah Rai
+                        arrival: DPS
+                        date: "2022-12-22"
+                        capacity: 250
+                        tripType: one_way
+                        sc: Economy
+                        departureTime: "14:00:00"
+                        arrivalTime: "16:35:00"
+                        price: 2500000
+                        updatedAt: "2022-12-21T17:24:38.285Z"
+      operationId: get-schedule-search
+      parameters:
+        - schema:
             type: string
+          in: query
+          name: departure
+        - schema:
+            type: string
+          in: query
+          name: arrival
+        - schema:
+            type: string
+          in: query
+          name: date
+        - schema:
+            type: string
+          in: query
+          name: sc
+        - schema:
+            type: string
+          in: query
+          name: tripType
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /user/updateProfile:
+    patch:
+      summary: Update Profile User
+      tags:
+        - "User : Profile"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Profile updated successfully
+                    data:
+                      fullName: John Binar Academy Tes
+                      gender: Male
+                      country: America
+                      province: Sumut
+                      city: Medan
+                      address: Jalan Terbang Tinggi
+                      phone: "0813"
+      operationId: patch-user-updateProfile
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
       requestBody:
-        description: Transaction object that needs to be added to the store
-        required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - flight_id
-                - passenger
-              properties:
-                flightId:
-                  type: integer
-                Passenger:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      firstName:
-                        type: string
-                      lastName:
-                        type: string
-                      email:
-                        type: string
-                      phone:
-                        type: string
-                      type:
-                        type: string
-                        enum:
-                          - adult
-                          - child
-                          - infant
+              properties: {}
             examples:
               Example 1:
                 value:
-                  flightId: 2
-                  Passenger:
-                    - firstName: Umar
-                      lastName: Mansyur
-                      email: umar@unira.ac.id
-                      phone: 081234567890
-                      type: adult
-                    - firstName: Ahmad
-                      lastName: Fadilah
-                      email: fadilah@gmail.com
-                      phone: 081234567890
-                      type: child
+                  first_name: John
+                  last_name: Binar Academy Tes
+                  gender: Male
+                  country: America
+                  province: Sumut
+                  city: Medan
+                  address: Jalan Terbang Tinggi
+                  phone: "0813"
+  /user/myProfile:
+    get:
+      summary: Get My Profile
+      tags:
+        - "User : Profile"
       responses:
-        201:
-          description: Created
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: berhasil dapat data!
+                    data:
+                      username: john123
+                      email: johnsihombing80@gmail.com
+                      thumbnail: null
+                      fullName: John Binar Academy
+                      gender: Male
+                      country: America
+                      province: Sumut
+                      city: Medan
+                      address: Jalan Terbang Tinggi
+                      phone: "0813"
+      operationId: get-user-myProfile
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /airport/indonesia:
+    get:
+      summary: Search Indonesia Airport
+      tags:
+        - Airport
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success Get Data
+                    data:
+                      - airportCode: ABU
+                        airportName: A A Bere Tallo
+                        airportLocation: "Atambua, Indonesia"
+                        cityName: Atambua
+                        countryName: Indonesia
+                        alias:
+                          - Haliwen
+                          - Hali wen
+                          - Atambua
+                          - atam bua
+                          - AA
+                          - A. A.
+                          - "A.A. "
+                          - "Bere "
+                          - Tallo
+                          - Talo
+                          - Bere Tallo
+                          - Beretalo
+                          - Bere talo
+                      - airportCode: MLG
+                        airportName: Abdul Rachman Saleh
+                        airportLocation: "Malang, Indonesia"
+                        cityName: Malang
+                        countryName: Indonesia
+                        alias:
+                          - Batu
+                          - Kota Batu
+                          - ML
+                          - Bromo
+                          - Ngalam
+                          - AbdulrahmanSaleh
+                          - Abdul Rahman Saleh
+                          - Abdulrahman Saleh
+                          - Abdul Rachmansaleh
+                          - Abdul Rachman Saleh
+                      - airportCode: SRG
+                        airportName: Achmad Yani
+                        airportLocation: "Semarang, Indonesia"
+                        cityName: Semarang
+                        countryName: Indonesia
+                        alias:
+                          - "Ahmad Yani "
+                          - "Ahmadyani "
+                          - Achmad Yani
+                          - "Achmadyani "
+                          - " Lawang Sewu "
+                          - " Simpanglima"
+                          - Simpang lima
+                          - " Semarang "
+                          - " SMG"
+                      - airportCode: SOC
+                        airportName: Adisumarmo
+                        airportLocation: "Surakarta (Solo), Indonesia"
+                        cityName: Surakarta (Solo)
+                        countryName: Indonesia
+                        alias:
+                          - "Adisumarmo "
+                          - " Adi Sumarmo"
+                          - Adisoemarmo
+                          - Adi Soemarmo
+                          - " Surakarta "
+                          - " Solo "
+                          - " Sala "
+                          - " SLO"
+                      - airportCode: AEG
+                        airportName: Aek Godang
+                        airportLocation: "Aek Godang, Indonesia"
+                        cityName: Aek Godang
+                        countryName: Indonesia
+                        alias:
+                          - Aekgodang
+                          - Tapanuli Selatan
+                          - Tapanuli
+                      - airportCode: VPM
+                        airportName: Ampenan
+                        airportLocation: "Mataram, Indonesia"
+                        cityName: Mataram
+                        countryName: Indonesia
+                        alias: []
+                      - airportCode: AAP
+                        airportName: Apt Pranoto
+                        airportLocation: "Samarinda, Indonesia"
+                        cityName: Samarinda
+                        countryName: Indonesia
+                        alias:
+                          - SRI
+                          - Apt
+                          - pranoto
+                          - apt pranoto
+                          - aptpranoto
+                          - Aji Pangeran Tumenggung Pranoto
+                          - Aji
+                          - Pangeran
+                          - Tumenggung
+                          - Termindung
+                      - airportCode: PXA
+                        airportName: Atung Bungsu
+                        airportLocation: "Lahat, Indonesia"
+                        cityName: Lahat
+                        countryName: Indonesia
+                        alias:
+                          - "Atung Bungsu "
+                          - " Atungbungsu "
+                          - Pagar alam
+                          - "Pagaralam "
+                          - "Lahat "
+                          - Dempo Selatan
+                      - airportCode: BXB
+                        airportName: Babo
+                        airportLocation: "Irarutu, Indonesia"
+                        cityName: Irarutu
+                        countryName: Indonesia
+                        alias:
+                          - Papua Barat
+                          - Bintuni
+                          - Papua
+                          - Teluk Bintuni
+                          - Telukbintuni
+                      - airportCode: LMU
+                        airportName: Bandar Udara Letung
+                        airportLocation: "Letung, Indonesia"
+                        cityName: Letung
+                        countryName: Indonesia
+                        alias:
+                          - Bukit Padi
+                          - Jemaja Timur
+                          - Kepulauan Anambas
+                          - Kep. Anambas
+                          - Anambas
+                          - Anambas Island
+                          - Kepri
+                          - Kepulauan Riau
+                          - Kep. Riau
+                      - airportCode: BTW
+                        airportName: Batu Licin
+                        airportLocation: "Batu Licin, Indonesia"
+                        cityName: Batu Licin
+                        countryName: Indonesia
+                        alias:
+                          - Bersujud Batulicin
+                          - Batulicin
+                          - Bersujud
+                          - Tanah Bumbu
+                          - Tanahbumbu
+                          - Kalimantan Selatan
+                          - Kalsel
+                      - airportCode: BUW
+                        airportName: "Betoambari "
+                        airportLocation: "Baubau, Indonesia"
+                        cityName: Baubau
+                        countryName: Indonesia
+                        alias:
+                          - Beto ambari
+                          - Bau-bau
+                          - Bau bau
+                          - Pulau Buton
+                          - Buton
+                          - Buton Island
+                          - Sulawesi Tenggara
+                          - Sulteng
+                      - airportCode: GNS
+                        airportName: Binaka
+                        airportLocation: "Gunung Sitoli, Indonesia"
+                        cityName: Gunung Sitoli
+                        countryName: Indonesia
+                        alias:
+                          - Gunungsitoli
+                          - Nias
+                          - Gn Sitoli
+                          - Sitoli
+                          - Sumatra Utara
+                          - Sumut
+                      - airportCode: BWX
+                        airportName: Blimbingsari
+                        airportLocation: "Banyuwangi, Indonesia"
+                        cityName: Banyuwangi
+                        countryName: Indonesia
+                        alias:
+                          - Banyu Wangi
+                          - Blimbing Sari
+                          - Ijen
+                          - Baluran
+                          - BW
+                      - airportCode: PGQ
+                        airportName: Buli Airport
+                        airportLocation: "Maba, Indonesia"
+                        cityName: Maba
+                        countryName: Indonesia
+                        alias:
+                          - buli
+                          - maba
+                          - Halmahera Timur
+                          - Pekaulang
+                          - Maluku Utara
+                      - airportCode: MEQ
+                        airportName: Cut Nyak Dien
+                        airportLocation: "Cut Nyak Dien, Indonesia"
+                        cityName: Cut Nyak Dien
+                        countryName: Indonesia
+                        alias:
+                          - Cut Nyak Dhien Nagan Raya
+                          - Cut Nyak Dhien
+                          - Cutnyakdhien
+                          - Cut Nyak Din
+                          - Cutnyakdin
+                          - Nagan Raya
+                          - Naganraya
+                          - Aceh
+                      - airportCode: SIQ
+                        airportName: Dabo Singkep
+                        airportLocation: "Singkep, Indonesia"
+                        cityName: Singkep
+                        countryName: Indonesia
+                        alias:
+                          - "Dabo "
+                          - " Pulau Singkep "
+                          - "Singkep Island "
+                          - Kepri
+                          - "Kepulauan Riau "
+                          - " Kep. Riau "
+                          - " Lingga"
+                      - airportCode: PGK
+                        airportName: Depati Amir
+                        airportLocation: "Pangkalpinang, Indonesia"
+                        cityName: Pangkalpinang
+                        countryName: Indonesia
+                        alias:
+                          - bangka
+                          - Depatiamir
+                          - Pangkal Pinang
+                          - Kepulauan Bangka Belitung
+                          - Pangkal-pinang
+                          - Bangka Belitung
+                          - Bangka-Belitung
+                      - airportCode: KRC
+                        airportName: Depati Parbo
+                        airportLocation: "Kerinci, Indonesia"
+                        cityName: Kerinci
+                        countryName: Indonesia
+                        alias:
+                          - Depatiparbo
+                          - Sitinjau Laut
+                          - Hiang Tinggi
+                          - Jambi
+                          - Krinci
+                      - airportCode: KWB
+                        airportName: Dewadaru Airport
+                        airportLocation: "Karimunjawa, Indonesia"
+                        cityName: Karimunjawa
+                        countryName: Indonesia
+                        alias:
+                          - dewa daru
+                          - Karimun Jawa
+                          - Kemujan
+                          - Kemujan Island
+                          - Pulau Kemujan
+                      - airportCode: SOQ
+                        airportName: Dominique Edward Osok
+                        airportLocation: "Sorong, Indonesia"
+                        cityName: Sorong
+                        countryName: Indonesia
+                        alias:
+                          - Papua
+                          - Papua Barat
+                          - "Dominique Edward Osok "
+                          - " Dominic "
+                          - "Dominiq "
+                          - Dominik
+                          - "Jefman "
+                          - " Raja Ampat"
+                          - " Rajaampat "
+                          - Sorong
+                      - airportCode: FLZ
+                        airportName: Dr. Ferdinand Lumban Tobing
+                        airportLocation: "Sibolga, Indonesia"
+                        cityName: Sibolga
+                        countryName: Indonesia
+                        alias:
+                          - Ferdinan Lumban Tobing
+                          - Ferdinan Lumbantobing
+                          - Ferdinan
+                          - Tapanuli Tengah
+                          - Pinang sori
+                          - Pinangsori
+                          - Sumatra Utara
+                          - Sumut
+                      - airportCode: KOE
+                        airportName: El Tari
+                        airportLocation: "Kupang, Indonesia"
+                        cityName: Kupang
+                        countryName: Indonesia
+                        alias:
+                          - Eltari
+                          - Nusa Tenggara Timur
+                          - NTT
+                      - airportCode: EWE
+                        airportName: Ewer
+                        airportLocation: "Ewer, Indonesia"
+                        cityName: Ewer
+                        countryName: Indonesia
+                        alias: []
+                      - airportCode: FKQ
+                        airportName: Fakfak Torea
+                        airportLocation: "Fak Fak, Indonesia"
+                        cityName: Fak Fak
+                        countryName: Indonesia
+                        alias:
+                          - Fak fak
+                          - Fak-fak
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-airport-indonesia
+  /airport/all:
+    get:
+      summary: Search All Airport
+      tags:
+        - Airport
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success Get Data
+                    data:
+                      - airportCode: AAA
+                        airportName: Anaa Airport
+                        airportLocation: Tuamotu-Gambier
+                        cityName: Anaa
+                        countryName: French Polynesia
+                      - airportCode: AAE
+                        airportName: El Mellah Airport
+                        airportLocation: Annaba
+                        cityName: El Tarf
+                        countryName: Algeria
+                      - airportCode: AAL
+                        airportName: Aalborg Airport
+                        airportLocation: Nordjylland
+                        cityName: Norresundby
+                        countryName: Denmark
+                      - airportCode: AAM
+                        airportName: Mala Mala
+                        airportLocation: ""
+                        cityName: Mala Mala
+                        countryName: South Africa
+                      - airportCode: AAN
+                        airportName: Al Ain Airport
+                        airportLocation: Abu Dhabi
+                        cityName: Ayn al Faydah
+                        countryName: United Arab Emirates
+                      - airportCode: AAQ
+                        airportName: Olkhovka Airport
+                        airportLocation: Krasnodarskiy Kray
+                        cityName: Novorossiysk
+                        countryName: Russia
+                      - airportCode: AAR
+                        airportName: Tirstrup Airport
+                        airportLocation: Midtjylland
+                        cityName: Kolind
+                        countryName: Denmark
+                      - airportCode: AAT
+                        airportName: Altay Airport
+                        airportLocation: Xinjiang
+                        cityName: Altay
+                        countryName: China
+                      - airportCode: AAX
+                        airportName: Romeu Zuma Airport
+                        airportLocation: Minas Gerais
+                        cityName: Araxá
+                        countryName: Brazil
+                      - airportCode: AAY
+                        airportName: Al Gaidah Airport
+                        airportLocation: Hadramawt
+                        cityName: Al Ghaydah
+                        countryName: Yemen
+                      - airportCode: ABA
+                        airportName: Abakan
+                        airportLocation: Khakasiya
+                        cityName: Abakan
+                        countryName: Russian Federation
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-airport-all
+  /notification:
+    post:
+      summary: Create Notification
+      tags:
+        - "Admin : Notification"
+      responses: {}
+      operationId: post-notification
+  /transaction/:
+    post:
+      summary: Create Transaction
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -1253,55 +1459,636 @@ paths:
                     message: Transaction created successfully
                     data:
                       transaction:
-                        id: 1
-                        user_id: 43
+                        id: 3
+                        user_id: 1
                         isPaid: false
-                        updatedAt: '2022-12-18T14:45:27.275Z'
-                        createdAt: '2022-12-18T14:45:27.275Z'
+                        payment_code: a4b55723adedca4b8cf3a3027957d6aeb15e2304
+                        total: 1
+                        updatedAt: "2022-12-21T17:13:11.780Z"
+                        createdAt: "2022-12-21T17:13:11.780Z"
                         detail_transaction:
-                          id: 1
-                          transaction_id: 1
+                          id: 137
+                          transaction_id: 3
                           flight_id: 2
-                          updatedAt: '2022-12-18T14:45:29.588Z'
-                          createdAt: '2022-12-18T14:45:29.588Z'
+                          updatedAt: "2022-12-21T17:13:11.803Z"
+                          createdAt: "2022-12-21T17:13:11.803Z"
                           passenger:
-                          - id: 100
-                            email: umar.@unira.ac.id
-                            firstName: Umar
-                            lastName: M
-                            phone: '085231339223'
-                            travelDocument:
-                            detail_transaction_id: 1
-                            createdAt: '2022-12-18T14:45:29.778Z'
-                            updatedAt: '2022-12-18T14:45:29.778Z'
-                            type: Adult
-                          - id: 101
-                            email: john@gmail.com
-                            firstName: John
-                            lastName: Putra
-                            phone: '085231339223'
-                            travelDocument:
-                            detail_transaction_id: 1
-                            createdAt: '2022-12-18T14:45:29.778Z'
-                            updatedAt: '2022-12-18T14:45:29.778Z'
-                            type: Adult
-                
-     
+                            - id: 195
+                              email: testinglagi@gmail.com
+                              firstName: John Sihombing
+                              lastName: Tes
+                              phone: "012381238123"
+                              type: Adult
+                              detail_transaction_id: 137
+                              createdAt: "2022-12-21T17:13:11.807Z"
+                              updatedAt: "2022-12-21T17:13:11.807Z"
+                              travelDocument: null
+                Example 2:
+                  value:
+                    flight_id: 2
+                    passenger:
+                      - email: halo@gmail.com
+                        firstName: John Sihombing
+                        lastName: Tes
+                        phone: "012381238123"
+                        type: Adult
+                      - email: testingpenumpang2@gmail.com
+                        firstName: Sihombing
+                        lastName: Tes
+                        phone: "012381238123"
+                        type: Adult
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: post-transaction
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              Example 1:
+                value:
+                  flight_id: 2
+                  passenger:
+                    - email: testinglagi@gmail.com
+                      firstName: John Sihombing
+                      lastName: Tes
+                      phone: "012381238123"
+                      type: Adult
+  "/ticket/{payment_code}":
+    parameters:
+      - schema:
+          type: string
+        name: payment_code
+        in: path
+        required: true
+    get:
+      summary: Get Detail Order
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Sucess Get Detail My Order
+                    data:
+                      isPaid: false
+                      payment_code: eabd20fc128847c4cf2ac7063aca901cfd49f50b
+                      detail_transaction:
+                        - id: 72
+                          transaction_id: 13
+                          flight_id: 2
+                          flight:
+                            id: 2
+                            code: "12312"
+                            airlineName: Garuda Indonesia
+                            departureAirport: Abdul Rachman Saleh
+                            departure: MLG
+                            arrivalAirport: Juanda
+                            arrival: SUB
+                            date: "2022-12-19T00:00:00.000Z"
+                            returnDate: null
+                            passengers: 1
+                            tripType: one_way
+                            sc: economy
+                            departureTime: "06:00:00"
+                            arrivalTime: "07:00:00"
+                            price: 2000000
+                          passenger:
+                            - id: 142
+                              detail_transaction_id: 72
+                              email: testinglagi@gmail.com
+                              firstName: John Sihombing
+                              lastName: Tes
+                              phone: "012381238123"
+                              type: Adult
+                              travelDocument: null
+                      user_transaction:
+                        username: tejxdxsudjdjdjser
+                        email: iklcusu@gmail.com
+                        role: User
+                        user_type: Basic
+                        is_verified: 1
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-ticket-payment_code
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /transaction:
+    get:
+      summary: Get All My History Transaction
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success get all transaction
+                    data:
+                      - isPaid: true
+                        payment_code: 8df57858f8b8a4091392c469db5db2989db4d5ab
+                        total: 1
+                        detail_transaction:
+                          - id: 139
+                            transaction_id: 5
+                            flight_id: 2
+                            flight:
+                              id: 2
+                              code: JT767
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-22"
+                              returnDate: null
+                              capacity: 241
+                              tripType: one_way
+                              sc: Economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 198
+                                detail_transaction_id: 139
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+                      - isPaid: false
+                        payment_code: 6e610f97579ecd0afd83b5677c4751fe100345f5
+                        total: 1
+                        detail_transaction:
+                          - id: 143
+                            transaction_id: 9
+                            flight_id: 6
+                            flight:
+                              id: 6
+                              code: JT787
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-23"
+                              returnDate: null
+                              capacity: 239
+                              tripType: one_way
+                              sc: economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 203
+                                detail_transaction_id: 143
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+                      - isPaid: true
+                        payment_code: 74b480524b36fa86530fb6ee8dd5f41dfc1d6bce
+                        total: 1
+                        detail_transaction:
+                          - id: 141
+                            transaction_id: 7
+                            flight_id: 6
+                            flight:
+                              id: 6
+                              code: JT787
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-23"
+                              returnDate: null
+                              capacity: 239
+                              tripType: one_way
+                              sc: economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 200
+                                detail_transaction_id: 141
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: "https://ik.imagekit.io/5kja0otrte/WhatsApp_Image_2022-12-01_at_9.43.44_PM_KvlaF2tLX.jpeg"
+                      - isPaid: true
+                        payment_code: a4b55723adedca4b8cf3a3027957d6aeb15e2304
+                        total: 1
+                        detail_transaction:
+                          - id: 137
+                            transaction_id: 3
+                            flight_id: 2
+                            flight:
+                              id: 2
+                              code: JT767
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-22"
+                              returnDate: null
+                              capacity: 241
+                              tripType: one_way
+                              sc: Economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 195
+                                detail_transaction_id: 137
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: "https://ik.imagekit.io/5kja0otrte/Screenshot_2022-06-22_055253_hHPzoVPJl.png"
+                      - isPaid: false
+                        payment_code: dff0e98026c64fba1134f874c6ee0dbac28d13be
+                        total: 2
+                        detail_transaction:
+                          - id: 138
+                            transaction_id: 4
+                            flight_id: 2
+                            flight:
+                              id: 2
+                              code: JT767
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-22"
+                              returnDate: null
+                              capacity: 241
+                              tripType: one_way
+                              sc: Economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 196
+                                detail_transaction_id: 138
+                                email: jhalohalo@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+                              - id: 197
+                                detail_transaction_id: 138
+                                email: testingpenumpang2@gmail.com
+                                firstName: Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+                      - isPaid: true
+                        payment_code: 9e87b6e5aeb13c48489ddd2412d58999c4866e63
+                        total: 1
+                        detail_transaction:
+                          - id: 140
+                            transaction_id: 6
+                            flight_id: 5
+                            flight:
+                              id: 5
+                              code: JT787
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-22"
+                              returnDate: null
+                              capacity: 249
+                              tripType: one_way
+                              sc: Economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 199
+                                detail_transaction_id: 140
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+                      - isPaid: false
+                        payment_code: bc31624f09dbfdb452a10e0c4bd45de8f4262ba1
+                        total: 1
+                        detail_transaction:
+                          - id: 144
+                            transaction_id: 10
+                            flight_id: 2
+                            flight:
+                              id: 2
+                              code: JT767
+                              airlineName: Lion Air
+                              departureAirport: Kuala Namu
+                              departure: KNO
+                              arrivalAirport: Ngurah Rai
+                              arrival: DPS
+                              date: "2022-12-22"
+                              returnDate: null
+                              capacity: 241
+                              tripType: one_way
+                              sc: Economy
+                              departureTime: "14:00:00"
+                              arrivalTime: "16:35:00"
+                              price: 2500000
+                            passenger:
+                              - id: 204
+                                detail_transaction_id: 144
+                                email: testinglagi@gmail.com
+                                firstName: John Sihombing
+                                lastName: Tes
+                                phone: "012381238123"
+                                type: Adult
+                                travelDocument: null
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-transaction
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  "/transaction/{transactionId}":
+    parameters:
+      - schema:
+          type: string
+        name: transactionId
+        in: path
+        required: true
+    get:
+      summary: Get Detail My Transaction
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success get all transaction
+                    data:
+                      isPaid: true
+                      payment_code: f30df13f560aecfe7df1778e01dc3e2f9e822cc5
+                      total: 1
+                      detail_transaction:
+                        - id: 202
+                          transaction_id: 69
+                          flight_id: 18
+                          flight:
+                            id: 18
+                            code: IU123
+                            airlineIata: IU
+                            airlineLogo: "https://sta.nusatrip.net/static/img/front/V2/icon-flight/IU.png"
+                            airlineName: Super Air Jet
+                            departureAirport: Abdul Rachman Saleh
+                            departure: MLG
+                            arrivalAirport: Juanda
+                            arrival: SUB
+                            date: "2022-12-29"
+                            returnDate: null
+                            capacity: 0
+                            tripType: one_way
+                            sc: economy
+                            departureTime: "06:00:00"
+                            arrivalTime: "07:00:00"
+                            price: 90000
+                          passenger:
+                            - id: 287
+                              detail_transaction_id: 202
+                              email: testinglagi@gmail.com
+                              firstName: John Sihombing
+                              lastName: Tes
+                              phone: "012381238123"
+                              type: Adult
+                              travelDocument: null
+                          tiket:
+                            - id: 26
+                              detail_transaction_id: 202
+                              ticket_pdf: "https://ik.imagekit.io/5kja0otrte/ticket_FXNBr7vVH.pdf"
+                              qr_code: iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAAAAAA+16u1AAACMklEQVR42u3by27CQBAEQP7/p5NjJCSbbs8uhqh84hHIlg+jnenl8fOfrgcNDQ0NDQ0NDQ0NDQ0NDc1U83h9/f3d08eevuDwjeCrghXQ0NBs1BwXjtNVBmur/NX6aGholmuC8pOu9/C1w7tTrYCGhuYOzfmGY1LxaGhovkPTlzMaGppv01SLCXAXNz9v6dZoaGgms84tj26b3NLQ0MQx41EHk9a+w0d3pLg0NDTpfOL8tSoPCSLU4LbR0NBs1PSxZb9jqZqmebdGQ0NT7Wz6cUWQjwbVMs1SaGho9mjS5QfDkdQVbLDm/Q0NDc24v5ksus9DqsiThoZmpSbd4wRTifRp3/PQ0NC8WdP3PFVwev4/AggNDc1GTXVAsUpAJ6MOGhqajZr0HGLarVx8tx910NDQbNSk88pq5eeVrN/j0NDQLNekrioA6bPQ0ZSDhoZmjWZ8mrFvn/r7SUNDs1ITbDMuxqDBzariFhoamj2a8cghyC7TY46LTnfT0NCsSTyChOK8RqblLK2qNDQ0ezTjVQa3I9i70NDQ3KFJjySn4Gq7FKSi8/6Ghoam2tlUU8rqdlysaTQ0NLs16YnEi7ud9JBDNU6hoaFZrqmGHv3R5TQp7X5MQUNDs1pTVai0OF38LQQNDc3naYJJRbBdShNQGhqaD9UE5SzIKiY5Bw0NzUZN2pSks87zYleFpDQ0NLs1/ayz6luqyCSdetLQ0CzSfO1FQ0NDQ0NDQ0NDQ0NDQ0PTXL98/DG9UkDw6QAAAABJRU5ErkJggg==
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-transaction-transactionId
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  "/payment/{payment_code}":
+    parameters:
+      - schema:
+          type: string
+        name: payment_code
+        in: path
+        required: true
+    post:
+      summary: Payment Ticket
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success payment
+                    data:
+                      isPaid: true
+                      payment_code: 8df57858f8b8a4091392c469db5db2989db4d5ab
+                      total: 1
+                      detail_transaction:
+                        - id: 139
+                          transaction_id: 5
+                          flight_id: 2
+                          flight:
+                            id: 2
+                            code: JT767
+                            airlineName: Lion Air
+                            departureAirport: Kuala Namu
+                            departure: KNO
+                            arrivalAirport: Ngurah Rai
+                            arrival: DPS
+                            date: "2022-12-22"
+                            returnDate: null
+                            capacity: 242
+                            tripType: one_way
+                            sc: Economy
+                            departureTime: "14:00:00"
+                            arrivalTime: "16:35:00"
+                            price: 2500000
+                          passenger:
+                            - id: 198
+                              detail_transaction_id: 139
+                              email: testinglagi@gmail.com
+                              firstName: John Sihombing
+                              lastName: Tes
+                              phone: "012381238123"
+                              type: Adult
+                              travelDocument: null
+                      user_transaction:
+                        username: tejxdxsudjdjdjser
+                        email: iklcusu@gmail.com
+                        role: User
+                        user_type: Basic
+                        is_verified: 1
+      operationId: post-payment-payment_code
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /notification/user/data:
+    get:
+      summary: Get Notification By User
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success Get Notifications
+                    data:
+                      - id: 4
+                        user_id: 1
+                        title: Your Transaction Success
+                        detail_message: Check your Order Flight
+                        is_read: true
+                        createdAt: "2022-12-24T04:15:02.883Z"
+                        updatedAt: "2022-12-25T14:44:12.251Z"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-notification-user-data
+  "/transaction/generatepdf/{payment_code}":
+    parameters:
+      - schema:
+          type: string
+        name: payment_code
+        in: path
+        required: true
+    get:
+      summary: Get My Ticket
+      tags:
+        - Ticket
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: success
+                    url: "https://ik.imagekit.io/5kja0otrte/ticket_1Z7BQJywJ.pdf"
+                    buffer: iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAAAAAA+16u1AAACMElEQVR42u3by07DMBAF0Pz/T8MSqVLMvbGdBHS8Qi1NfbwYeR49vv7TOmhoaGhoaGhoaGhoaGhoaGY1x+/r5/8+PvbxgNM3gkcFO6ChodmoOQ8cw10Ge6v81f5oaGiWa2Yi2ekXjx/Q74CGhuYxzWnoWnjRoaGhebOmSlnGMY2Ghualmn4z41wmSHIey9ZoaGhmap1b/nqscktDQxO3GZsCR3UST3RxaWho0kbE+LW+ypHenk6PjYaGZqMmLW5W956qdFJ1RWloaJZrjnCl37lm6ImGhma3Zlz0qOjpCERwqIuyNRoamlSThq5x2tG3Ry62PGloaPZo+q2O36iamumJ0dDQ7NFUmw7GHfoxqbTCSUNDs1uTtjLTIHZMLBoamls0Vb0yDWf9u32pg4aGZrkmeC1oe1Su9Hk0NDQbNX1JM6iTVh+7mOTQ0NDcokkznX66Ob3PrIxpNDQ008FpuoaZ3FjW1GxoaGguVjmCUNNPP1ShcPk8NA0NzUzHIy1hpGGvj5Y0NDS3aPqtVnnL9AHS0NBs1KTXkQAc5DLBk9PSCQ0NzSJNH29mLjVBgjT/qwgaGpo+pl0cZw4C0ThGztyFaGhoVmrSbKX/yUMVsLqGCg0NzWpNFclO41d6COnp0NDQvEXTj0SlY8/pwdDQ0LxAMy5wXC1X1KPQNDQ0ezQz/ZC+iZEa9mRrNDQ007XOvj8axMOuakJDQ7NG82cXDQ0NDQ0NDQ0NDQ0NDQ1Ns74BR0iVWQy49sUAAAAASUVORK5CYII=
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-transaction-generatepdf-payment_code
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
 components:
   schemas:
     User:
       title: User
       type: object
-      x-examples:
-        Alice Smith:
-          id: 142
-          username: Alice
-          email: alice.smith@gmail.com
-          password: alice123
-          thumbnail: http.drive.com
-          role: User
-          user_type: Basic
-          is_verified: 0
       properties:
         id:
           type: integer
@@ -1319,15 +2106,157 @@ components:
           type: string
         user_type:
           type: string
-        is_verified:
-          type: integer
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
       required:
         - id
         - username
         - email
+        - password
+        - role
+        - emailVerified
+    DetailUser:
+      title: DetailUser
+      x-stoplight:
+        id: 7o7um832q8fjc
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        fullName:
+          type: string
+        gender:
+          type: string
+        country:
+          type: string
+        province:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+    Flight:
+      title: Flight
+      x-stoplight:
+        id: glycnumsu38kx
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        airlineIata:
+          type: string
+        airlineLogo:
+          type: string
+        airlineName:
+          type: string
+        departureAirport:
+          type: string
+        departure:
+          type: string
+        arrivalAirport:
+          type: string
+        arrival:
+          type: string
+        date:
+          type: string
+        returnDate:
+          type: string
+        capacity:
+          type: integer
+        tripType:
+          type: string
+        sc:
+          type: string
+        departureTime:
+          type: string
+        arrivalTime:
+          type: string
+        price:
+          type: integer
+    Transaction:
+      title: Transaction
+      x-stoplight:
+        id: g9c721kkw0wwk
+      type: object
+      properties:
+        user_id:
+          type: integer
+        isPaid:
+          type: boolean
+        payment_code:
+          type: string
+        total:
+          type: integer
+    DetailTransaction:
+      title: DetailTransaction
+      x-stoplight:
+        id: 1r2hj43nll1in
+      type: object
+      properties:
+        id:
+          type: integer
+        transaction_id:
+          type: integer
+        flight_id:
+          type: integer
+    Notification:
+      title: Notification
+      x-stoplight:
+        id: op2n61b1k7cv7
+      type: object
+      properties:
+        user_id:
+          type: integer
+        title:
+          type: string
+        detail_message:
+          type: string
+        is_read:
+          type: boolean
+    Passenger:
+      title: Passenger
+      x-stoplight:
+        id: h9fg9wfj8vqss
+      type: object
+      properties:
+        id:
+          type: integer
+        detail_transaction_id:
+          type: integer
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        type:
+          type: string
+        travelDocument:
+          type: string
+    Ticket:
+      title: Ticket
+      x-stoplight:
+        id: nuppfkgpvg4kb
+      type: object
+      properties:
+        id:
+          type: integer
+        detail_transaction_id:
+          type: integer
+        ticket_pdf:
+          type: string
+        qr_code:
+          type: string
   securitySchemes:
     Authorization:
       type: http
       scheme: basic
-security:
-  - Authorization: []
