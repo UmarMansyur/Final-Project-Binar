@@ -221,8 +221,8 @@ module.exports = {
 
       let user = await User.findOne({ where: { email: email } });
 
-      if (!user)
-        user = await User.create({
+      if (!user) {
+        await User.create({
           username: name,
           email,
           thumbnail: picture,
@@ -230,20 +230,29 @@ module.exports = {
           user_type: userTypes.google,
           is_verified: 1,
         });
+      }
 
-      await DetailUser.create({
-        user_id: user.id,
+      let newUser = await User.findOne({ where: { email: email } });
+
+      let detailUser = await DetailUser.findOne({
+        where: { user_id: newUser.id },
       });
 
-      delete user.encryptedPassword;
+      if (!detailUser) {
+        await DetailUser.create({
+          user_id: newUser.id,
+        });
+      }
+
+      // delete user.encryptedPassword;
 
       // generate token
       const payload = {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        user_type: user.user_type,
-        role: user.role,
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        user_type: newUser.user_type,
+        role: newUser.role,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
 
@@ -253,7 +262,7 @@ module.exports = {
         token,
       });
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   },
 
