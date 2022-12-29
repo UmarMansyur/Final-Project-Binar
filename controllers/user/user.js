@@ -62,7 +62,7 @@ module.exports = {
       const user = await User.findOne({ where: { id } });
       const detail = await DetailUser.findOne({ where: { user_id: id } });
 
-      if (!user || !detail)
+      if (!user)
         return res
           .status(400)
           .json({ status: false, message: "user not found!" });
