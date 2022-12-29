@@ -10,8 +10,6 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./documentation.yaml");
-const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
 const graphql = require("./routes/graphql");
 
 const { HTTP_PORT } = process.env;
@@ -32,8 +30,8 @@ app.use(express.static(path.join(__dirname, "client")));
 //documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/pdf', (req, res) => {
-  return res.render('report');
+app.get("/pdf", (req, res) => {
+  return res.render("report");
 });
 
 // 404 handler
