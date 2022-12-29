@@ -231,6 +231,10 @@ module.exports = {
           is_verified: 1,
         });
 
+      await DetailUser.create({
+        user_id: user.id,
+      });
+
       delete user.encryptedPassword;
 
       // generate token
