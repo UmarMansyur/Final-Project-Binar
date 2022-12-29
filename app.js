@@ -9,7 +9,7 @@ const path = require("path");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
-const swaggerDocument = YAML.load("./documentation.yaml");
+const swaggerDocument = YAML.load("./documentationSwagger.yaml");
 const graphql = require("./routes/graphql");
 
 const { HTTP_PORT } = process.env;
