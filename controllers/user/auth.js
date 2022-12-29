@@ -262,7 +262,7 @@ module.exports = {
         token,
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   },
 
@@ -285,7 +285,7 @@ module.exports = {
         token,
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   },
 
@@ -316,6 +316,19 @@ module.exports = {
           message: "invalid token!",
         });
       }
+
+      let strongPassword = new RegExp(
+        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})"
+      );
+
+      let check = strongPassword.test(newPassword);
+      if (!check)
+        return res.status(400).json({
+          status: false,
+          message:
+            "Password min 6 character, include a minimum of 1 lower case letter [a-z], a minimum of 1 upper case letter [A-Z] , and a minimum of 1 numeric character [0-9]",
+        });
+
       if (newPassword != confirmPassword) {
         return res.status(400).json({
           status: false,
