@@ -244,8 +244,6 @@ module.exports = {
         });
       }
 
-      // delete user.encryptedPassword;
-
       // generate token
       const payload = {
         id: newUser.id,
