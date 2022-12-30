@@ -76,11 +76,11 @@ module.exports = {
 
   delete: async (req, res, next) => {
     try {
-      const { notificationId } = req.params;
+      const { id } = req.params;
 
       const notification = await Notification.findOne({
         where: {
-          id: notificationId,
+          id: id,
         },
       });
 
@@ -94,13 +94,13 @@ module.exports = {
 
       const deleted = await Notification.destroy({
         where: {
-          id: notificationId,
+          id: id,
         },
       });
 
       return res.status(201).json({
         status: true,
-        detail_message: "delete notification success",
+        detail_message: "delete notification by id success",
       });
     } catch (err) {
       next(err);

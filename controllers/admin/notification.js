@@ -27,7 +27,7 @@ module.exports = {
 
       const notification = await Notification.findOne({
         where: {
-          id
+          id,
         },
       });
 
@@ -119,7 +119,6 @@ module.exports = {
       return res.status(201).json({
         status: true,
         detail_message: "delete notification success",
-        data: deleted,
       });
     } catch (err) {
       next(err);

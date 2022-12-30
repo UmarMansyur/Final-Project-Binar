@@ -35,11 +35,11 @@ router.delete(
   userCont.userNotification.deleteAllReadNotification
 );
 
-// delete notif
+// delete notif by id
 router.delete(
-  "/:notificationId",
-  middle([roles.admin]),
-  cont.notification.delete
+  "/:id",
+  middle([roles.user, roles.admin]),
+  userCont.userNotification.delete
 );
 
 // get all notif created user
