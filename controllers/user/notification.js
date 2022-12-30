@@ -62,16 +62,16 @@ module.exports = {
           is_read: true,
         },
         {
-          where: { 
+          where: {
             [Op.and]: [
-          {
-            is_read: false
+              {
+                is_read: false,
+              },
+              {
+                user_id: req.user.id,
+              },
+            ],
           },
-          {
-            user_id: req.user.id
-          }
-        ]
-        },
         }
       );
       return res.status(200).json({

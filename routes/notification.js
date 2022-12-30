@@ -23,7 +23,7 @@ router.patch(
   userCont.userNotification.readAllNotifications
 );
 
-router.get(
+router.patch(
   "/read/:id",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readNotification
