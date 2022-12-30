@@ -863,7 +863,7 @@ paths:
     get:
       summary: Search Flight By User
       tags:
-        - "Flight : User"
+        - "Search Flight : User"
       responses:
         "200":
           description: OK
@@ -1432,13 +1432,6 @@ paths:
         "500":
           description: Internal Server Error
       operationId: get-airport-all
-  /notification:
-    post:
-      summary: Create Notification
-      tags:
-        - "Admin : Notification"
-      responses: {}
-      operationId: post-notification
   /transaction/:
     post:
       summary: Create Transaction
@@ -2013,39 +2006,6 @@ paths:
             type: string
           in: header
           name: Authorization
-  /notification/user/data:
-    get:
-      summary: Get Notification By User
-      tags:
-        - "User : Notification"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                Example 1:
-                  value:
-                    status: true
-                    message: Success Get Notifications
-                    data:
-                      - id: 4
-                        user_id: 1
-                        title: Your Transaction Success
-                        detail_message: Check your Order Flight
-                        is_read: true
-                        createdAt: "2022-12-24T04:15:02.883Z"
-                        updatedAt: "2022-12-25T14:44:12.251Z"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-      operationId: get-notification-user-data
   "/transaction/generatepdf/{payment_code}":
     parameters:
       - schema:
@@ -2079,6 +2039,144 @@ paths:
         "500":
           description: Internal Server Error
       operationId: get-transaction-generatepdf-payment_code
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /notiification/user/data:
+    get:
+      summary: Get All Notification
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Success Get Notifications
+                    data:
+                      - id: 71
+                        user_id: 66
+                        title: Your Transaction Success
+                        detail_message: Check your Order Flight
+                        is_read: false
+                        createdAt: "2022-12-30T03:30:32.290Z"
+                        updatedAt: "2022-12-30T03:30:32.290Z"
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: get-notiification-user-data
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  "/notification/read/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    post:
+      summary: Read Notification By Id
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: read notif by id success
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: patch-notification-read-id
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /notification/readall:
+    post:
+      summary: Read All Notification
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Read all notif success
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value: {}
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: patch-notification-readall
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    delete:
+      summary: Delete All Notif Read By User
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: "success delete all notif read by user "
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      operationId: delete-notification-readall
       parameters:
         - schema:
             type: string
