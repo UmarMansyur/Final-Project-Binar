@@ -17,16 +17,22 @@ router.post("/", middle([roles.admin]), cont.notification.create);
 // update notif
 router.put("/:notificationId", middle([roles.admin]), cont.notification.update);
 
-router.put(
+router.patch(
   "/readall",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readAllNotifications
 );
 
-router.put(
+router.patch(
   "/read/:id",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readNotification
+);
+
+router.delete(
+  "/readall",
+  middle([roles.admin, roles.user]),
+  userCont.userNotification.deleteAllReadNotification
 );
 
 // delete notif

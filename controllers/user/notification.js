@@ -1,4 +1,5 @@
 const { Notification } = require("../../models");
+const { Op } = require("sequelize");
 
 module.exports = {
   getNotifications: async (req, res, next) => {
@@ -72,6 +73,67 @@ module.exports = {
       });
     } catch (err) {
       next(err);
+    }
+  },
+
+  delete: async (req, res, next) => {
+    try {
+      const { notificationId } = req.params;
+
+      const notification = await Notification.findOne({
+        where: {
+          id: notificationId,
+        },
+      });
+
+      if (!notification) {
+        return res.status(400).json({
+          status: false,
+          detail_message: "notification not found",
+          data: null,
+        });
+      }
+
+      const deleted = await Notification.destroy({
+        where: {
+          id: notificationId,
+        },
+      });
+
+      return res.status(201).json({
+        status: true,
+        detail_message: "delete notification success",
+        data: deleted,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  deleteAllReadNotification: async (req, res, next) => {
+    try {
+      const user_id = req.user.id;
+
+      const notifications = await Notification.findAll({
+        where: {
+          user_id,
+          is_read: {
+            [Op.is]: true,
+          },
+        },
+      });
+
+      await notifications.forEach(async (notification) => {
+        await notification.destroy();
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "success delete all notif read by user ",
+        data: notifications,
+      });
+    } catch (err) {
+      console.log(err);
     }
   },
 };
