@@ -9,6 +9,7 @@ module.exports = {
         user_id: user_id,
         title: title,
         detail_message: detail_message,
+        is_read: false
       });
 
       return res.status(201).json({
