@@ -49,8 +49,7 @@ module.exports = {
       );
       return res.status(200).json({
         status: true,
-        message: "read notif success",
-        data: notification,
+        message: "read notif by id success",
       });
     } catch (err) {
       next(err);
@@ -69,7 +68,6 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Read all notif success",
-        data: notification,
       });
     } catch (err) {
       next(err);
@@ -103,7 +101,6 @@ module.exports = {
       return res.status(201).json({
         status: true,
         detail_message: "delete notification success",
-        data: deleted,
       });
     } catch (err) {
       next(err);
@@ -130,10 +127,9 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "success delete all notif read by user ",
-        data: notifications,
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   },
 };
