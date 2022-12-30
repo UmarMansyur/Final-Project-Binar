@@ -17,13 +17,13 @@ router.post("/", middle([roles.admin]), cont.notification.create);
 // update notif
 router.put("/:notificationId", middle([roles.admin]), cont.notification.update);
 
-router.post(
+router.patch(
   "/readall",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readAllNotifications
 );
 
-router.post(
+router.get(
   "/read/:id",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readNotification
