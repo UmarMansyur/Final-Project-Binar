@@ -14,16 +14,16 @@ module.exports = {
         });
       }
 
-      await Notification.update(
-        {
-          is_read: true,
-        },
-        {
-          where: {
-            user_id: id,
-          },
-        }
-      );
+      // await Notification.update(
+      //   {
+      //     is_read: true,
+      //   },
+      //   {
+      //     where: {
+      //       user_id: id,
+      //     },
+      //   }
+      // );
 
       return res.status(200).json({
         status: true,
@@ -31,6 +31,46 @@ module.exports = {
         data: exist,
       });
     } catch (error) {
+      next(err);
+    }
+  },
+
+  readNotification: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const notification = await Notification.update(
+        {
+          is_read: true,
+        },
+        {
+          where: { id: id },
+        }
+      );
+      return res.status(200).json({
+        status: true,
+        message: "read notif success",
+        data: notification,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+  readAllNotifications: async (req, res, next) => {
+    try {
+      const notification = await Notification.update(
+        {
+          is_read: true,
+        },
+        {
+          where: { is_read: false },
+        }
+      );
+      return res.status(200).json({
+        status: true,
+        message: "Read all notif success",
+        data: notification,
+      });
+    } catch (err) {
       next(err);
     }
   },
