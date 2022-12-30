@@ -2182,6 +2182,36 @@ paths:
             type: string
           in: header
           name: Authorization
+  "/notification/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Delete Notif By Id
+      tags:
+        - "User : Notification"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    detail_message: delete notification by id success
+      operationId: delete-notification-id
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
 components:
   schemas:
     User:
