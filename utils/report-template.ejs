@@ -1107,11 +1107,11 @@
                   <span class="watermark">Postsnap</span>
                   <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                   <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
-                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <span class="seat">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
                   <span class="return-date">RETURN DATE<br><span><%= flight.returnDate %></span></span>
                   <span class="flight flightslip">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat seatslip">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="seat seatslip">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                   <span class="name nameslip">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                 </div>
               </div>
@@ -1182,11 +1182,11 @@
                   <span class="watermark1">Postsnap</span>
                   <span class="name1">PASSENGER NAME<br><span><%= pass[1].lastName %>, <%= pass[1].firstName %></span></span>
                   <span class="flight1">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat1">CLASS<br><span><%= flight.sc %></span></span>
-                  <span class="boardingtime1">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <span class="seat1">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                  <span class="boardingtime1">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
                   <span class="return-date1">RETURN DATE<br><span><%= flight.returnDate %></span></span>
                   <span class="flight flightslip1">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat seatslip1">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="seat seatslip1">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                   <span class="name nameslip1">PASSENGER NAME<br><span><%= pass[1].lastName %>, <%= pass[1].firstName %></span></span>
                 </div>
               </div>
@@ -1260,11 +1260,11 @@
                   <span class="watermark">Postsnap</span>
                   <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                   <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
-                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <span class="seat">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                  <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
           
                   <span class="flight flightslip">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat seatslip">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="seat seatslip">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                   <span class="name nameslip">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                 </div>
               </div>
@@ -1335,11 +1335,11 @@
                   <span class="watermark1">Postsnap</span>
                   <span class="name1">PASSENGER NAME<br><span><%= pass[1].lastName %>, <%= pass[1].firstName %></span></span>
                   <span class="flight1">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat1">CLASS<br><span><%= flight.sc %></span></span>
-                  <span class="boardingtime1">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                  <span class="seat1">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                  <span class="boardingtime1">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
           
                   <span class="flight flightslip1">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                  <span class="seat seatslip1">CLASS<br><span><%= flight.sc %></span></span>
+                  <span class="seat seatslip1">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                   <span class="name nameslip1">PASSENGER NAME<br><span><%= pass[1].lastName %>, <%= pass[1].firstName %></span></span>
                 </div>
               </div>
@@ -1413,11 +1413,11 @@
                       <span class="watermark">Postsnap</span>
                       <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                       <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                      <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
-                      <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                      <span class="seat">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                      <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
                       <span class="return-date">RETURN DATE<br><span><%= flight.returnDate %></span></span>
                       <span class="flight flightslip">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                      <span class="seat seatslip">CLASS<br><span><%= flight.sc %></span></span>
+                      <span class="seat seatslip">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                       <span class="name nameslip">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                     </div>
                   </div>
@@ -1491,10 +1491,10 @@
                         <span class="watermark">Postsnap</span>
                         <span class="name">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                         <span class="flight">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                        <span class="seat">CLASS<br><span><%= flight.sc %></span></span>
-                        <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime %> ON <%= flight.date %></span></span>
+                        <span class="seat">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
+                        <span class="boardingtime">BOARDING TIME<br><span><%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %> ON <%= flight.date %></span></span>
                         <span class="flight flightslip">FLIGHT N&deg;<br><span><%= flight.code %></span></span>
-                        <span class="seat seatslip">CLASS<br><span><%= flight.sc %></span></span>
+                        <span class="seat seatslip">CLASS<br><span><%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></span></span>
                         <span class="name nameslip">PASSENGER NAME<br><span><%= pass[0].lastName %>, <%= pass[0].firstName %></span></span>
                       </div>
                     </div>
