@@ -18,7 +18,7 @@ router.post("/", middle([roles.admin]), cont.notification.create);
 router.put("/:notificationId", middle([roles.admin]), cont.notification.update);
 
 router.put(
-  "/read-all",
+  "/readall",
   middle([roles.admin, roles.user]),
   userCont.userNotification.readAllNotifications
 );
