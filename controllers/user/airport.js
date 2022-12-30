@@ -38,7 +38,7 @@ module.exports = {
   getIndoAirport: async (req, res, next) => {
     try {
       const url =
-        "https://gist.githubusercontent.com/aroyan/89b170c9f76df8f76c31d3fe1b1d33df/raw/9a8dcd2196a1a9c2087c860de02085ef42e1f78e/allAirportInIndonesia.json";
+        "https://gist.githubusercontent.com/aroyan/89b170c9f76df8f76c31d3fe1b1d33df/raw/5b6f528c5cb2ccb3e519974d613a14651085d497/allAirportInIndonesia.json";
       const options = {
         method: "GET",
 

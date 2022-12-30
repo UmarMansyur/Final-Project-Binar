@@ -5,6 +5,15 @@ module.exports = {
     try {
       const id = req.user.id;
 
+      const exist = await Notification.findAll({ where: { user_id: id } });
+
+      if (!exist) {
+        return res.status(400).json({
+          status: null,
+          message: "Data not found",
+        });
+      }
+
       await Notification.update(
         {
           is_read: true,
@@ -15,15 +24,6 @@ module.exports = {
           },
         }
       );
-
-      const exist = await Notification.findAll({ where: { user_id: id } });
-
-      if (!exist) {
-        return res.status(400).json({
-          status: null,
-          message: "No Notif",
-        });
-      }
 
       return res.status(200).json({
         status: true,
