@@ -385,6 +385,24 @@ module.exports = {
         qr_code: b1,
       });
 
+      const html3 = await email1.getHtml("email/payment.ejs", {
+        trans: trans,
+        detailtrans: detailtrans,
+        flight: flight,
+        pass: pass,
+        link1,
+      });
+
+      const user = req.user;
+      let today = new Date().toLocaleDateString();
+
+      const response = await email1.sendEmail(
+        `${user.email}`,
+        "Your Order Confirmation On Terbang Tinggi Website Successful, Date : " +
+          today,
+        `${html3}`
+      );
+
       return res.status(200).json({
         status: true,
         message: "success",

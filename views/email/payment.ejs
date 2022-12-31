@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Confirmation</title>
+  </head>
+  <body>
+    <h1>Order Confirmation</h1>
+    <p>
+      Thank you for booking your flight with us! Here are the details of your
+      reservation:
+    </p>
+    <ul>
+      <h3>Detail Penerbangan</h3>
+      <li>Departure Airport: <%= flight.departureAirport %></li>
+      <li>Departure : <%= flight.departure %></li>
+      <li>Departure Date: <%= flight.date %></li>
+      <li>Arrival Airport: <%= flight.arrivalAirport %></li>
+      <li>Arrival: <%= flight.arrival %></li>
+      <li>Departure Time: <%= flight.departureTime %></li>
+      <li>Arrival Time: <%= flight.arrivalTime%></li>
+      <li>Trip Type: <%= flight.tripType%></li>
+      <li>Seat Class: <%= flight.sc%></li>
+      <li>Price : <%= flight.price%></li>
+      <br />
+      <h3>Get Your Ticket</h3>
+      <li><b>Download Your Ticket:</b> <%= link1%></li>
+    </ul>
+    <p>We look forward to seeing you on board!</p>
+  </body>
+</html>
