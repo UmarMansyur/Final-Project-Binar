@@ -4,15 +4,26 @@ x-stoplight:
 info:
   title: Terbang Tinggi App
   version: "1.0"
-  description: API Terbang Tinggi App For Final Project Backend Javascript Binar Academy
+  description: |
+    API Terbang Tinggi App For Final Project Backend Javascript Binar Academy.
+    We Also Provide Documentation On Postman :
+    https://documenter.getpostman.com/view/23103147/2s8YsxurAy
+    ---------------------------------------------------------------------------
+
+    Backend Team 
+    1. Achmad Fadilla - Universitas Nusa Mandiri
+    2. John Tri Putra Sihombing - Universitas Sumatera Utara
+    3. Muhammad Umar Mansyur - Universitas Madura
   contact:
     email: terbangtinggiapp@gmail.com
     name: Developer
 servers:
   - description: ""
     url: "https://terbangtinggi-api-staging.km3ggwp.com/"
-  - url: "http://localhost:3000"
-    description: ""
+  - description: ""
+    url: "https://terbangtinggi-api.km3ggwp.com/"
+  - description: ""
+    url: "http://localhost:3000"
 paths:
   /auth/register:
     post:
@@ -2087,7 +2098,7 @@ paths:
         name: id
         in: path
         required: true
-    post:
+    patch:
       summary: Read Notification By Id
       tags:
         - "User : Notification"
@@ -2117,7 +2128,7 @@ paths:
           in: header
           name: Authorization
   /notification/readall:
-    post:
+    patch:
       summary: Read All Notification
       tags:
         - "User : Notification"

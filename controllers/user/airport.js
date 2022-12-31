@@ -30,7 +30,7 @@ module.exports = {
         message: "Success Get Data",
         data: data,
       });
-    } catch (error) {
+    } catch (err) {
       next(err);
     }
   },
