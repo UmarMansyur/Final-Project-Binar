@@ -394,7 +394,7 @@ module.exports = {
       });
 
       const user = req.user;
-      let today = new Date().toLocaleDateString();
+      let today = new Date().toLocaleDateString(["ban", "id"]);
 
       const response = await email1.sendEmail(
         `${user.email}`,
