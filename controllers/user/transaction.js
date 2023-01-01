@@ -391,6 +391,7 @@ module.exports = {
         flight: flight,
         pass: pass,
         link1,
+        b1
       });
 
       const user = req.user;

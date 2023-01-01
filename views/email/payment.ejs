@@ -14,13 +14,25 @@
       <li>Departure Airport: <%= flight.departureAirport %></li>
       <li>Departure : <%= flight.departure %></li>
       <li>Departure Date: <%= flight.date %></li>
+      <% if (flight.tripType == 'round_trip') { %>
+      <li>Return Date: <%= flight.returnDate %></li>
+      <% } %>
       <li>Arrival Airport: <%= flight.arrivalAirport %></li>
       <li>Arrival: <%= flight.arrival %></li>
-      <li>Departure Time: <%= flight.departureTime %></li>
-      <li>Arrival Time: <%= flight.arrivalTime%></li>
-      <li>Trip Type: <%= flight.tripType%></li>
-      <li>Seat Class: <%= flight.sc%></li>
-      <li>Price : <%= flight.price%></li>
+      <li>Departure Time: <%= flight.departureTime.slice(0, 5) %><%= flight.departureTime >= '12:00' ? 'PM' : 'AM' %></li>
+      <li>Arrival Time: <%= flight.arrivalTime.slice(0, 5) %><%= flight.arrivalTime >= '12:00' ? 'PM' : 'AM' %></li>
+      <% if (flight.tripType == 'one_way') { %>
+      <li>Trip Type: One Way</li>
+      <% } else { %>
+      <li>Trip Type: Round Trip</li>
+      <% } %>
+      <li>Seat Class: <%= flight.sc.charAt(0).toUpperCase() %><%=flight.sc.slice(1) %></li>
+      <% if (trans.total > 1) { %>
+      <li>Passenger: <%= trans.total %> Passengers</li>
+      <% } else { %>
+      <li>Passenger: <%= trans.total %> Passenger</li>
+      <% } %>
+      <li>Price : Rp <%= flight.price * trans.total%></li>
       <br />
       <h3>Get Your Ticket</h3>
       <li><b>Download Your Ticket:</b> <%= link1%></li>
