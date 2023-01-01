@@ -2,6 +2,8 @@
 const { Model } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const userTypes = require('../utils/userType');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,6 +13,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Transaction, {
+        foreignKey: "user_id",
+        as: "transaction",
+      });
+      User.hasOne(models.DetailUser, {
+        foreignKey: "user_id",
+        as: "detail_user",
+      });
+      User.hasMany(models.Notification, {
+        foreignKey: "user_id",
+        as: "notif_user",
+      });
     }
 
     checkPassword(password) {
@@ -20,8 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     generateToken() {
       const payload = {
         id: this.id,
+        username: this.username,
         email: this.email,
         role: this.role,
+        user_type: this.user_type,
+        is_verified: this.is_verified,
       };
 
       return jwt.sign(payload, process.env.JWT_SECRET_KEY);
@@ -30,10 +47,13 @@ module.exports = (sequelize, DataTypes) => {
     static authenticate = async ({ email, password }) => {
       try {
         const user = await this.findOne({ where: { email: email } });
-        if (!user) return Promise.reject(new Error("user not found!"));
+        if (!user) return Promise.reject(new Error("E-mail not found!"));
+        if (user.user_type != userTypes.basic) return Promise.reject(new Error(`your account is associated with ${user.user_type} oauth`));
 
         const valid = user.checkPassword(password);
-        if (!valid) return Promise.reject(new Error("wrong password!"));
+        if (!valid) return Promise.reject(new Error("Wrong password!"));
+
+        if (user.is_verified == 0) return Promise.reject(new Error("Your account has not been verified. Please verify first!"));
 
         return Promise.resolve(user);
       } catch (err) {
@@ -48,6 +68,8 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       thumbnail: DataTypes.STRING,
       role: DataTypes.STRING,
+      user_type: DataTypes.STRING,
+      is_verified: DataTypes.INTEGER,
     },
     {
       sequelize,

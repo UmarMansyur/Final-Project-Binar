@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const cont = require("../controllers");
+const cont = require("../controllers/user");
 const middle = require("../middlewares/authorize");
+const roles = require("../utils/roles");
 
-// router.get('/register', cont.user.register);
-router.post('/register', cont.user.register);
-
-// router.get('/login', cont.auth.signIn);
-router.post('/login', cont.user.login);
+router.patch("/updateProfile", middle(roles.user), cont.user.updateProfile);
+router.get("/myProfile", middle(roles.user), cont.user.myProfile);
 
 module.exports = router;
