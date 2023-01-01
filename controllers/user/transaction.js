@@ -390,8 +390,7 @@ module.exports = {
         detailtrans: detailtrans,
         flight: flight,
         pass: pass,
-        link1,
-        b1
+        link1
       });
 
       const user = req.user;
