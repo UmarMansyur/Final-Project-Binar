@@ -31,7 +31,7 @@ module.exports = {
         message: "Success Get Notifications",
         data: exist,
       });
-    } catch (error) {
+    } catch (err) {
       next(err);
     }
   },

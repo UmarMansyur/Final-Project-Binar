@@ -68,7 +68,7 @@ module.exports = {
         message: "Success Get Data",
         data: indonesiaAirport,
       });
-    } catch (error) {
+    } catch (err) {
       next(err);
     }
   },
