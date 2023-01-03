@@ -1948,6 +1948,43 @@ paths:
             type: string
           in: header
           name: Authorization
+  "/transaction/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Delete History Transaction By Id
+      tags:
+        - "User : Transaction"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example 1:
+                  value:
+                    status: true
+                    message: Transaction deleted successfully
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: delete-transaction-id
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
   "/payment/{payment_code}":
     parameters:
       - schema:
