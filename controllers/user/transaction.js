@@ -390,7 +390,7 @@ module.exports = {
         detailtrans: detailtrans,
         flight: flight,
         pass: pass,
-        link1
+        link1,
       });
 
       const user = req.user;
@@ -472,7 +472,6 @@ module.exports = {
             })
           );
         }
-
         resolve(
           res.status(200).json({
             status: true,
