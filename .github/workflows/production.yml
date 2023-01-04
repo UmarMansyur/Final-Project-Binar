@@ -2,7 +2,7 @@ name: Deploy to Railway Dev Environment
 
 on:
   push:
-    branches: [develop]
+    branches: [master]
 
 jobs:
   deploy:
@@ -26,4 +26,4 @@ jobs:
       - name: Deploy
         run: railway up
         env:
-          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN_DEV}}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_PRODUCTION }}
