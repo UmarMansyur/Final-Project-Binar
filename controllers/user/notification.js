@@ -6,7 +6,10 @@ module.exports = {
     try {
       const id = req.user.id;
 
-      const exist = await Notification.findAll({ where: { user_id: id } });
+      const exist = await Notification.findAll({
+        where: { user_id: id },
+        order: [["createdAt", "DESC"]],
+      });
 
       if (!exist) {
         return res.status(400).json({
