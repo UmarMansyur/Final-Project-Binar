@@ -308,7 +308,7 @@ module.exports = {
       const page = await browser.newPage();
 
       // const a = path.join(__dirname, '/../../views/', "tes.ejs")
-      const html1 = await email1.getHtml1("report-template.ejs", {
+      const html1 = await email1.getHtml1("email/report-template.ejs", {
         trans: trans,
         detailtrans: detailtrans,
         flight: flight,
@@ -323,7 +323,6 @@ module.exports = {
 
       // Downlaod the PDF
       const pdf = await page.pdf({
-        path: `ticket.pdf`,
         margin: { top: "100px", right: "50px", bottom: "50px", left: "50px" },
         printBackground: true,
         format: "A4",
@@ -342,7 +341,7 @@ module.exports = {
 
       const b = buffer.toString("base64");
 
-      const html2 = await email1.getHtml1("report-template1.ejs", {
+      const html2 = await email1.getHtml1("email/report-template1.ejs", {
         trans: trans,
         detailtrans: detailtrans,
         flight: flight,
@@ -358,7 +357,6 @@ module.exports = {
 
       // Downlaod the PDF
       const pdf1 = await page.pdf({
-        path: `ticket.pdf`,
         margin: { top: "100px", right: "50px", bottom: "50px", left: "50px" },
         printBackground: true,
         format: "A4",
