@@ -9,13 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ticket.belongsTo(models.DetailTransaction, {
+        foreignKey: "detail_transaction_id",
+        as: "tiket",
+      });
     }
   }
   Ticket.init(
     {
       detail_transaction_id: DataTypes.INTEGER,
-      ticket_code: DataTypes.STRING,
-      qr_code: DataTypes.STRING,
+      ticket_pdf: DataTypes.STRING,
+      qr_code: DataTypes.TEXT,
     },
     {
       sequelize,

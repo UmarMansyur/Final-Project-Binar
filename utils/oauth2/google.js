@@ -1,12 +1,12 @@
 const { google } = require("googleapis");
 
-const { GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } =
+const { GOOGLE_CLIENT_SECRET3, GOOGLE_CLIENT_ID3, GOOGLE_REDIRECT_URI3 } =
   process.env;
 
 const oauth2Client = new google.auth.OAuth2(
-  GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
-  GOOGLE_REDIRECT_URI
+  GOOGLE_CLIENT_ID3,
+  GOOGLE_CLIENT_SECRET3,
+  GOOGLE_REDIRECT_URI3
 );
 module.exports = {
   generateAuthURL: () => {

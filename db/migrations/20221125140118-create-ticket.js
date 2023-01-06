@@ -11,11 +11,11 @@ module.exports = {
       detail_transaction_id: {
         type: Sequelize.INTEGER,
       },
-      ticket_code: {
+      ticket_pdf: {
         type: Sequelize.STRING,
       },
       qr_code: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

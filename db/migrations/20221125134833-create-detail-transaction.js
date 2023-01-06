@@ -14,9 +14,6 @@ module.exports = {
       flight_id: {
         type: Sequelize.INTEGER
       },
-      passenger_id: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
