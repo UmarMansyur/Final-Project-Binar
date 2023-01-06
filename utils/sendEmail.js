@@ -2,7 +2,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const ejs = require("ejs");
-const path = require('path')
+const path = require("path");
 
 const {
   GOOGLE_REFRESH_TOKEN3,
@@ -69,7 +69,7 @@ module.exports = {
 
   getHtml1: async (filename, data) => {
     return new Promise((resolve, reject) => {
-      const p = __dirname + "/" + filename;
+      const p = __dirname + "/../views/" + filename;
 
       ejs.renderFile(p, data, (err, data) => {
         if (err) {

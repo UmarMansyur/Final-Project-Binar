@@ -5,7 +5,6 @@ module.exports = {
   getNotifications: async (req, res, next) => {
     try {
       const id = req.user.id;
-
       const exist = await Notification.findAll({
         where: { user_id: id },
         order: [["createdAt", "DESC"]],

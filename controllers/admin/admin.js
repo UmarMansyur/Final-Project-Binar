@@ -6,7 +6,7 @@ module.exports = {
     try {
       const { limit = 5, page = 1 } = req.query;
       const offset = (page - 1) * limit;
-      const {count, rows} = await User.findAndCountAll({
+      const { count, rows } = await User.findAndCountAll({
         limit: limit,
         offset: offset,
         include: [
@@ -15,9 +15,10 @@ module.exports = {
             as: "detail_user",
           },
         ],
+        order: [["createdAt", "DESC"]],
         attributes: { exclude: ["password", "thumbnail"] },
       });
-      const totalPage = Math.ceil(count/limit);
+      const totalPage = Math.ceil(count / limit);
       const totalData = count;
 
       return res.status(200).json({
@@ -28,7 +29,7 @@ module.exports = {
           totalPage,
           totalData,
           rows,
-        }
+        },
       });
     } catch (err) {
       next(err);
